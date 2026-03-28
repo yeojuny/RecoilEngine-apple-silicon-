@@ -12,6 +12,7 @@ target_sources(Game PRIVATE ${sources_engine_Game})
 add_dependencies(Game generateVersionFiles)
 target_include_directories(Game PRIVATE "${CMAKE_BINARY_DIR}/src-generated/engine")
 target_link_libraries(Game PRIVATE
+	 nowide::nowide
 	 Tracy::TracyClient
 	 SDL2::SDL2
 	 RmlUi::RmlUi
@@ -49,15 +50,18 @@ find_freetype_hack() # hack to find different named freetype.dll
 find_package_static(Freetype 2.8.1 REQUIRED)
 list(APPEND engineLibraries Freetype::Freetype)
 
-if    (UNIX)
+if    (UNIX AND NOT APPLE)
 	find_package(X11 REQUIRED)
-	target_link_libraries(Game PRIVATE X11::Xcursor)
+	target_link_libraries(Game PRIVATE
+	 nowide::nowide X11::Xcursor)
 	list(APPEND engineLibraries ${X11_Xcursor_LIB} ${X11_X11_LIB})
-endif (UNIX)
+endif (UNIX AND NOT APPLE)
 
 if (APPLE)
 	find_library(COREFOUNDATION_LIBRARY Foundation)
 	list(APPEND engineLibraries ${COREFOUNDATION_LIBRARY})
+	list(APPEND engineLibraries "/Users/yeojun/mesa-native/lib/libEGL.dylib")
+	list(APPEND engineLibraries objc)
 endif (APPLE)
 
 list(APPEND engineLibraries squish rgetc1)

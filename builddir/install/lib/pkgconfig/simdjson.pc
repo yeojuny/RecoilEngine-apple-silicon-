@@ -1,0 +1,11 @@
+prefix=/Users/yeojun/RecoilEngine/builddir/install
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+Name: simdjson
+Description: Parsing gigabytes of JSON per second
+URL: https://simdjson.org/
+Version: 3.13.0
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lsimdjson
+

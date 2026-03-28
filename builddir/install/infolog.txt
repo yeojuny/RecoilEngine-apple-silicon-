@@ -1,0 +1,1432 @@
+﻿[t=00:00:00.002712] Found logical processors (mask 0x00003fff) using L3 cache (sized 0KB) 
+[t=00:00:00.002713] Run: thread affinity 0
+[t=00:00:00.002713] [DataDirLocater::FindWriteableDataDir] using writeable data-directory "/Users/yeojun/RecoilEngine/builddir/install/"
+[t=00:00:00.002714] Using writeable configuration source: "/Users/yeojun/RecoilEngine/builddir/install/springsettings.cfg"
+[t=00:00:00.002714] Using additional read-only configuration source: "/Users/yeojun/.spring/springsettings.cfg"
+[t=00:00:00.002714] LogOutput initialized. Logging to /Users/yeojun/RecoilEngine/builddir/install/infolog.txt
+[t=00:00:00.002729] ============== <Log Sections ([A]vailable, [E]nabled)> ==============
+[t=00:00:00.002733]   
+    [A] ArchiveScanner
+    [A] AutohostInterface
+    [A] BumpWater
+    [A] CSMFGroundTextures
+    [A] CrashHandler
+    [A] CregSerializer
+    [A] DynWater
+    [A] Font
+    [A] GameServer
+    [A] GroundMoveType
+    [A] KeyBindings
+    [A] LuaSocket
+    [A] Model
+    [A] Net
+    [A] Path
+    [A] Piece
+    [A] RoamMeshDrawer
+    [A] Shader
+    [A] SkyBox
+    [A] Sound
+    [A] Texture
+    [A] VFS
+    [E] Sound (Notice)
+    [E] VFS (Info)
+[t=00:00:00.002739]   
+[t=00:00:00.002741]   Enable or disable log sections using the LogSections configuration key
+[t=00:00:00.002743]   or the SPRING_LOG_SECTIONS environment variable (both comma separated).
+[t=00:00:00.002744]   Use "none" to disable the default log sections.
+[t=00:00:00.002746] ============== </Log Sections> ==============
+
+[t=00:00:00.002748] ============== <User Config> ==============
+[t=00:00:00.002770]   Fullscreen = 0
+[t=00:00:00.002774]   InputTextGeo = 0.26 0.73 0.02 0.028
+[t=00:00:00.002776]   MaxTextureAtlasSizeX = 16384
+[t=00:00:00.002778]   MaxTextureAtlasSizeY = 16384
+[t=00:00:00.002780]   ShowFPS = 1
+[t=00:00:00.002782]   SoftParticles = 0
+[t=00:00:00.002784]   WindowPosX = 464
+[t=00:00:00.002786]   WindowPosY = 100
+[t=00:00:00.002787]   XResolution = 1280
+[t=00:00:00.002789]   XResolutionWindowed = 1280
+[t=00:00:00.002795]   YResolution = 720
+[t=00:00:00.002801]   YResolutionWindowed = 720
+[t=00:00:00.002803] ============== </User Config> ==============
+
+[t=00:00:00.002805] ============== <User System> ==============
+[t=00:00:00.002806]   Spring Engine Version: 2026.06.06-6-gce685e9 master
+[t=00:00:00.002809]       Build Environment: clang libc++ version 210106
+[t=00:00:00.002811]        Compiler Version: gcc-Apple LLVM 21.0.0 (clang-2100.0.123.102)
+[t=00:00:00.002819]        Operating System: Darwin 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:25 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6041 (arm64)
+[t=00:00:00.002828]         Hardware Config: 24576MB RAM
+[t=00:00:00.002830]        Binary Word Size: 64-bit (native)
+[t=00:00:00.002832]           Process Clock: std::chrono::high_resolution_clock
+[t=00:00:00.002833]      Physical CPU Cores: 14
+[t=00:00:00.002835]       Logical CPU Cores: 14
+[t=00:00:00.002836] ============== </User System> ==============
+
+[t=00:00:00.002838] Run: thread affinity 0
+[t=00:00:00.002841] [good_fpu_init][STREFLOP_NEON]
+[t=00:00:00.002845] 	NEON: available (mandatory on AArch64)
+[t=00:00:00.002847] 	Streflop NEON mode, FPCR verification active
+[t=00:00:00.002848] 	FPCR: 0x00000000
+[t=00:00:00.009563] [WatchDog::Install] installed (hang-timeout: 60s)
+[t=00:00:00.009578] [WatchDog::RegisterThread] registering controls for thread [main]
+[t=00:00:00.107127] [GL::CheckAvailableVideoModes] desktop={1512x982x32bpp@120Hz} current={1512x982x32bpp@120Hz}
+[t=00:00:00.113910] 	Display (0)=1 modes=88 bounds={x=0, y=0, w=1512, h=982}
+[t=00:00:00.113928] 		[ 1] 3024x1964x32bpp@120Hz
+[t=00:00:00.113931] 		[ 5] 3024x1890x32bpp@120Hz
+[t=00:00:00.113933] 		[ 9] 2704x1756x32bpp@120Hz
+[t=00:00:00.113934] 		[13] 2704x1690x32bpp@120Hz
+[t=00:00:00.113937] 		[17] 2560x1600x32bpp@120Hz
+[t=00:00:00.113938] 		[21] 2294x1490x32bpp@120Hz
+[t=00:00:00.113939] 		[25] 2294x1432x32bpp@120Hz
+[t=00:00:00.113941] 		[29] 2048x1330x32bpp@120Hz
+[t=00:00:00.113943] 		[33] 2048x1280x32bpp@120Hz
+[t=00:00:00.113945] 		[37] 1920x1200x32bpp@120Hz
+[t=00:00:00.113968] 		[41] 1800x1169x32bpp@120Hz
+[t=00:00:00.113970] 		[45] 1800x1125x32bpp@120Hz
+[t=00:00:00.113972] 		[49] 1512x982x32bpp@120Hz
+[t=00:00:00.113973] 		[53] 1512x945x32bpp@120Hz
+[t=00:00:00.113974] 		[57] 1352x878x32bpp@120Hz
+[t=00:00:00.113976] 		[61] 1352x845x32bpp@120Hz
+[t=00:00:00.113978] 		[65] 1280x800x32bpp@120Hz
+[t=00:00:00.113979] 		[69] 1147x745x32bpp@120Hz
+[t=00:00:00.113980] 		[73] 1147x716x32bpp@120Hz
+[t=00:00:00.113982] 		[77] 1024x665x32bpp@120Hz
+[t=00:00:00.113983] 		[81] 1024x640x32bpp@120Hz
+[t=00:00:00.113984] 		[85] 960x600x32bpp@120Hz
+[t=00:00:00.163584] [GR::CreateSDLWindow] using 0x anti-aliasing and 24-bit depth-buffer (PF="SDL_PIXELFORMAT_ARGB8888") for main window
+[t=00:00:00.163620] [GR::SetWindowAttributes][1] cfgFullScreen=0 numDisplays=1 winPos=<464,100> newRes=<1280,720>
+[t=00:00:00.163633] [GR::SetWindowAttributes][2] cfgFullScreen=0 numDisplays=1 winPos=<464,100> newRes=<1048,720>
+[t=00:00:00.385848] [GR::LogVersionInfo]
+[t=00:00:00.385862] 	SDL version : 2.32.10 (linked) / 2.32.10 (compiled)
+[t=00:00:00.385874] 	GL version  : 4.3 (Compatibility Profile) Mesa 26.0.0-devel (git-a325151787)
+[t=00:00:00.385875] 	GL vendor   : Mesa
+[t=00:00:00.385877] 	GL renderer : zink Vulkan 1.3(Apple M4 Pro (MESA_KOSMICKRISP))
+[t=00:00:00.385878] 	GLSL version: 4.30
+[t=00:00:00.385880] 	GLAD version: 0.1.36
+[t=00:00:00.385881] 	GPU memory  : unknown
+[t=00:00:00.385884] 	SDL swap-int: 0
+[t=00:00:00.385886] 	SDL driver  : cocoa
+[t=00:00:00.385887] 	
+[t=00:00:00.385889] 	Initialized OpenGL Context: 4.3 (Compat)
+[t=00:00:00.385890] 	GLSL shader support       : 1
+[t=00:00:00.385891] 	GL4 support               : 0
+[t=00:00:00.385893] 	FBO extension support     : 1
+[t=00:00:00.385897] 	NVX GPU mem-info support  : 1
+[t=00:00:00.385899] 	ATI GPU mem-info support  : 1
+[t=00:00:00.385901] 	Texture clamping to edge  : 1
+[t=00:00:00.385903] 	S3TC/DXT1 texture support : 1/1
+[t=00:00:00.385904] 	texture query-LOD support : 1 (1)
+[t=00:00:00.385906] 	MSAA frame-buffer support : 1 (1)
+[t=00:00:00.385907] 	Z-buffer depth            : 32 (-)
+[t=00:00:00.385912] 	primitive-restart support : 1 (1)
+[t=00:00:00.385914] 	clip-space control support: 1 (1)
+[t=00:00:00.385915] 	seamless cube-map support : 1 (1)
+[t=00:00:00.385917] 	frag-depth layout support : 1 (1)
+[t=00:00:00.385918] 	persistent maps support   : 1 (1)
+[t=00:00:00.385919] 	explicit attribs location : 1 (1)
+[t=00:00:00.385921] 	multi draw indirect       : 1 (-)
+[t=00:00:00.385922] 	array textures            : 1 (-)
+[t=00:00:00.385925] 	buffer copy support       : 1 (-)
+[t=00:00:00.385926] 	indirect draw             : 1 (-)
+[t=00:00:00.385928] 	base instance             : 1 (-)
+[t=00:00:00.385929] 	
+[t=00:00:00.385931] 	max. FBO samples              : 4
+[t=00:00:00.385932] 	max. texture slots            : 8
+[t=00:00:00.385934] 	max. FS/program texture slots : 32/160
+[t=00:00:00.385935] 	max. texture size             : 16384
+[t=00:00:00.385937] 	max. texture anisotropy level : 16.000000
+[t=00:00:00.385938] 	max. vec4 varyings/attributes : 16/16
+[t=00:00:00.385940] 	max. draw-buffers             : 8
+[t=00:00:00.385944] 	max. rec. indices/vertices    : 3000/3000
+[t=00:00:00.385945] 	max. uniform buffer-bindings  : 105
+[t=00:00:00.385947] 	max. uniform block-size       : 64KB
+[t=00:00:00.385948] 	max. storage buffer-bindings  : 40
+[t=00:00:00.385950] 	max. storage block-size       : 2047MB
+[t=00:00:00.385951] 	
+[t=00:00:00.385952] 	enable AMD-hacks : 0
+[t=00:00:00.385954] 	compress MIP-maps: 0
+[t=00:00:00.385965] 	Number of compressed texture formats: 10
+[t=00:00:00.385969] 	Compressed texture formats: GL_COMPRESSED_RGB_S3TC_DXT1_EXT, GL_COMPRESSED_RGBA_S3TC_DXT3_EXT, GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, GL_COMPRESSED_RGB8_ETC2, GL_COMPRESSED_RGBA8_ETC2_EAC, GL_COMPRESSED_R11_EAC, GL_COMPRESSED_RG11_EAC, GL_COMPRESSED_SIGNED_R11_EAC, GL_COMPRESSED_SIGNED_RG11_EAC, GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2. 
+[t=00:00:00.386003] [GR::ToggleGLDebugOutput] OpenGL debug-message callback disabled
+[t=00:00:00.386393] [GR::UpdateGLConfigs]
+[t=00:00:00.386405] [VSync::SetInterval] interval=-1 (disabled)
+[t=00:00:00.386415] [GR::UpdateGLGeometry][1] winSize=<1,1>
+[t=00:00:00.393702] [GR::UpdateScreenMatrices] vpx=464.000000, vpy=162.000000, vsx=1048.000000, vsy=720.000000, ssx=1512.000000, ssy=982.000000, screenPosX=0, screenPosY=0
+[t=00:00:00.393714] [GR::UpdateGLGeometry][2] winSize=<1048,720>
+[t=00:00:00.393718] [GR::InitGLState]
+[t=00:00:00.393778] [GR::LogDisplayMode] display-mode set to 1048x720x32bpp@120Hz (windowed::decorated)
+[t=00:00:00.416486] [TexMemPool::Resize] poolSize=536870912u allocSize=0u texCount=0u
+[t=00:00:00.422457] [Font] [InitFontconfig] Using Fontconfig light init
+[t=00:00:00.431551] [Font] [InitFontconfig] Using Fontconfig cache dir "/opt/homebrew/var/cache/fontconfig"
+[t=00:00:00.431566] [Font] [InitFontconfig] Using Fontconfig cache dir "/Users/yeojun/RecoilEngine/builddir/install/fontcache"
+[t=00:00:00.431568] [~ScopedOnceTimer][InitFontconfig::FontConfigInit (version 2.17.1)] 13ms
+[t=00:00:00.432109] [CglFont::CglShaderFontRenderer] Creating Font shaders: GLAD_GL_ARB_explicit_attrib_location = true
+[t=00:00:00.445396] [WatchDog::RegisterThread] registering controls for thread [vfsi]
+[t=00:00:00.480553] [DataDirLocater::FindWriteableDataDir] using writeable data-directory "/Users/yeojun/RecoilEngine/builddir/install/"
+[t=00:00:00.480600] [DataDirLocater::Check] Portable Mode!
+[t=00:00:00.480613] [DataDirLocater::FilterUsableDataDirs] using read-write data directory: /Users/yeojun/RecoilEngine/builddir/install/
+[t=00:00:00.480619] [DataDirLocater::FilterUsableDataDirs] using read-only data directory: /Users/yeojun/.spring/
+[t=00:00:00.550091] Scanning: /Users/yeojun/.spring/maps
+[t=00:00:00.550182] Scanning: /Users/yeojun/.spring/games
+[t=00:00:00.550226] Scanning: /Users/yeojun/.spring/packages
+[t=00:00:00.550284] Scanning: /Users/yeojun/RecoilEngine/builddir/install/base
+[t=00:00:00.550372] Scanning: /Users/yeojun/RecoilEngine/builddir/install/maps
+[t=00:00:00.550405] Scanning: /Users/yeojun/RecoilEngine/builddir/install/games
+[t=00:00:00.584737] [~ScopedOnceTimer][CArchiveScanner::ScanAllDirs] 34ms
+[t=00:00:00.584762] [VFS] [SpringVFS::ReserveArchives<this=0x14a9a0c80>]
+[t=00:00:00.584781] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Spring content v1", overwrite=false)] section=2 cached=0
+[t=00:00:00.589118] [VFS] [VFSHandler::SetGlobalInstanceRaw] handler=0x14a9a0c80 (SpringVFS) global=0x0 (null)
+[t=00:00:00.589131] [WatchDog::DeregisterThread] deregistering controls for thread [vfsi]
+[t=00:00:00.593560] [Threading] Optimal thread count is 14
+[t=00:00:00.593574] [ThreadPool::SetThreadCount][1] wanted=14 current=1 maximum=14 (init=1)
+[t=00:00:00.593761] [ThreadPool::SetThreadCount][2] workers=13
+[t=00:00:00.593767] CPU Affinity Mask Details detected:
+[t=00:00:00.593769] -- Performance Core Mask:      0x00003fff
+[t=00:00:00.593770] -- Efficiency  Core Mask:      0x00003fff
+[t=00:00:00.593772] -- Hyper Thread/SMT Low Mask:  0x00003fff
+[t=00:00:00.593773] -- Hyper Thread/SMT High Mask: 0x00000000
+[t=00:00:00.593775] -- Optimal Cache Mask:         0x00003fff
+[t=00:00:00.593790] [ThreadPool] Main thread affinity requested as 0x00000000
+[t=00:00:00.593803] [Threading] Worker 13 thread CPU affinity not set
+[t=00:00:00.593813] [Threading] Worker 3 thread CPU affinity not set
+[t=00:00:00.593814] [Threading] Worker 5 thread CPU affinity not set
+[t=00:00:00.593816] [Threading] Worker 9 thread CPU affinity not set
+[t=00:00:00.593820] [Threading] Worker 1 thread CPU affinity not set
+[t=00:00:00.593821] [Threading] Worker 8 thread CPU affinity not set
+[t=00:00:00.593826] [Threading] Worker 6 thread CPU affinity not set
+[t=00:00:00.593825] [Threading] Worker 7 thread CPU affinity not set
+[t=00:00:00.593856] [Threading] Worker 10 thread CPU affinity not set
+[t=00:00:00.593857] [Threading] Worker 11 thread CPU affinity not set
+[t=00:00:00.593872] [Threading] Worker 4 thread CPU affinity not set
+[t=00:00:00.593880] [Threading] Worker 12 thread CPU affinity not set
+[t=00:00:00.593816] [Threading] Worker 2 thread CPU affinity not set
+[t=00:00:00.593932] [Threading] Main thread CPU affinity not set
+[t=00:00:00.596570][f=-000001] [CPreGame] using server IP localhost and port 8452
+[t=00:00:00.596587][f=-000001] [NetProto::InitLocalClient] connecting to local server
+[t=00:00:00.615213][f=-000001] [PreGame::AddMapArchivesToVFS][server=0x0] using map "Altair_Crossing_V4" (loaded=0 cached=0)
+[t=00:00:00.615242][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Altair_Crossing_V4", overwrite=false)] section=1 cached=0
+[t=00:00:00.615809][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Map Helper v1", overwrite=false)] section=2 cached=0
+[t=00:00:00.616722][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:00.616737][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:00.616767][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:00.616778][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:00.616789][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:00.616796][f=-000001] [PreGame::StartServer]
+	mod-checksum=912a8d9091f9b390410ead41254a0dc83bfcea48b16f6e8699ca3624b752acbfa55f7fd5d28837b3f7e0853e162281d0393c9670465331d2b0c169aebdb8ff9b
+	map-checksum=cb66943c7c980f2f9bcd2f8fd7d0ceeec88ce89018f0292c685cfd34812ae4373f5852c5b64bc809ff0c43636e5af218d1498c4dfafebb4d31e8e38d0983326e
+[t=00:00:00.616800][f=-000001] [PreGame::StartServer] Game/Map archives checksum acquisition took = 20 microseconds
+[t=00:00:00.617237][f=-000001] Warning: [UDPListener::TryBindSocket] opening socket on loopback address, other users will not be able to connect!
+[t=00:00:00.617257][f=-000001] [UDPListener::TryBindSocket] binding UDP socket to IPv6-address ::1 (localhost) on port 8452
+[t=00:00:00.617263][f=-000001] [UDPListener] successfully bound socket on port 8452
+[t=00:00:00.617506][f=-000001] [GameServer] Initialize: thread affinity 0
+[t=00:00:00.617542][f=-000001] [~ScopedOnceTimer][PreGame::StartServer] 20ms
+[t=00:00:00.629771][f=-000001] [PreGame::AddMapArchivesToVFS][server=0x14a9c3000] using map "Altair_Crossing_V4" (loaded=1 cached=0)
+[t=00:00:00.629795][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Altair_Crossing_V4", overwrite=false)] section=1 cached=0
+[t=00:00:00.629819][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Map Helper v1", overwrite=false)] section=2 cached=0
+[t=00:00:00.629833][f=-000001] [PreGame::AddModArchivesToVFS][server=0x14a9c3000] using game "Beyond All Reason $VERSION" (loaded=0 cached=0)
+[t=00:00:00.629848][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Beyond All Reason $VERSION", overwrite=false)] section=0 cached=0
+[t=00:00:00.629865][f=-000001] Warning: [IsPathOnSpinningDisk] Error 'No such file or directory' getting readlink() for file '/Users/yeojun/.spring/games/BAR.sdd'
+[t=00:00:00.895722][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Spring content v1", overwrite=false)] section=2 cached=0
+[t=00:00:00.895772][f=-000001] [VFS] [SpringVFS::AddArchive<this=0x14a9a0c80>(arName="Spring Bitmaps", overwrite=false)] section=2 cached=0
+[t=00:00:00.897661][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:00.897684][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:00.897722][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:00.897731][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:00.897739][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:00.898210][f=-000001] [CDemoRecorder::WriteSetupText] SetupText="W2dhbWVdCnsKW3BsYXllcjBdCnsKdGVhbT0wOwpuYW1lPVVubmFtZWRQbGF5ZXI7Cn0KW3RlYW0wXQp7CmFsbHl0ZWFtPTA7CnRlYW1sZWFkZXI9MDsKfQpbYWxseXRlYW0wXQp7Cm51bWFsbGllcz0wOwp9Clttb2RvcHRpb25zXQp7Cm1pbmltYWxzZXR1cD0xOwp9CmdhbWV0eXBlPUJBUi5zZGQ7CmlzaG9zdD0xOwptYXBuYW1lPUFsdGFpcl9Dcm9zc2luZ19WNDsKbXlwbGF5ZXJuYW1lPVVubmFtZWRQbGF5ZXI7Cn0K"
+[t=00:00:00.898236][f=-000001] [PreGame::GameDataReceived] recording demo to "/Users/yeojun/RecoilEngine/builddir/install/demos/2026-03-28_03-33-49-351_Altair_Crossing_V4_2026.06.06-6-gce685e9 master.sdfz"
+[t=00:00:00.898238][f=-000001] [~ScopedOnceTimer][PreGame::GameDataReceived] 280ms
+[t=00:00:00.898382][f=-000001] [PreGame::UpdateClientNet] received local player number 0 (team 0, allyteam 0), creating LoadScreen
+[t=00:00:00.913250][f=-000001] Deprecated: [CMapInfo::ReadAtmosphere] atmosphere.skyDir in mapinfo.lua was never used and now deprecated, use atmosphere.skyAxisAngle instead
+[t=00:00:00.913614][f=-000001] [LoadScreen::Init] skipping CLuaIntro (macOS EGL workaround)
+[t=00:00:00.913627][f=-000001] [LoadScreen::Init] single-threaded
+[t=00:00:00.913633][f=-000001] [WatchDog::RegisterThread] registering controls for thread [load]
+[t=00:00:00.921032][f=-000001] [Game::Load][1] globalQuit=0 threaded=0
+[t=00:00:00.921070][f=-000001] [LoadScreen::SetLoadMessage] text="Parsing Map Information"
+[t=00:00:00.921140][f=-000001] [LoadScreen::SetLoadMessage] text="Loading SMF"
+[t=00:00:00.940307][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Map (26 MB)"
+[t=00:00:01.143450][f=-000001] Warning: [CSMFReadMap::CreateSplatDetailTextures] Invalid SMF splatDetailTex maps/iwantDNTS.tga. Creating fallback texture
+[t=00:00:01.388083][f=-000001] [~ScopedOnceTimer][Game::LoadMap] 467ms
+[t=00:00:01.396055][f=-000001] [LoadScreen::SetLoadMessage] text="Loading GameData Definitions"
+[t=00:00:01.396182][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:01.396207][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:01.396232][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:01.396243][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:01.396254][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:01.467149][f=-000001] Loading tweakdefs modoption
+[t=00:00:01.467166][f=-000001] 
+[t=00:00:01.467170][f=-000001] Loading tweakdefs1 modoption
+[t=00:00:01.467172][f=-000001] 
+[t=00:00:01.467174][f=-000001] Loading tweakdefs2 modoption
+[t=00:00:01.467176][f=-000001] 
+[t=00:00:01.467178][f=-000001] Loading tweakdefs3 modoption
+[t=00:00:01.467180][f=-000001] 
+[t=00:00:01.467183][f=-000001] Loading tweakdefs4 modoption
+[t=00:00:01.467185][f=-000001] 
+[t=00:00:01.467188][f=-000001] Loading tweakdefs5 modoption
+[t=00:00:01.467190][f=-000001] 
+[t=00:00:01.467193][f=-000001] Loading tweakdefs6 modoption
+[t=00:00:01.467196][f=-000001] 
+[t=00:00:01.467199][f=-000001] Loading tweakdefs7 modoption
+[t=00:00:01.467203][f=-000001] 
+[t=00:00:01.467206][f=-000001] Loading tweakdefs8 modoption
+[t=00:00:01.467208][f=-000001] 
+[t=00:00:01.467210][f=-000001] Loading tweakdefs9 modoption
+[t=00:00:01.467213][f=-000001] 
+[t=00:00:01.490858][f=-000001] [featuredefs_post.lua] Warning: Removing feature def, corfast_dead, for having invalid model that would crash the engine, Units/corfast_dead.s3o
+[t=00:00:01.491178][f=-000001] [featuredefs_post.lua] Warning: Removing feature def, corhack_dead, for having invalid model that would crash the engine, Units/corfast_dead.s3o
+[t=00:00:01.501994][f=-000001] [~ScopedOnceTimer][Loading all definitions: ] 101ms
+[t=00:00:01.511101][f=-000001] [~ScopedOnceTimer][Game::LoadDefs (GameData)] 123ms
+[t=00:00:01.511839][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Radar Icons"
+[t=00:00:01.684863][f=-000001] Warning: [CIconHandler::UpdateAtlasData] Failed to load icon=default, bitmap=
+[t=00:00:01.684885][f=-000001] Warning: [CIconHandler::UpdateAtlasData] Failed to load icon=default_scav, bitmap=
+[t=00:00:01.790539][f=-000001] CTextureRenderAtlas::CalculateAtlas() atlas=IconsAtlas_0 atlasFinalized=1
+[t=00:00:01.790666][f=-000001] CTextureRenderAtlas::CreateAtlasTexture()[0] atlas=IconsAtlas_0 FBO::ready=1
+[t=00:00:01.797139][f=-000001] CTextureRenderAtlas::CreateAtlasTexture()[1] atlas=IconsAtlas_0 atlasRendered=1
+[t=00:00:01.798026][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Sound Definitions"
+[t=00:00:01.798107][f=-000001] [~ScopedOnceTimer][Game::LoadDefs (Sound)] 0ms
+[t=00:00:01.798120][f=-000001] [Game::Load][2] globalQuit=0 forcedQuit=0
+[t=00:00:01.798126][f=-000001] [LoadScreen::SetLoadMessage] text="Creating Smooth Height Mesh"
+[t=00:00:01.798873][f=-000001] [~ScopedOnceTimer][SmoothHeightMesh::MakeSmoothMesh] 0ms
+[t=00:00:01.798888][f=-000001] [LoadScreen::SetLoadMessage] text="Creating QuadField & CEGs"
+[t=00:00:01.799058][f=-000001] [Init] number of ArmorDefs: 15
+[t=00:00:01.875791][f=-000001] [RegisterModelFormats] supported (Assimp) model formats: *.3ds;*.blend;*.dae;*.lwo;*.obj;
+[t=00:00:01.878297][f=-000001] [LoadScreen::SetLoadMessage] text="Creating Unit Textures"
+[t=00:00:01.878836][f=-000001] [LoadScreen::SetLoadMessage] text="Creating Sky"
+[t=00:00:01.987592][f=-000001] [Game::Load][3] globalQuit=0 forcedQuit=0
+[t=00:00:01.988073][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Weapon Definitions"
+[t=00:00:01.991076][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "armcomcon_repulsor1"
+[t=00:00:01.993398][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "armfgate_sea_repulsor"
+[t=00:00:01.993627][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "armgate_repulsor"
+[t=00:00:01.996726][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "corcomcon_repulsor1"
+[t=00:00:01.999000][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "corfgate_sea_repulsor"
+[t=00:00:01.999224][f=-000001] Warning: WeaponDefs: Unknown tag "shield.energyupkeep" in "corgate_repulsor"
+[t=00:00:01.999560][f=-000001] Warning: WeaponDefs: Unknown tag "comment" in "corjuno_juno_pulse_ghost"
+[t=00:00:02.005737][f=-000001] [~ScopedOnceTimer][Game::PostLoadSim (WeaponDefs)] 18ms
+[t=00:00:02.005980][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Unit Definitions"
+[t=00:00:02.006668][f=-000001] Warning: [CreateYardMap] armanavaldefturret: given yardmap requires 13 extra char(s)!
+[t=00:00:02.009388][f=-000001] Warning: [CreateYardMap] armhaap: given yardmap requires 81 extra char(s)!
+[t=00:00:02.012847][f=-000001] Warning: [CreateYardMap] coranavaldefturret: given yardmap requires 13 extra char(s)!
+[t=00:00:02.015132][f=-000001] Warning: [CreateYardMap] corhasy: given yardmap requires 48 extra char(s)!
+[t=00:00:02.018411][f=-000001] Warning: [CreateYardMap] leghaap: given yardmap requires 36 extra char(s)!
+[t=00:00:02.019714][f=-000001] [~ScopedOnceTimer][Game::PostLoadSim (UnitDefs)] 13ms
+[t=00:00:02.019887][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Feature Definitions"
+[t=00:00:02.024654][f=-000001] [~ScopedOnceTimer][Game::PostLoadSim (FeatureDefs)] 4ms
+[t=00:00:02.026372][f=-000001] InitStatic: NUM_SPEEDMOD_BINS=10, MIN_SPEEDMOD_VALUE=0.000000, MAX_SPEEDMOD_VALUE=2.000000
+[t=00:00:02.026400][f=-000001] InitStatic: MAP_MAX_NODES_SEARCHED=0, MAP_RELATIVE_MAX_NODES_SEARCHED=0.000000
+[t=00:00:02.026403][f=-000001] InitStatic: MAP_MAX_NODES_SEARCHED=0, MAP_RELATIVE_MAX_NODES_SEARCHED=0.000000
+[t=00:00:02.026404][f=-000001] InitStatic: MAP_MAX_NODES_SEARCHED=0, MAP_RELATIVE_MAX_NODES_SEARCHED=0.000000
+[t=00:00:02.026406][f=-000001] [IPathManager::GetInstance] using QTPFS
+[t=00:00:02.026519][f=-000001] [LoadScreen::SetLoadMessage] text="Initializing Map Features"
+[t=00:00:02.026613][f=-000001] Error: [GetFeatureDef] could not find FeatureDef "corfast_dead"
+[t=00:00:02.026636][f=-000001] Error: [GetFeatureDef] could not find FeatureDef "corhack_dead"
+[t=00:00:02.026689][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Models"
+[t=00:00:02.026953][f=-000001] [LoadScreen::SetLoadMessage] text="Creating ShadowHandler"
+[t=00:00:02.040817][f=-000001] [LoadScreen::SetLoadMessage] text="Creating InfoTextureHandler"
+[t=00:00:02.052580][f=-000001] InfoTexture: shaders
+[t=00:00:02.052799][f=-000001] [LoadScreen::SetLoadMessage] text="Creating GroundDrawer"
+[t=00:00:02.052856][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Map Tiles"
+[t=00:00:02.267119][f=-000001] [LoadScreen::SetLoadMessage] text="Loading Square Textures"
+[t=00:00:02.283706][f=-000001] Switching to ROAM Mesh Rendering
+[t=00:00:02.283733][f=-000001] [TriNodePool::Resize] to 2097152
+[t=00:00:02.291815][f=-000001] [TriNodePool::InitPools] newPoolSize=2097152 PoolSize=2097152 (shadowPass=0)
+[t=00:00:02.291834][f=-000001] [TriNodePool::Resize] to 2097152
+[t=00:00:02.301797][f=-000001] [TriNodePool::InitPools] newPoolSize=2097152 PoolSize=2097152 (shadowPass=1)
+[t=00:00:02.346359][f=-000001] [LoadScreen::SetLoadMessage] text="Creating GrassDrawer"
+[t=00:00:02.354138][f=-000001] [Texture] Warning: [LoadAndCacheTexture] could not load primary texture "rocks30_map_color.dds" from model "objects3d/rocks30/rocks30_map_09.s3o"
+[t=00:00:02.455450][f=-000001] CTextureRenderAtlas::CalculateAtlas() atlas=Decals atlasFinalized=1
+[t=00:00:02.581814][f=-000001] Loaded DecalsDrawer: standard
+[t=00:00:02.582260][f=-000001] [LoadScreen::SetLoadMessage] text="Creating ProjectileDrawer & UnitDrawer"
+[t=00:00:02.582315][f=-000001] [LoadScreen::SetLoadMessage] text="Creating Projectile Textures"
+[t=00:00:02.969771][f=-000001] Warning: [CCEG::Load] genericshellexplosion-small-bomb: unknown class "groundflash_anim"
+[t=00:00:03.025795][f=-000001] [LoadScreen::SetLoadMessage] text="Creating Water"
+[t=00:00:03.063466][f=-000001] [LoadScreen::SetLoadMessage] text="Finalizing Models"
+[t=00:00:03.090344][f=-000001] [Game::Load][4] globalQuit=0 forcedQuit=0
+[t=00:00:03.097880][f=-000001] [~ScopedOnceTimer][Game::LoadInterface (Console)] 2ms
+[t=00:00:03.100533][f=-000001] [RmlUi::Initialize] Beginning RmlUi Initialization
+[t=00:00:03.127867][f=-000001] [RmlUi] Loaded font face 'FreeSans' [bold] from 'fonts/FreeSansBold.otf'.
+[t=00:00:03.128131][f=-000001] [RmlUi] SVG plugin initialised.
+[t=00:00:03.128145][f=-000001] [RmlUi] SVG plugin initialised.
+[t=00:00:03.128148][f=-000001] [Game::Load][5] globalQuit=0 forcedQuit=0
+[t=00:00:03.128453][f=-000001] [LoadScreen::SetLoadMessage] text="[LoadFinalize] finalizing PFS"
+[t=00:00:03.128676][f=-000001] InitRootSize: map root size is (512, 512)
+[t=00:00:03.128690][f=-000001] InitRootSize: root node size is set to: 64
+[t=00:00:03.128724][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.128738][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.128757][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.128767][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.128777][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.178914][f=-000001] [LoadScreen::SetLoadMessage] text="[PathManager::InitNodeLayersThreaded] using 14 threads for 43 node-layers"
+[t=00:00:03.186917][f=-000001] [QTPFS] pfs-checksum: 00067800
+[t=00:00:03.186937][f=-000001] [QTPFS] mem-footprint: 212MB
+[t=00:00:03.230259][f=-000001] [LoadScreen::SetLoadMessage] text="[PathManager::Load] Complete. Used 14 threads for 43 node-layers"
+[t=00:00:03.230325][f=-000001] [LoadScreen::SetLoadMessage] text="[LoadFinalize] finalized PFS (101ms, checksum 00067800)"
+[t=00:00:03.230343][f=-000001] [Game::Load][6] globalQuit=0 forcedQuit=0
+[t=00:00:03.230667][f=-000001] [Game::LoadLua] Lua developer mode disabled
+[t=00:00:03.230682][f=-000001] [LoadScreen::SetLoadMessage] text="Loading LuaRules"
+[t=00:00:03.233004][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.233024][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.233045][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.233055][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.233064][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.242285][f=-000001] [~ScopedOnceTimer][creg::AutoRegisterCFunctions(LuaRules)] 9ms
+[t=00:00:03.249580][f=-000001] Lava Mapname, Altair_Crossing_V4
+[t=00:00:03.261597][f=-000001] [AI Loader] ShardLua bot Deactivated!
+[t=00:00:03.569598][f=-000001] [ATMOSPHERIC] Current map: altair_crossing_v4
+[t=00:00:03.569629][f=-000001] [ATMOSPHERIC] No map config found. Turning off the gadget
+[t=00:00:03.574752][f=-000001] REMOVED PVE BOSS DRONES
+[t=00:00:03.667598][f=-000001] Loaded synced gadget:  Dev Helper Cmds     <cmd_dev_helpers.lua>
+[t=00:00:03.667690][f=-000001] Loaded synced gadget:  Dead Unit           <unit_dead.lua>
+[t=00:00:03.667766][f=-000001] Loaded synced gadget:  Area Attack Limiter  <unit_areaattack_limiter.lua>
+[t=00:00:03.667845][f=-000001] Loaded synced gadget:  CMD limiter         <cmd_limiter.lua>
+[t=00:00:03.667919][f=-000001] Loaded synced gadget:  Get Player Data     <cmd_get_player_data.lua>
+[t=00:00:03.667994][f=-000001] Loaded synced gadget:  Stats               <api_damage_stats.lua>
+[t=00:00:03.668078][f=-000001] Loaded synced gadget:  Permissions         <api_permissions.lua>
+[t=00:00:03.668151][f=-000001] Loaded synced gadget:  No Share Load       <unit_prevent_share_load.lua>
+[t=00:00:03.668226][f=-000001] Loaded synced gadget:  No Share Self-D     <unit_prevent_share_self_d.lua>
+[t=00:00:03.668302][f=-000001] Loaded synced gadget:  Anti Stacking Hax   <unit_stack_hack_fix.lua>
+[t=00:00:03.668378][f=-000001] Loaded synced gadget:  AutoColorPicker     <game_autocolors.lua>
+[t=00:00:03.668454][f=-000001] Loaded synced gadget:  Explosion Deformation Fix  <map_explosion_deformation_fix.lua>
+[t=00:00:03.668529][f=-000001] Loaded synced gadget:  Map Atmosphere CEGs  <map_atmosphere_cegs.lua>
+[t=00:00:03.668601][f=-000001] Loaded synced gadget:  Map NightMode       <map_nightmode.lua>
+[t=00:00:03.668679][f=-000001] Loaded synced gadget:  Reactive Armor      <unit_reactive_armor.lua>
+[t=00:00:03.668757][f=-000001] Loaded synced gadget:  Ruins Blueprint Tester  <ai_ruin_blueprint_tester.lua>
+[t=00:00:03.668826][f=-000001] [Gaia Critters] gadget:Initialize() Game.mapName=Altair_Crossing_V4
+[t=00:00:03.668864][f=-000001] Loaded synced gadget:  gaia critter units  <gaia_critters.lua>
+[t=00:00:03.668942][f=-000001] Loaded synced gadget:  supply drops        <pve_supply_drops.lua>
+[t=00:00:03.669018][f=-000001] Loaded synced gadget:  Feature Death Explosion  <feature_dead_explosion.lua>
+[t=00:00:03.669099][f=-000001] Loaded synced gadget:  Place Target On Ground  <cmd_place_target_on_ground.lua>
+[t=00:00:03.669174][f=-000001] Loaded synced gadget:  IconGenerator       <unit_icongenerator.lua>
+[t=00:00:03.670073][f=-000001] Loaded synced gadget:  Map Lua Metal Spot Placer  <map_metal_spot_placer.lua>
+[t=00:00:03.670160][f=-000001] Loaded synced gadget:  Shield Behaviour    <unit_shield_behaviour.lua>
+[t=00:00:03.673501][f=-000001] Loaded synced gadget:  API Resource Spot Finder (mex/geo)  <api_resource_spot_finder.lua>
+[t=00:00:03.673585][f=-000001] Loaded synced gadget:  CameraBroadcast     <camera_lockcamera.lua>
+[t=00:00:03.673677][f=-000001] Loaded synced gadget:  Map Lava Gadget 2.5  <map_lava.lua>
+[t=00:00:03.673766][f=-000001] Loaded synced gadget:  AA Targeting Priority  <unit_aa_targeting_priority.lua>
+[t=00:00:03.673854][f=-000001] Loaded synced gadget:  Awards              <gui_awards.lua>
+[t=00:00:03.673948][f=-000001] Loaded synced gadget:  Collision Damage Behavior  <unit_collision_damage_behavior.lua>
+[t=00:00:03.674038][f=-000001] Loaded synced gadget:  Geo fix             <map_geofix.lua>
+[t=00:00:03.674489][f=-000001] Loaded synced gadget:  Healthbars Widget Forwarding  <unit_healthbars_widget_forwarding.lua>
+[t=00:00:03.674583][f=-000001] Loaded synced gadget:  PBR enabler         <api_pbr_enabler.lua>
+[t=00:00:03.674978][f=-000001] Loaded synced gadget:  Raptor Scum GL4     <gfx_raptor_scum_gl4.lua>
+[t=00:00:03.675077][f=-000001] Loaded synced gadget:  Team Power Watcher  <game_team_power_watcher.lua>
+[t=00:00:03.675166][f=-000001] Loaded synced gadget:  UnitCallinsGadget   <dbg_unit_callins.lua>
+[t=00:00:03.675258][f=-000001] Loaded synced gadget:  Activity Broadcast  <activity_broadcast.lua>
+[t=00:00:03.675347][f=-000001] Loaded synced gadget:  Air AttackSafetyDistance  <unit_air_attacksafetydistance.lua>
+[t=00:00:03.675440][f=-000001] Loaded synced gadget:  AirPlantParents     <unit_air_plants.lua>
+[t=00:00:03.675530][f=-000001] Loaded synced gadget:  Allow Builder Hold Fire  <unit_allow_builder_hold_fire.lua>
+[t=00:00:03.675620][f=-000001] Loaded synced gadget:  Ally Selected Units  <cmd_selected_units.lua>
+[t=00:00:03.675713][f=-000001] Loaded synced gadget:  AllyTeam ranking    <game_allyteam_ranking.lua>
+[t=00:00:03.676093][f=-000001] Loaded synced gadget:  Area Mex            <cmd_area_mex.lua>
+[t=00:00:03.676752][f=-000001] Loaded synced gadget:  Area Timed Damage Handler  <unit_area_timed_damage.lua>
+[t=00:00:03.676852][f=-000001] Loaded synced gadget:  Bomber No Air Target  <unit_bomber_no_air_target.lua>
+[t=00:00:03.677922][f=-000001] Loaded synced gadget:  Build Blocking API  <api_build_blocking.lua>
+[t=00:00:03.678022][f=-000001] Loaded synced gadget:  Build Icons Slowy (/luarules buildiconslow or buildiconanim or buildiconanimslow)  <dbg_buildicons_run.lua>
+[t=00:00:03.678116][f=-000001] Loaded synced gadget:  Builder Priority    <unit_builder_priority.lua>
+[t=00:00:03.678203][f=-000001] Loaded synced gadget:  Builder buggeroff   <cmd_build_bugger_off.lua>
+[t=00:00:03.678290][f=-000001] Loaded synced gadget:  Cancel orders on share  <unit_cancel_orders_on_share.lua>
+[t=00:00:03.678378][f=-000001] Loaded synced gadget:  Capture Only Enemy  <unit_capture_only_enemy.lua>
+[t=00:00:03.678470][f=-000001] Loaded synced gadget:  Cloak               <unit_cloak.lua>
+[t=00:00:03.678557][f=-000001] Loaded synced gadget:  Cob Debug           <dbg_cob_debug.lua>
+[t=00:00:03.678648][f=-000001] Loaded synced gadget:  Com Counter         <mo_com_counter.lua>
+[t=00:00:03.678737][f=-000001] Loaded synced gadget:  Commander Dance Command  <cmd_commander_dance.lua>
+[t=00:00:03.678829][f=-000001] Loaded synced gadget:  Commando Watch      <unit_commando_watch.lua>
+[t=00:00:03.678921][f=-000001] Loaded synced gadget:  Continuous Aim      <unit_continuous_aim.lua>
+[t=00:00:03.679005][f=-000001] Loaded synced gadget:  Controls Unit's maxrange  <unit_custommaxranges.lua>
+[t=00:00:03.679095][f=-000001] Loaded synced gadget:  Corpse link         <unit_corpse_link.lua>
+[t=00:00:03.679179][f=-000001] Loaded synced gadget:  Cursor Broadcast    <cmd_mouse_pos_broadcast.lua>
+[t=00:00:03.710371][f=-000001] Loaded synced gadget:  Cursors             <unit_cursors.lua>
+[t=00:00:03.710483][f=-000001] Loaded synced gadget:  Custom Map Tidal    <game_custom_map_tidal.lua>
+[t=00:00:03.710851][f=-000001] Loaded synced gadget:  Custom weapon behaviours  <unit_custom_weapons_behaviours.lua>
+[t=00:00:03.710963][f=-000001] Loaded synced gadget:  D-Gun Behaviour     <unit_dgun_behaviour.lua>
+[t=00:00:03.711061][f=-000001] Loaded synced gadget:  DGun CmdType Fix    <unit_dgun_cmdtype_fix.lua>
+[t=00:00:03.711154][f=-000001] Loaded synced gadget:  Debris Explosions   <gfx_debrisexplosions.lua>
+[t=00:00:03.711253][f=-000001] Loaded synced gadget:  Debris physics      <feature_debris_physics.lua>
+[t=00:00:03.711347][f=-000001] Loaded synced gadget:  DirectControl       <unit_direct_control.lua>
+[t=00:00:03.711451][f=-000001] Loaded synced gadget:  Display DPS         <gui_display_dps.lua>
+[t=00:00:03.711971][f=-000001] Loaded synced gadget:  Don't target flyover nukes  <unit_interceptors.lua>
+[t=00:00:03.712074][f=-000001] Loaded synced gadget:  Dragons Disguise    <unit_dragons_disguise.lua>
+[t=00:00:03.712175][f=-000001] Loaded synced gadget:  Dynamic Maxunits    <game_dynamic_maxunits.lua>
+[t=00:00:03.718372][f=-000001] Loaded synced gadget:  Dynamic collision volume & Hitsphere Scaledown  <unit_dynamic_collision_volume.lua>
+[t=00:00:03.718499][f=-000001] Loaded synced gadget:  Energy Conversion   <game_energy_conversion.lua>
+[t=00:00:03.718592][f=-000001] Loaded synced gadget:  Experimental Bots Steps Damages  <unit_stomp.lua>
+[t=00:00:03.719121][f=-000001] Loaded synced gadget:  Explosion_lights    <gfx_explosion_lights.lua>
+[t=00:00:03.719227][f=-000001] Loaded synced gadget:  FPS Broadcast       <game_fps_broadcast.lua>
+[t=00:00:03.719327][f=-000001] Loaded synced gadget:  Factory Guard       <unit_factory_guard.lua>
+[t=00:00:03.719426][f=-000001] Loaded synced gadget:  Factory Quotas      <unit_factory_quota.lua>
+[t=00:00:03.719528][f=-000001] Loaded synced gadget:  Factory Stop Production  <cmd_factory_stop_production.lua>
+[t=00:00:03.719625][f=-000001] Loaded synced gadget:  Factory Unblocking  <unit_factory_unblocking.lua>
+[t=00:00:03.719717][f=-000001] Loaded synced gadget:  Footprint clearance  <unit_footprint_clearance.lua>
+[t=00:00:03.719809][f=-000001] Loaded synced gadget:  GPU mem Broadcast   <gpumem_broadcast.lua>
+[t=00:00:03.719906][f=-000001] Loaded synced gadget:  Game End            <game_end.lua>
+[t=00:00:03.720002][f=-000001] Loaded synced gadget:  GameID GameRulesParam  <game_id.lua>
+[t=00:00:03.720104][f=-000001] Loaded synced gadget:  Geo Upgrade Reclaimer  <unit_geo_upgrade_reclaimer.lua>
+[t=00:00:03.720205][f=-000001] Loaded synced gadget:  Infestor Replication  <unit_infestor_spawn.lua>
+[t=00:00:03.720299][f=-000001] Loaded synced gadget:  Inherit Creation Units XP  <unit_inherit_creation_xp.lua>
+[t=00:00:03.720776][f=-000001] Loaded synced gadget:  Initial Spawn       <game_initial_spawn.lua>
+[t=00:00:03.720877][f=-000001] Loaded synced gadget:  Instant Self Destruct  <unit_instant_self_destruct.lua>
+[t=00:00:03.720975][f=-000001] Loaded synced gadget:  Juno Damage         <unit_juno_damage.lua>
+[t=00:00:03.721066][f=-000001] Loaded synced gadget:  Lightning Splash Damage  <unit_lightning_splash_dmg.lua>
+[t=00:00:03.721172][f=-000001] Loaded synced gadget:  Load/unload         <unit_airtransport_load_unload.lua>
+[t=00:00:03.727951][f=-000001] Loaded synced gadget:  Lua unit script framework  <unit_script.lua>
+[t=00:00:03.728064][f=-000001] Loaded synced gadget:  LuaUI Reload        <cmd_luaui_reload.lua>
+[t=00:00:03.728183][f=-000001] Loaded synced gadget:  Manual launch command  <cmd_manual_launch.lua>
+[t=00:00:03.728281][f=-000001] Loaded synced gadget:  Map VoidWater       <map_voidground.lua>
+[t=00:00:03.728383][f=-000001] Loaded synced gadget:  Mex Upgrade Reclaimer  <unit_mex_upgrade_reclaimer.lua>
+[t=00:00:03.728484][f=-000001] Loaded synced gadget:  Minesweeper Detection  <unit_minesweeper_detection.lua>
+[t=00:00:03.728582][f=-000001] Loaded synced gadget:  Nano Radar Pos      <unit_nanoradarpos.lua>
+[t=00:00:03.728676][f=-000001] Loaded synced gadget:  No Land Damage      <unit_no_land_damage.lua>
+[t=00:00:03.728785][f=-000001] Loaded synced gadget:  Nonblocking mines   <unit_nonblocking_mines.lua>
+[t=00:00:03.728905][f=-000001] Loaded synced gadget:  Objectify           <unit_objectify.lua>
+[t=00:00:03.729020][f=-000001] Loaded synced gadget:  On/Off descriptions  <cmd_onoffdesc.lua>
+[t=00:00:03.729127][f=-000001] Loaded synced gadget:  Only Target Emp-able units  <unit_onlytargetempable.lua>
+[t=00:00:03.729233][f=-000001] Loaded synced gadget:  Only Target onlytargetcategory  <unit_onlytargetcategory.lua>
+[t=00:00:03.729331][f=-000001] Loaded synced gadget:  Paralyze Damage Multiplier  <unit_paralyze_damage_multiplier.lua>
+[t=00:00:03.729740][f=-000001] Loaded synced gadget:  Penetrator Weapons  <unit_custom_weapons_overpen.lua>
+[t=00:00:03.729851][f=-000001] Loaded synced gadget:  Pre-aim             <unit_preaim.lua>
+[t=00:00:03.730139][f=-000001] Loaded synced gadget:  Prevent Cloaked Unit Reclaim  <unit_prevent_cloaked_unit_reclaim.lua>
+[t=00:00:03.730263][f=-000001] Loaded synced gadget:  Prevent Lab Hax2    <unit_prevent_lab_hax2.lua>
+[t=00:00:03.730387][f=-000001] Loaded synced gadget:  Prevent Load Hax    <unit_prevent_load_hax.lua>
+[t=00:00:03.730511][f=-000001] Loaded synced gadget:  Prevent Nanoframe Blocking Hax  <unit_prevent_nanoframe_blocking_hax.lua>
+[t=00:00:03.730632][f=-000001] Loaded synced gadget:  Prevent Range Hax   <unit_prevent_range_hax.lua>
+[t=00:00:03.730742][f=-000001] Loaded synced gadget:  Prevent Self Guard  <unit_prevent_self_guard.lua>
+[t=00:00:03.730855][f=-000001] Loaded synced gadget:  Prevent Strange Orders  <unit_prevent_strange_orders.lua>
+[t=00:00:03.730975][f=-000001] Loaded synced gadget:  Prevent Unload Hax  <unit_prevent_unload_hax.lua>
+[t=00:00:03.731091][f=-000001] Loaded synced gadget:  Prevent outside-of-map hax  <unit_prevent_aircraft_hax.lua>
+[t=00:00:03.731216][f=-000001] Loaded synced gadget:  Projectile Effects  <fx_projectile_effects.lua>
+[t=00:00:03.731324][f=-000001] Loaded synced gadget:  Raptor Queen Anti-Dgun behavior  <pve_boss_priority_targetting.lua>
+[t=00:00:03.731441][f=-000001] Loaded synced gadget:  Reclaim Fix         <unit_reclaim_fix.lua>
+[t=00:00:03.731553][f=-000001] Loaded synced gadget:  Reclaim effect      <gfx_reclaim_fx.lua>
+[t=00:00:03.731675][f=-000001] Loaded synced gadget:  Remove Stop         <cmd_remove_stop.lua>
+[t=00:00:03.731791][f=-000001] Loaded synced gadget:  Remove Wait         <cmd_remove_wait.lua>
+[t=00:00:03.731901][f=-000001] Loaded synced gadget:  Scav Cloud Spawner  <scav_cloud_spawner.lua>
+[t=00:00:03.732017][f=-000001] Loaded synced gadget:  Scav Spawn Effect   <scav_spawn_effect.lua>
+[t=00:00:03.732130][f=-000001] Loaded synced gadget:  Stealthy Passengers  <unit_stealthy_passengers.lua>
+[t=00:00:03.732253][f=-000001] Loaded synced gadget:  Stockpile Script    <unit_stockpile_script.lua>
+[t=00:00:03.732388][f=-000001] Loaded synced gadget:  Stockpile control   <unit_stockpile_limit.lua>
+[t=00:00:03.732515][f=-000001] Loaded synced gadget:  Stun Control        <unit_stun_control.lua>
+[t=00:00:03.732640][f=-000001] Loaded synced gadget:  Stun Script         <unit_stun_script.lua>
+[t=00:00:03.732770][f=-000001] Loaded synced gadget:  Stun Storage        <unit_stun_storage.lua>
+[t=00:00:03.733132][f=-000001] Loaded synced gadget:  Sunfacer            <unit_sunfacing.lua>
+[t=00:00:03.733261][f=-000001] Loaded synced gadget:  System info         <system_info.lua>
+[t=00:00:03.733410][f=-000001] Loaded synced gadget:  Target on the move  <unit_target_on_the_move.lua>
+[t=00:00:03.733539][f=-000001] Loaded synced gadget:  Techup blocking     <game_tech_blocking.lua>
+[t=00:00:03.733665][f=-000001] Loaded synced gadget:  Tombstones          <unit_tombstones.lua>
+[t=00:00:03.733783][f=-000001] Loaded synced gadget:  Transported building Ghost Remover  <unit_transported_building_ghost.lua>
+[t=00:00:03.733903][f=-000001] Loaded synced gadget:  Tree feller         <gfx_tree_feller.lua>
+[t=00:00:03.734038][f=-000001] Loaded synced gadget:  TurnRadius          <unit_airunitsturnradius.lua>
+[t=00:00:03.734156][f=-000001] Loaded synced gadget:  Unally on demand    <cmd_alliance_break.lua>
+[t=00:00:03.734293][f=-000001] Loaded synced gadget:  UnderwaterPickup    <unit_disallow_underwater_load.lua>
+[t=00:00:03.734437][f=-000001] Loaded synced gadget:  Unit Capture Decay  <unit_capture_decay.lua>
+[t=00:00:03.734597][f=-000001] Loaded synced gadget:  Unit Range XP Update  <unit_xp_range_bonus.lua>
+[t=00:00:03.734767][f=-000001] Loaded synced gadget:  Unit Script Decals  <gfx_unit_script_decals.lua>
+[t=00:00:03.734911][f=-000001] Loaded synced gadget:  Unit Script Lights and Distortion  <gfx_unit_script_lights.lua>
+[t=00:00:03.735024][f=-000001] Loaded synced gadget:  Unit transportable nanos  <unit_transportable_nanos.lua>
+[t=00:00:03.735119][f=-000001] Loaded synced gadget:  UnitDefs Turret TurnSpeeds  <unit_turretspeed.lua>
+[t=00:00:03.735229][f=-000001] Loaded synced gadget:  Volcano Pyroclastic Eruptions  <game_volcano_pyroclastic.lua>
+[t=00:00:03.735331][f=-000001] Loaded synced gadget:  Wade Effects        <gfx_wade_fx.lua>
+[t=00:00:03.735426][f=-000001] Loaded synced gadget:  Water Crush and Collision Damage  <unit_water_depth_damage.lua>
+[t=00:00:03.735524][f=-000001] Loaded synced gadget:  Water Speed Multiplier  <unit_waterspeedmultiplier.lua>
+[t=00:00:03.735767][f=-000001] Loaded synced gadget:  Watereffects        <fx_watersplash.lua>
+[t=00:00:03.735942][f=-000001] Loaded synced gadget:  Windmill Control    <unit_windmill_control.lua>
+[t=00:00:03.736035][f=-000001] Loaded synced gadget:  Workertime Multiplier Boost  <unit_workertime_boost.lua>
+[t=00:00:03.736123][f=-000001] Loaded synced gadget:  ai_ruins.lua        <ai_ruins.lua>
+[t=00:00:03.736208][f=-000001] Loaded synced gadget:  api_widget_events.lua  <api_widget_events.lua>
+[t=00:00:03.736291][f=-000001] Loaded synced gadget:  cmd_idle_players.lua  <cmd_idle_players.lua>
+[t=00:00:03.736376][f=-000001] Loaded synced gadget:  cmd_paused_is_paused.lua  <cmd_paused_is_paused.lua>
+[t=00:00:03.736463][f=-000001] Loaded synced gadget:  fx_reclaim_shards   <fx_reclaim_shards.lua>
+[t=00:00:03.736546][f=-000001] Loaded synced gadget:  game_assistdronespawn.lua  <game_assistdronespawn.lua>
+[t=00:00:03.736629][f=-000001] Loaded synced gadget:  game_commander_builder.lua  <game_commander_builder.lua>
+[t=00:00:03.736715][f=-000001] Loaded synced gadget:  game_draft_spawn_order.lua  <game_draft_spawn_order.lua>
+[t=00:00:03.736797][f=-000001] Loaded synced gadget:  game_ffa_start_setup.lua  <game_ffa_start_setup.lua>
+[t=00:00:03.736882][f=-000001] Loaded synced gadget:  game_logger.lua     <game_logger.lua>
+[t=00:00:03.736975][f=-000001] Loaded synced gadget:  game_no_share_to_enemy  <game_no_share_to_enemy.lua>
+[t=00:00:03.737063][f=-000001] Loaded synced gadget:  game_selfd_resign.lua  <game_selfd_resign.lua>
+[t=00:00:03.737154][f=-000001] Loaded synced gadget:  gui_soundeffects.lua  <gui_soundeffects.lua>
+[t=00:00:03.737245][f=-000001] Loaded synced gadget:  preventcombomb      <mo_preventcombomb.lua>
+[t=00:00:03.737337][f=-000001] Loaded synced gadget:  transport_dies_load_dies  <unit_transport_dies_load_dies.lua>
+[t=00:00:03.737428][f=-000001] Loaded synced gadget:  unit_attributes.lua  <unit_attributes.lua>
+[t=00:00:03.737522][f=-000001] Loaded synced gadget:  unit_combomb_full_damage  <unit_combomb_full_damage.lua>
+[t=00:00:03.737614][f=-000001] Loaded synced gadget:  unit_juno_damage_mini.lua  <unit_juno_damage_mini.lua>
+[t=00:00:03.737704][f=-000001] Loaded synced gadget:  unit_timeslow.lua   <unit_timeslow.lua>
+[t=00:00:03.737799][f=-000001] Loaded synced gadget:  unit_wanted_speed.lua  <unit_wanted_speed.lua>
+[t=00:00:03.737888][f=-000001] Loaded synced gadget:  unit_xmas.lua       <unit_xmas.lua>
+[t=00:00:03.737990][f=-000001] Loaded synced gadget:  Area Attack         <unit_areaattack.lua>
+[t=00:00:03.738083][f=-000001] Loaded synced gadget:  Deny Invalid Mex Orders  <cmd_mex_denier.lua>
+[t=00:00:03.738172][f=-000001] Loaded synced gadget:  Give Command        <cmd_give.lua>
+[t=00:00:03.738265][f=-000001] Loaded synced gadget:  Message             <game_message.lua>
+[t=00:00:03.738366][f=-000001] Loaded synced gadget:  Mission API triggers  <api_missions_triggers.lua>
+[t=00:00:03.738462][f=-000001] Loaded synced gadget:  Projectile Over-Range and Leashing  <unit_projectile_overrange.lua>
+[t=00:00:03.738553][f=-000001] Loaded synced gadget:  Send Command        <cmd_sendcommand.lua>
+[t=00:00:03.738655][f=-000001] Loaded synced gadget:  Team Com Ends       <game_team_com_ends.lua>
+[t=00:00:03.738749][f=-000001] Loaded synced gadget:  Team Death Effect   <game_team_death_effect.lua>
+[t=00:00:03.738844][f=-000001] Loaded synced gadget:  Team Resourcing     <game_team_resources.lua>
+[t=00:00:03.738933][f=-000001] Loaded synced gadget:  UnitDamagedReplay   <dev_replay_data.lua>
+[t=00:00:03.739036][f=-000001] Loaded synced gadget:  Weapon Smart Select  <unit_weapon_smart_select_helper.lua>
+[t=00:00:03.739126][f=-000001] Loaded synced gadget:  Prevent Excessive Share  <game_prevent_excessive_share.lua>
+[t=00:00:03.739234][f=-000001] Loaded synced gadget:  Zombies             <unit_zombies.lua>
+[t=00:00:03.739325][f=-000001] Loaded synced gadget:  Garbage Collector   <api_garbage_collector.lua>
+[t=00:00:03.739410][f=-000001] Loaded synced gadget:  Notifications       <sfx_notifications.lua>
+[t=00:00:03.739499][f=-000001] Loaded synced gadget:  Notifications Broadcaster  <sfx_notifications_broadcaster.lua>
+[t=00:00:03.739615][f=-000001] Loaded synced gadget:  Resurrection Behavior  <unit_resurrected.lua>
+[t=00:00:03.739711][f=-000001] Loaded synced gadget:  Seismic Ping        <unit_seismic_ping.lua>
+[t=00:00:03.739809][f=-000001] Loaded synced gadget:  Unit kill count     <unit_kill_count.lua>
+[t=00:00:03.739907][f=-000001] Loaded synced gadget:  Cluster Munitions   <unit_custom_weapons_cluster.lua>
+[t=00:00:03.740435][f=-000001] Loaded synced gadget:  Attached Construction Turret  <unit_attached_con_turret.lua>
+[t=00:00:03.740539][f=-000001] Loaded synced gadget:  Paralyze On Off Behavior  <unit_paralyze_on_off.lua>
+[t=00:00:03.740640][f=-000001] Loaded synced gadget:  Unit Respawning     <unit_respawning.lua>
+[t=00:00:03.740745][f=-000001] Loaded synced gadget:  Unit Evolution      <unit_evolution.lua>
+[t=00:00:03.740849][f=-000001] Loaded synced gadget:  Unit Explosion Spawner  <unit_explosion_spawner.lua>
+[t=00:00:03.740964][f=-000001] Loaded synced gadget:  Unit Carrier Spawner  <unit_carrier_spawner.lua>
+[t=00:00:03.741061][f=-000001] Loaded synced gadget:  Mobile Unit Paralyze Damage Handler  <unit_paralyze_damage_limit.lua>
+[t=00:00:03.741156][f=-000001] Loaded synced gadget:  AI namer            <ai_namer.lua>
+[t=00:00:03.741255][f=-000001] Loaded synced gadget:  Crashing Aircraft   <unit_crashing_aircraft.lua>
+[t=00:00:03.741366][f=-000001] Loaded synced gadget:  Death Animations    <unit_death_animations.lua>
+[t=00:00:03.741487][f=-000001] Loaded synced gadget:  Hats                <unit_hats.lua>
+[t=00:00:03.741581][f=-000001] Loaded synced gadget:  Sinking Ship        <unit_sinking_ship.lua>
+[t=00:00:03.741671][f=-000001] Loaded synced gadget:  Shield Effects      <gfx_unit_shield_effects.lua>
+[t=00:00:03.741759][f=-000001] Loaded synced gadget:  Synced Proxy        <dbg_synced_proxy.lua>
+[t=00:00:03.741858][f=-000001] Loaded synced gadget:  Test Environment Helper  <dbg_test_env_helper.lua>
+[t=00:00:03.741958][f=-000001] Loaded synced gadget:  Map Waterlevel      <map_waterlevel.lua>
+[t=00:00:03.742062][f=-000001] Loaded synced gadget:  Scenario Loadout    <unit_scenario_loadout.lua>
+[t=00:00:03.742152][f=-000001] Loaded synced gadget:  Scenario Script     <unit_scenario_script.lua>
+[t=00:00:03.742253][f=-000001] Loaded synced gadget:  Gadget Profiler     <dbg_gadget_profiler.lua>
+[t=00:00:03.742366][f=-000001] Loaded synced gadget:  APM Broadcast       <game_apm_broadcast.lua>
+[t=00:00:03.745314][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.745338][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.745359][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.745369][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.745383][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.749819][f=-000001] Lava Mapname, Altair_Crossing_V4
+[t=00:00:03.762102][f=-000001] [AI Loader] ShardLua bot Deactivated!
+[t=00:00:03.763381][f=-000001] <LockCamera>: Sorry for the camera switch spam, but this is the only reliable way to list camera states other than hardcoding them
+[t=00:00:03.763400][f=-000001] Switching to Overview style camera
+[t=00:00:03.763411][f=-000001] Switching to Spring style camera
+[t=00:00:03.763421][f=-000001] Switching to Free style camera
+[t=00:00:03.763435][f=-000001] Switching to Dolly style camera
+[t=00:00:03.763441][f=-000001] Switching to Rotatable overhead camera
+[t=00:00:03.763447][f=-000001] Switching to Overhead (TA) style camera
+[t=00:00:03.763459][f=-000001] Switching to FPS style camera
+[t=00:00:03.763473][f=-000001] Switching to Spring style camera
+[t=00:00:03.769491][f=-000001] Missing capabilities:  CUS GL4. Disabling.
+[t=00:00:03.770146][f=-000001] Profiler not using highres timers, false, 0
+[t=00:00:03.784773][f=-000001] [ATMOSPHERIC] Current map: altair_crossing_v4
+[t=00:00:03.784798][f=-000001] [ATMOSPHERIC] No map config found. Turning off the gadget
+[t=00:00:03.786619][f=-000001] REMOVED PVE BOSS DRONES
+[t=00:00:03.812900][f=-000001] Loaded unsynced gadget:  Dev Helper Cmds     <cmd_dev_helpers.lua>
+[t=00:00:03.812992][f=-000001] Loaded unsynced gadget:  Dead Unit           <unit_dead.lua>
+[t=00:00:03.813079][f=-000001] Loaded unsynced gadget:  Area Attack Limiter  <unit_areaattack_limiter.lua>
+[t=00:00:03.813165][f=-000001] Loaded unsynced gadget:  CMD limiter         <cmd_limiter.lua>
+[t=00:00:03.813763][f=-000001] Loaded unsynced gadget:  Get Player Data     <cmd_get_player_data.lua>
+[t=00:00:03.813857][f=-000001] Loaded unsynced gadget:  Stats               <api_damage_stats.lua>
+[t=00:00:03.813951][f=-000001] Loaded unsynced gadget:  Permissions         <api_permissions.lua>
+[t=00:00:03.814037][f=-000001] Loaded unsynced gadget:  No Share Load       <unit_prevent_share_load.lua>
+[t=00:00:03.814122][f=-000001] Loaded unsynced gadget:  No Share Self-D     <unit_prevent_share_self_d.lua>
+[t=00:00:03.814206][f=-000001] Loaded unsynced gadget:  AutoColorPicker     <game_autocolors.lua>
+[t=00:00:03.814287][f=-000001] Loaded unsynced gadget:  Explosion Deformation Fix  <map_explosion_deformation_fix.lua>
+[t=00:00:03.814369][f=-000001] Loaded unsynced gadget:  Map Atmosphere CEGs  <map_atmosphere_cegs.lua>
+[t=00:00:03.814476][f=-000001] Loaded unsynced gadget:  Map NightMode       <map_nightmode.lua>
+[t=00:00:03.814560][f=-000001] Loaded unsynced gadget:  Ruins Blueprint Tester  <ai_ruin_blueprint_tester.lua>
+[t=00:00:03.814640][f=-000001] Loaded unsynced gadget:  Feature Death Explosion  <feature_dead_explosion.lua>
+[t=00:00:03.815055][f=-000001] Loaded unsynced gadget:  IconGenerator       <unit_icongenerator.lua>
+[t=00:00:03.815164][f=-000001] Loaded unsynced gadget:  API Resource Spot Finder (mex/geo)  <api_resource_spot_finder.lua>
+[t=00:00:03.815259][f=-000001] Loaded unsynced gadget:  CameraBroadcast     <camera_lockcamera.lua>
+[t=00:00:03.815348][f=-000001] Loaded unsynced gadget:  Map Lava Gadget 2.5  <map_lava.lua>
+[t=00:00:03.815436][f=-000001] Loaded unsynced gadget:  AA Targeting Priority  <unit_aa_targeting_priority.lua>
+[t=00:00:03.815526][f=-000001] Loaded unsynced gadget:  Awards              <gui_awards.lua>
+[t=00:00:03.815615][f=-000001] Loaded unsynced gadget:  Collision Damage Behavior  <unit_collision_damage_behavior.lua>
+[t=00:00:03.815700][f=-000001] Loaded unsynced gadget:  Geo fix             <map_geofix.lua>
+[t=00:00:03.815796][f=-000001] Loaded unsynced gadget:  Healthbars Widget Forwarding  <unit_healthbars_widget_forwarding.lua>
+[t=00:00:03.851434][f=-000001] Loaded unsynced gadget:  PBR enabler         <api_pbr_enabler.lua>
+[t=00:00:03.872458][f=-000001] LuaShader: [scumShader] shader warning(s):
+0:31045(19): warning: `fragColor' used uninitialized
+
+[t=00:00:03.873338][f=-000001] Loaded unsynced gadget:  Raptor Scum GL4     <gfx_raptor_scum_gl4.lua>
+[t=00:00:03.873415][f=-000001] Map Sun Handler: Clearing groundSpecularColor via SetSunLighting because map does not change it from default.
+[t=00:00:03.873537][f=-000001] Loaded unsynced gadget:  Sun Handler         <map_sun_handler.lua>
+[t=00:00:03.873631][f=-000001] Loaded unsynced gadget:  Team Power Watcher  <game_team_power_watcher.lua>
+[t=00:00:03.873744][f=-000001] Loaded unsynced gadget:  UnitCallinsGadget   <dbg_unit_callins.lua>
+[t=00:00:03.873849][f=-000001] Loaded unsynced gadget:  Activity Broadcast  <activity_broadcast.lua>
+[t=00:00:03.873947][f=-000001] Loaded unsynced gadget:  AirPlantParents     <unit_air_plants.lua>
+[t=00:00:03.874043][f=-000001] Loaded unsynced gadget:  Ally Selected Units  <cmd_selected_units.lua>
+[t=00:00:03.874136][f=-000001] Loaded unsynced gadget:  AllyTeam ranking    <game_allyteam_ranking.lua>
+[t=00:00:03.874238][f=-000001] Loaded unsynced gadget:  Area Mex            <cmd_area_mex.lua>
+[t=00:00:03.874329][f=-000001] Loaded unsynced gadget:  Area Timed Damage Handler  <unit_area_timed_damage.lua>
+[t=00:00:03.874431][f=-000001] Loaded unsynced gadget:  Bomber No Air Target  <unit_bomber_no_air_target.lua>
+[t=00:00:03.874534][f=-000001] Loaded unsynced gadget:  Build Blocking API  <api_build_blocking.lua>
+[t=00:00:03.874631][f=-000001] Loaded unsynced gadget:  Build Icons Slowy (/luarules buildiconslow or buildiconanim or buildiconanimslow)  <dbg_buildicons_run.lua>
+[t=00:00:03.874726][f=-000001] Loaded unsynced gadget:  Builder Priority    <unit_builder_priority.lua>
+[t=00:00:03.874818][f=-000001] Loaded unsynced gadget:  Builder buggeroff   <cmd_build_bugger_off.lua>
+[t=00:00:03.874912][f=-000001] Loaded unsynced gadget:  Cancel orders on share  <unit_cancel_orders_on_share.lua>
+[t=00:00:03.875005][f=-000001] Loaded unsynced gadget:  Capture Only Enemy  <unit_capture_only_enemy.lua>
+[t=00:00:03.875097][f=-000001] Loaded unsynced gadget:  Cob Debug           <dbg_cob_debug.lua>
+[t=00:00:03.875187][f=-000001] Loaded unsynced gadget:  Commander Dance Command  <cmd_commander_dance.lua>
+[t=00:00:03.875407][f=-000001] Loaded unsynced gadget:  Continuous Aim      <unit_continuous_aim.lua>
+[t=00:00:03.875513][f=-000001] Loaded unsynced gadget:  Cursor Broadcast    <cmd_mouse_pos_broadcast.lua>
+[t=00:00:03.875612][f=-000001] Loaded unsynced gadget:  Cursors             <unit_cursors.lua>
+[t=00:00:03.875710][f=-000001] Loaded unsynced gadget:  Custom weapon behaviours  <unit_custom_weapons_behaviours.lua>
+[t=00:00:03.875812][f=-000001] Loaded unsynced gadget:  D-Gun Behaviour     <unit_dgun_behaviour.lua>
+[t=00:00:03.875908][f=-000001] Loaded unsynced gadget:  Debris Explosions   <gfx_debrisexplosions.lua>
+[t=00:00:03.876012][f=-000001] Loaded unsynced gadget:  Display DPS         <gui_display_dps.lua>
+[t=00:00:03.876115][f=-000001] Loaded unsynced gadget:  Dragons Disguise    <unit_dragons_disguise.lua>
+[t=00:00:03.876220][f=-000001] Loaded unsynced gadget:  Dynamic collision volume & Hitsphere Scaledown  <unit_dynamic_collision_volume.lua>
+[t=00:00:03.876315][f=-000001] Loaded unsynced gadget:  Experimental Bots Steps Damages  <unit_stomp.lua>
+[t=00:00:03.876408][f=-000001] Loaded unsynced gadget:  Explosion_lights    <gfx_explosion_lights.lua>
+[t=00:00:03.876506][f=-000001] Loaded unsynced gadget:  FPS Broadcast       <game_fps_broadcast.lua>
+[t=00:00:03.876603][f=-000001] Loaded unsynced gadget:  Factory Stop Production  <cmd_factory_stop_production.lua>
+[t=00:00:03.876698][f=-000001] Loaded unsynced gadget:  Footprint clearance  <unit_footprint_clearance.lua>
+[t=00:00:03.876797][f=-000001] Loaded unsynced gadget:  GPU mem Broadcast   <gpumem_broadcast.lua>
+[t=00:00:03.876895][f=-000001] Loaded unsynced gadget:  GUI Sound Effects player  <gui_soundeffects.lua>
+[t=00:00:03.876990][f=-000001] Loaded unsynced gadget:  Game End            <game_end.lua>
+[t=00:00:03.877085][f=-000001] Loaded unsynced gadget:  Geo Upgrade Reclaimer  <unit_geo_upgrade_reclaimer.lua>
+[t=00:00:03.877184][f=-000001] Loaded unsynced gadget:  Initial Spawn       <game_initial_spawn.lua>
+[t=00:00:03.877275][f=-000001] Loaded unsynced gadget:  Juno Damage         <unit_juno_damage.lua>
+[t=00:00:03.877366][f=-000001] Loaded unsynced gadget:  Load/unload         <unit_airtransport_load_unload.lua>
+[t=00:00:03.877458][f=-000001] Loaded unsynced gadget:  LuaUI Reload        <cmd_luaui_reload.lua>
+[t=00:00:03.877546][f=-000001] Loaded unsynced gadget:  Manual launch command  <cmd_manual_launch.lua>
+[t=00:00:03.877634][f=-000001] Loaded unsynced gadget:  Mex Upgrade Reclaimer  <unit_mex_upgrade_reclaimer.lua>
+[t=00:00:03.877723][f=-000001] Loaded unsynced gadget:  Nano Radar Pos      <unit_nanoradarpos.lua>
+[t=00:00:03.877831][f=-000001] Loaded unsynced gadget:  Objectify           <unit_objectify.lua>
+[t=00:00:03.877941][f=-000001] Loaded unsynced gadget:  Only Target Emp-able units  <unit_onlytargetempable.lua>
+[t=00:00:03.878055][f=-000001] Loaded unsynced gadget:  Only Target onlytargetcategory  <unit_onlytargetcategory.lua>
+[t=00:00:03.878160][f=-000001] Loaded unsynced gadget:  Pre-aim             <unit_preaim.lua>
+[t=00:00:03.878265][f=-000001] Loaded unsynced gadget:  Prevent Cloaked Unit Reclaim  <unit_prevent_cloaked_unit_reclaim.lua>
+[t=00:00:03.878369][f=-000001] Loaded unsynced gadget:  Prevent Lab Hax2    <unit_prevent_lab_hax2.lua>
+[t=00:00:03.878474][f=-000001] Loaded unsynced gadget:  Prevent Nanoframe Blocking Hax  <unit_prevent_nanoframe_blocking_hax.lua>
+[t=00:00:03.878579][f=-000001] Loaded unsynced gadget:  Prevent Self Guard  <unit_prevent_self_guard.lua>
+[t=00:00:03.878683][f=-000001] Loaded unsynced gadget:  Prevent Unload Hax  <unit_prevent_unload_hax.lua>
+[t=00:00:03.878792][f=-000001] Loaded unsynced gadget:  PvE Builder Controller  <pve_builder_controller.lua>
+[t=00:00:03.878894][f=-000001] Loaded unsynced gadget:  Raptor Area Healers  <pve_areahealers.lua>
+[t=00:00:03.878996][f=-000001] Loaded unsynced gadget:  Raptor Defense Nuke Controller  <pve_nuke_controller.lua>
+[t=00:00:03.879101][f=-000001] Loaded unsynced gadget:  Raptor Queen Anti-Dgun behavior  <pve_boss_priority_targetting.lua>
+[t=00:00:03.879203][f=-000001] Loaded unsynced gadget:  Reclaim Fix         <unit_reclaim_fix.lua>
+[t=00:00:03.879308][f=-000001] Loaded unsynced gadget:  Reclaim effect      <gfx_reclaim_fx.lua>
+[t=00:00:03.879409][f=-000001] Loaded unsynced gadget:  Scav Cloud Spawner  <scav_cloud_spawner.lua>
+[t=00:00:03.879511][f=-000001] Loaded unsynced gadget:  Scav Spawn Effect   <scav_spawn_effect.lua>
+[t=00:00:03.879613][f=-000001] Loaded unsynced gadget:  Stockpile control   <unit_stockpile_limit.lua>
+[t=00:00:03.889933][f=-000001] infologVersionTags:engine=2026.06.06-6-gce685e9 master,game=Beyond All Reason $VERSION,lobby=,map=Altair_Crossing_V4
+[t=00:00:03.892030][f=-000001] Loaded unsynced gadget:  System info         <system_info.lua>
+[t=00:00:03.892498][f=-000001] Loaded unsynced gadget:  Target on the move  <unit_target_on_the_move.lua>
+[t=00:00:03.892623][f=-000001] Loaded unsynced gadget:  Techup blocking     <game_tech_blocking.lua>
+[t=00:00:03.892734][f=-000001] Loaded unsynced gadget:  Tombstones          <unit_tombstones.lua>
+[t=00:00:03.892849][f=-000001] Loaded unsynced gadget:  Transported building Ghost Remover  <unit_transported_building_ghost.lua>
+[t=00:00:03.892958][f=-000001] Loaded unsynced gadget:  Tree feller         <gfx_tree_feller.lua>
+[t=00:00:03.893072][f=-000001] Loaded unsynced gadget:  TurnRadius          <unit_airunitsturnradius.lua>
+[t=00:00:03.893179][f=-000001] Loaded unsynced gadget:  Unally on demand    <cmd_alliance_break.lua>
+[t=00:00:03.893287][f=-000001] Loaded unsynced gadget:  UnderwaterPickup    <unit_disallow_underwater_load.lua>
+[t=00:00:03.893394][f=-000001] Loaded unsynced gadget:  Unit Capture Decay  <unit_capture_decay.lua>
+[t=00:00:03.893506][f=-000001] Loaded unsynced gadget:  Unit Script Decals  <gfx_unit_script_decals.lua>
+[t=00:00:03.893621][f=-000001] Loaded unsynced gadget:  Unit Script Lights and Distortion  <gfx_unit_script_lights.lua>
+[t=00:00:03.893734][f=-000001] Loaded unsynced gadget:  UnitDefs Turret TurnSpeeds  <unit_turretspeed.lua>
+[t=00:00:03.893841][f=-000001] Loaded unsynced gadget:  Volcano Pyroclastic Eruptions  <game_volcano_pyroclastic.lua>
+[t=00:00:03.893943][f=-000001] Loaded unsynced gadget:  Water Crush and Collision Damage  <unit_water_depth_damage.lua>
+[t=00:00:03.894051][f=-000001] Loaded unsynced gadget:  Widget Events       <api_widget_events.lua>
+[t=00:00:03.894153][f=-000001] Loaded unsynced gadget:  ai_ruins.lua        <ai_ruins.lua>
+[t=00:00:03.894253][f=-000001] Loaded unsynced gadget:  cmd_idle_players.lua  <cmd_idle_players.lua>
+[t=00:00:03.894355][f=-000001] Loaded unsynced gadget:  cmd_onoffdesc.lua   <cmd_onoffdesc.lua>
+[t=00:00:03.894456][f=-000001] Loaded unsynced gadget:  cmd_paused_is_paused.lua  <cmd_paused_is_paused.lua>
+[t=00:00:03.894558][f=-000001] Loaded unsynced gadget:  cmd_remove_stop.lua  <cmd_remove_stop.lua>
+[t=00:00:03.894663][f=-000001] Loaded unsynced gadget:  cmd_remove_wait.lua  <cmd_remove_wait.lua>
+[t=00:00:03.894765][f=-000001] Loaded unsynced gadget:  feature_debris_physics.lua  <feature_debris_physics.lua>
+[t=00:00:03.894866][f=-000001] Loaded unsynced gadget:  fx_reclaim_shards   <fx_reclaim_shards.lua>
+[t=00:00:03.894969][f=-000001] Loaded unsynced gadget:  game_assistdronespawn.lua  <game_assistdronespawn.lua>
+[t=00:00:03.895069][f=-000001] Loaded unsynced gadget:  game_commander_builder.lua  <game_commander_builder.lua>
+[t=00:00:03.895173][f=-000001] Loaded unsynced gadget:  game_draft_spawn_order.lua  <game_draft_spawn_order.lua>
+[t=00:00:03.895275][f=-000001] Loaded unsynced gadget:  game_dynamic_maxunits.lua  <game_dynamic_maxunits.lua>
+[t=00:00:03.895381][f=-000001] Loaded unsynced gadget:  game_ffa_start_setup.lua  <game_ffa_start_setup.lua>
+[t=00:00:03.895484][f=-000001] Loaded unsynced gadget:  game_id.lua         <game_id.lua>
+[t=00:00:03.895591][f=-000001] Loaded unsynced gadget:  game_logger.lua     <game_logger.lua>
+[t=00:00:03.895698][f=-000001] Loaded unsynced gadget:  game_no_share_to_enemy  <game_no_share_to_enemy.lua>
+[t=00:00:03.895801][f=-000001] Loaded unsynced gadget:  game_selfd_resign.lua  <game_selfd_resign.lua>
+[t=00:00:03.895901][f=-000001] Loaded unsynced gadget:  gfx_wade_fx.lua     <gfx_wade_fx.lua>
+[t=00:00:03.896003][f=-000001] Loaded unsynced gadget:  map_metal_spot_placer.lua  <map_metal_spot_placer.lua>
+[t=00:00:03.896104][f=-000001] Loaded unsynced gadget:  map_voidground.lua  <map_voidground.lua>
+[t=00:00:03.896206][f=-000001] Loaded unsynced gadget:  transport_dies_load_dies  <unit_transport_dies_load_dies.lua>
+[t=00:00:03.896307][f=-000001] Loaded unsynced gadget:  unit_allow_builder_hold_fire.lua  <unit_allow_builder_hold_fire.lua>
+[t=00:00:03.896410][f=-000001] Loaded unsynced gadget:  unit_attributes.lua  <unit_attributes.lua>
+[t=00:00:03.896512][f=-000001] Loaded unsynced gadget:  unit_custommaxranges.lua  <unit_custommaxranges.lua>
+[t=00:00:03.896613][f=-000001] Loaded unsynced gadget:  unit_factory_guard.lua  <unit_factory_guard.lua>
+[t=00:00:03.896720][f=-000001] Loaded unsynced gadget:  unit_factory_quota.lua  <unit_factory_quota.lua>
+[t=00:00:03.896824][f=-000001] Loaded unsynced gadget:  unit_factory_unblocking.lua  <unit_factory_unblocking.lua>
+[t=00:00:03.896926][f=-000001] Loaded unsynced gadget:  unit_juno_damage_mini.lua  <unit_juno_damage_mini.lua>
+[t=00:00:03.897029][f=-000001] Loaded unsynced gadget:  unit_timeslow.lua   <unit_timeslow.lua>
+[t=00:00:03.897130][f=-000001] Loaded unsynced gadget:  unit_wanted_speed.lua  <unit_wanted_speed.lua>
+[t=00:00:03.897233][f=-000001] Loaded unsynced gadget:  unit_xmas.lua       <unit_xmas.lua>
+[t=00:00:03.897337][f=-000001] Loaded unsynced gadget:  Area Attack         <unit_areaattack.lua>
+[t=00:00:03.897440][f=-000001] Loaded unsynced gadget:  Deny Invalid Mex Orders  <cmd_mex_denier.lua>
+[t=00:00:03.897547][f=-000001] Loaded unsynced gadget:  Give Command        <cmd_give.lua>
+[t=00:00:03.897659][f=-000001] Loaded unsynced gadget:  Message             <game_message.lua>
+[t=00:00:03.897770][f=-000001] Loaded unsynced gadget:  Projectile Over-Range and Leashing  <unit_projectile_overrange.lua>
+[t=00:00:03.897886][f=-000001] Loaded unsynced gadget:  Send Command        <cmd_sendcommand.lua>
+[t=00:00:03.898000][f=-000001] Loaded unsynced gadget:  Team Com Ends       <game_team_com_ends.lua>
+[t=00:00:03.898110][f=-000001] Loaded unsynced gadget:  Team Death Effect   <game_team_death_effect.lua>
+[t=00:00:03.898224][f=-000001] Loaded unsynced gadget:  UnitDamagedReplay   <dev_replay_data.lua>
+[t=00:00:03.898337][f=-000001] Loaded unsynced gadget:  Weapon Smart Select  <unit_weapon_smart_select_helper.lua>
+[t=00:00:03.898465][f=-000001] Loaded unsynced gadget:  Garbage Collector   <api_garbage_collector.lua>
+[t=00:00:03.898579][f=-000001] Loaded unsynced gadget:  Battle Volume Controller  <snd_battle_volume_controller.lua>
+[t=00:00:03.898690][f=-000001] Loaded unsynced gadget:  GeoVent Sounds      <fx_atmosphere.lua>
+[t=00:00:03.898807][f=-000001] Loaded unsynced gadget:  Notifications       <sfx_notifications.lua>
+[t=00:00:03.898926][f=-000001] Loaded unsynced gadget:  Notifications Broadcaster  <sfx_notifications_broadcaster.lua>
+[t=00:00:03.899977][f=-000001] Loaded unsynced gadget:  Seismic Ping        <unit_seismic_ping.lua>
+[t=00:00:03.900107][f=-000001] Loaded unsynced gadget:  Unit kill count     <unit_kill_count.lua>
+[t=00:00:03.900839][f=-000001] Loaded unsynced gadget:  Unit Respawning     <unit_respawning.lua>
+[t=00:00:03.900980][f=-000001] Loaded unsynced gadget:  Unit Evolution      <unit_evolution.lua>
+[t=00:00:03.901093][f=-000001] Loaded unsynced gadget:  AI namer            <ai_namer.lua>
+[t=00:00:03.901210][f=-000001] Loaded unsynced gadget:  Crashing Aircraft   <unit_crashing_aircraft.lua>
+[t=00:00:03.901326][f=-000001] Loaded unsynced gadget:  Death Animations    <unit_death_animations.lua>
+[t=00:00:03.901434][f=-000001] Loaded unsynced gadget:  Hats                <unit_hats.lua>
+[t=00:00:03.901549][f=-000001] Loaded unsynced gadget:  Sinking Ship        <unit_sinking_ship.lua>
+[t=00:00:03.951220][f=-000001] Loaded unsynced gadget:  Shield Effects      <gfx_unit_shield_effects.lua>
+[t=00:00:03.951406][f=-000001] Loaded unsynced gadget:  Synced Proxy        <dbg_synced_proxy.lua>
+[t=00:00:03.951524][f=-000001] Loaded unsynced gadget:  Test Environment Helper  <dbg_test_env_helper.lua>
+[t=00:00:03.951642][f=-000001] Loaded unsynced gadget:  Map Waterlevel      <map_waterlevel.lua>
+[t=00:00:03.951754][f=-000001] Loaded unsynced gadget:  Scenario Loadout    <unit_scenario_loadout.lua>
+[t=00:00:03.951859][f=-000001] Loaded unsynced gadget:  Scenario Script     <unit_scenario_script.lua>
+[t=00:00:03.951970][f=-000001] Loaded unsynced gadget:  Gadget Profiler     <dbg_gadget_profiler.lua>
+[t=00:00:03.952096][f=-000001] Loaded unsynced gadget:  APM Broadcast       <game_apm_broadcast.lua>
+[t=00:00:03.967663][f=-000001] [LoadScreen::SetLoadMessage] text="Loading LuaGaia"
+[t=00:00:03.968961][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.968987][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.969011][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.969023][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.969033][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.978303][f=-000001] [~ScopedOnceTimer][creg::AutoRegisterCFunctions(LuaGaia)] 9ms
+[t=00:00:03.984764][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.984791][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.984813][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.984822][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.984832][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.988788][f=-000001] [LoadScreen::SetLoadMessage] text="Loading LuaUI"
+[t=00:00:03.989751][f=-000001] LuaUI Entry Point: "luaui.lua"
+[t=00:00:03.989778][f=-000001] LuaSocket Support: enabled
+[t=00:00:03.991017][f=-000001] [CAS::GASCB] Archive file="altair_crossing_v4.sd7" cs="a5a94cd807b404f1bc9c511d6ac7d3f3cbe2ec12d30cbbb6717948171f67bd70d26b0f343defbf52e98879f991bed9471c6321d4ad44702e95620388ce1a6020"
+[t=00:00:03.991045][f=-000001] [CAS::GASCB] Archive file="maphelper.sdz" cs="6ecfd8e47b2c0bde27517e92bd171d1d036e0482cbfc929a1925b5239e4d5947ed335df18ba4775b16843a9affe42b5fcd2aad9957bacb63a48ae005c799524e"
+[t=00:00:03.991063][f=-000001] [CAS::GASCB] Archive file="bar.sdd" cs="571ee0d1a311670ae0c1fe913fda64686a785f3ab26fe93fb9f46fd9cfb621cfb08cd8328cb5ad07343934581d16b2abd628a0a7eb57d3dad0fd2e95969c33d1"
+[t=00:00:03.991073][f=-000001] [CAS::GASCB] Archive file="springcontent.sdz" cs="d5d5bda7f1d0ee645602fb9ee5832b874a9837a33f6634cfb1b0bfe75d13f02c73fcc687b2493b9516440ce922edc271efbf07bb7cb7c242ebde8e63e36ef4a1"
+[t=00:00:03.991083][f=-000001] [CAS::GASCB] Archive file="bitmaps.sdz" cs="13e1d0e6c3383afef7cda84eff1342271b1c82d13c66b376918ee61a25f77d5c662f6160ec74a121d59dbd8f29d9f10a00ab316cd1b3204a8be2c958c84a38eb"
+[t=00:00:03.991122][f=-000001] [RmlGui::InitializeLua] Initializing RmlUi Lua Bindings
+[t=00:00:03.995198][f=-000001] Using LUAUI_DIRNAME = LuaUI/
+[t=00:00:03.995606][f=-000001] Reloading GUI config from file: LuaUI/ctrlpanel.txt
+[t=00:00:04.025495][f=-000001] Lava Mapname, Altair_Crossing_V4
+[t=00:00:04.027951][f=-000001] [RmlUi] Loaded font face 'Poppins' [regular] from 'fonts/Poppins-Regular.otf'.
+[t=00:00:04.027979][f=-000001] loading font, fonts/exo2/exo2-bold.ttf
+[t=00:00:04.028225][f=-000001] [RmlUi] Loaded font face 'Exo 2' [bold] from 'fonts/exo2/exo2-bold.ttf'.
+[t=00:00:04.028236][f=-000001] loading font, fonts/exo2/exo2-bolditalic.ttf
+[t=00:00:04.028464][f=-000001] [RmlUi] Loaded font face 'Exo 2' [italic, bold] from 'fonts/exo2/exo2-bolditalic.ttf'.
+[t=00:00:04.028470][f=-000001] loading font, fonts/exo2/exo2-italic.ttf
+[t=00:00:04.029078][f=-000001] [RmlUi] Loaded font face 'Exo 2' [italic] from 'fonts/exo2/exo2-italic.ttf'.
+[t=00:00:04.029092][f=-000001] loading font, fonts/exo2/exo2-regular.ttf
+[t=00:00:04.029717][f=-000001] [RmlUi] Loaded font face 'Exo 2' [regular] from 'fonts/exo2/exo2-regular.ttf'.
+[t=00:00:04.039805][f=-000001] [i18n] "units.names.volcano_projectile_unit" is not translated in en
+[t=00:00:04.039819][f=-000001] [i18n] No translation found for "units.names.volcano_projectile_unit"
+[t=00:00:04.039825][f=-000001] [i18n] "units.descriptions.volcano_projectile_unit" is not translated in en
+[t=00:00:04.039827][f=-000001] [i18n] No translation found for "units.descriptions.volcano_projectile_unit"
+[t=00:00:04.039970][f=-000001] [i18n] "units.names.armsaap" is not translated in en
+[t=00:00:04.039975][f=-000001] [i18n] No translation found for "units.names.armsaap"
+[t=00:00:04.039979][f=-000001] [i18n] "units.descriptions.armsaap" is not translated in en
+[t=00:00:04.039982][f=-000001] [i18n] No translation found for "units.descriptions.armsaap"
+[t=00:00:04.040118][f=-000001] [i18n] "units.names.armsacsub" is not translated in en
+[t=00:00:04.040130][f=-000001] [i18n] No translation found for "units.names.armsacsub"
+[t=00:00:04.040134][f=-000001] [i18n] "units.descriptions.armsacsub" is not translated in en
+[t=00:00:04.040137][f=-000001] [i18n] No translation found for "units.descriptions.armsacsub"
+[t=00:00:04.040303][f=-000001] [i18n] "units.names.armcomnew" is not translated in en
+[t=00:00:04.040307][f=-000001] [i18n] No translation found for "units.names.armcomnew"
+[t=00:00:04.040312][f=-000001] [i18n] "units.descriptions.armcomnew" is not translated in en
+[t=00:00:04.040314][f=-000001] [i18n] No translation found for "units.descriptions.armcomnew"
+[t=00:00:04.040400][f=-000001] [i18n] "units.names.corsacv" is not translated in en
+[t=00:00:04.040404][f=-000001] [i18n] No translation found for "units.names.corsacv"
+[t=00:00:04.040409][f=-000001] [i18n] "units.descriptions.corsacv" is not translated in en
+[t=00:00:04.040411][f=-000001] [i18n] No translation found for "units.descriptions.corsacv"
+[t=00:00:04.040563][f=-000001] [i18n] "units.names.armsasy" is not translated in en
+[t=00:00:04.040568][f=-000001] [i18n] No translation found for "units.names.armsasy"
+[t=00:00:04.040571][f=-000001] [i18n] "units.descriptions.armsasy" is not translated in en
+[t=00:00:04.040574][f=-000001] [i18n] No translation found for "units.descriptions.armsasy"
+[t=00:00:04.040837][f=-000001] [i18n] "units.names.corvacct" is not translated in en
+[t=00:00:04.040842][f=-000001] [i18n] No translation found for "units.names.corvacct"
+[t=00:00:04.040846][f=-000001] [i18n] "units.descriptions.corvacct" is not translated in en
+[t=00:00:04.040849][f=-000001] [i18n] No translation found for "units.descriptions.corvacct"
+[t=00:00:04.041439][f=-000001] [i18n] "units.names.corsacvsub" is not translated in en
+[t=00:00:04.041444][f=-000001] [i18n] No translation found for "units.names.corsacvsub"
+[t=00:00:04.041448][f=-000001] [i18n] "units.descriptions.corsacvsub" is not translated in en
+[t=00:00:04.041451][f=-000001] [i18n] No translation found for "units.descriptions.corsacvsub"
+[t=00:00:04.041496][f=-000001] [i18n] "units.names.armsalab" is not translated in en
+[t=00:00:04.041500][f=-000001] [i18n] No translation found for "units.names.armsalab"
+[t=00:00:04.041504][f=-000001] [i18n] "units.descriptions.armsalab" is not translated in en
+[t=00:00:04.041507][f=-000001] [i18n] No translation found for "units.descriptions.armsalab"
+[t=00:00:04.041671][f=-000001] [i18n] "units.names.corsalab" is not translated in en
+[t=00:00:04.041676][f=-000001] [i18n] No translation found for "units.names.corsalab"
+[t=00:00:04.041681][f=-000001] [i18n] "units.descriptions.corsalab" is not translated in en
+[t=00:00:04.041684][f=-000001] [i18n] No translation found for "units.descriptions.corsalab"
+[t=00:00:04.042240][f=-000001] [i18n] "units.names.corsack" is not translated in en
+[t=00:00:04.042245][f=-000001] [i18n] No translation found for "units.names.corsack"
+[t=00:00:04.042250][f=-000001] [i18n] "units.descriptions.corsack" is not translated in en
+[t=00:00:04.042258][f=-000001] [i18n] No translation found for "units.descriptions.corsack"
+[t=00:00:04.042382][f=-000001] [i18n] "units.names.corsaap" is not translated in en
+[t=00:00:04.042387][f=-000001] [i18n] No translation found for "units.names.corsaap"
+[t=00:00:04.042391][f=-000001] [i18n] "units.descriptions.corsaap" is not translated in en
+[t=00:00:04.042394][f=-000001] [i18n] No translation found for "units.descriptions.corsaap"
+[t=00:00:04.042786][f=-000001] [i18n] "units.names.corsasy" is not translated in en
+[t=00:00:04.042791][f=-000001] [i18n] No translation found for "units.names.corsasy"
+[t=00:00:04.042795][f=-000001] [i18n] "units.descriptions.corsasy" is not translated in en
+[t=00:00:04.042798][f=-000001] [i18n] No translation found for "units.descriptions.corsasy"
+[t=00:00:04.043460][f=-000001] [i18n] "units.names.armsack" is not translated in en
+[t=00:00:04.043465][f=-000001] [i18n] No translation found for "units.names.armsack"
+[t=00:00:04.043469][f=-000001] [i18n] "units.descriptions.armsack" is not translated in en
+[t=00:00:04.043475][f=-000001] [i18n] No translation found for "units.descriptions.armsack"
+[t=00:00:04.043533][f=-000001] [i18n] "units.names.corsavp" is not translated in en
+[t=00:00:04.043538][f=-000001] [i18n] No translation found for "units.names.corsavp"
+[t=00:00:04.043542][f=-000001] [i18n] "units.descriptions.corsavp" is not translated in en
+[t=00:00:04.043545][f=-000001] [i18n] No translation found for "units.descriptions.corsavp"
+[t=00:00:04.043612][f=-000001] [i18n] "units.names.armsacv" is not translated in en
+[t=00:00:04.043616][f=-000001] [i18n] No translation found for "units.names.armsacv"
+[t=00:00:04.043620][f=-000001] [i18n] "units.descriptions.armsacv" is not translated in en
+[t=00:00:04.043623][f=-000001] [i18n] No translation found for "units.descriptions.armsacv"
+[t=00:00:04.044007][f=-000001] [i18n] "units.names.armsavp" is not translated in en
+[t=00:00:04.044012][f=-000001] [i18n] No translation found for "units.names.armsavp"
+[t=00:00:04.044019][f=-000001] [i18n] "units.descriptions.armsavp" is not translated in en
+[t=00:00:04.044022][f=-000001] [i18n] No translation found for "units.descriptions.armsavp"
+[t=00:00:04.046335][f=-000001] [i18n] "features.names.armdecomlvl10_dead" is not translated in en
+[t=00:00:04.046341][f=-000001] [i18n] No translation found for "features.names.armdecomlvl10_dead"
+[t=00:00:04.046366][f=-000001] [i18n] "features.names.cordecomlvl3_dead" is not translated in en
+[t=00:00:04.046370][f=-000001] [i18n] No translation found for "features.names.cordecomlvl3_dead"
+[t=00:00:04.046400][f=-000001] [i18n] "features.names.armdecomlvl6_heap" is not translated in en
+[t=00:00:04.046404][f=-000001] [i18n] No translation found for "features.names.armdecomlvl6_heap"
+[t=00:00:04.046444][f=-000001] [i18n] "features.names.armdecomlvl6_dead" is not translated in en
+[t=00:00:04.046449][f=-000001] [i18n] No translation found for "features.names.armdecomlvl6_dead"
+[t=00:00:04.046502][f=-000001] [i18n] "features.names.corhack_heap" is not translated in en
+[t=00:00:04.046509][f=-000001] [i18n] No translation found for "features.names.corhack_heap"
+[t=00:00:04.046564][f=-000001] [i18n] "features.names.corfast_heap" is not translated in en
+[t=00:00:04.046568][f=-000001] [i18n] No translation found for "features.names.corfast_heap"
+[t=00:00:04.046593][f=-000001] [i18n] "features.names.cordecomlvl3_heap" is not translated in en
+[t=00:00:04.046597][f=-000001] [i18n] No translation found for "features.names.cordecomlvl3_heap"
+[t=00:00:04.046625][f=-000001] [i18n] "features.names.cordecomlvl6_dead" is not translated in en
+[t=00:00:04.046629][f=-000001] [i18n] No translation found for "features.names.cordecomlvl6_dead"
+[t=00:00:04.046667][f=-000001] [i18n] "features.names.legstone" is not translated in en
+[t=00:00:04.046672][f=-000001] [i18n] No translation found for "features.names.legstone"
+[t=00:00:04.046702][f=-000001] [i18n] "features.names.armdecomlvl10_heap" is not translated in en
+[t=00:00:04.046706][f=-000001] [i18n] No translation found for "features.names.armdecomlvl10_heap"
+[t=00:00:04.046749][f=-000001] [i18n] "features.names.cordecomlvl10_dead" is not translated in en
+[t=00:00:04.046754][f=-000001] [i18n] No translation found for "features.names.cordecomlvl10_dead"
+[t=00:00:04.046762][f=-000001] [i18n] "features.names.armdecomlvl3_dead" is not translated in en
+[t=00:00:04.046765][f=-000001] [i18n] No translation found for "features.names.armdecomlvl3_dead"
+[t=00:00:04.046838][f=-000001] [i18n] "features.names.armdecomlvl3_heap" is not translated in en
+[t=00:00:04.046843][f=-000001] [i18n] No translation found for "features.names.armdecomlvl3_heap"
+[t=00:00:04.046862][f=-000001] [i18n] "features.names.cordecomlvl6_heap" is not translated in en
+[t=00:00:04.046866][f=-000001] [i18n] No translation found for "features.names.cordecomlvl6_heap"
+[t=00:00:04.046978][f=-000001] [i18n] "features.names.cordecomlvl10_heap" is not translated in en
+[t=00:00:04.046983][f=-000001] [i18n] No translation found for "features.names.cordecomlvl10_heap"
+[t=00:00:04.050547][f=-000001] LuaUI: bound F11 to the widget selector
+[t=00:00:04.051474][f=-000001] LuaUI: Allowing User Widgets
+[t=00:00:04.052801][f=-000001] Failed to load: __defs_write.lua  (no GetInfo() call)
+[t=00:00:04.085360][f=-000001] Profiler using highres timers, nil, 0
+[t=00:00:04.150748][f=-000001] gridmenu config: no unitdefname found for: legacv
+[t=00:00:04.150793][f=-000001] gridmenu config: no unitdefname found for: legdecom
+[t=00:00:04.150836][f=-000001] gridmenu config: no unitdefname found for: legafcv
+[t=00:00:04.150945][f=-000001] gridmenu config: no unitdefname found for: legcomlvl7
+[t=00:00:04.150952][f=-000001] gridmenu config: no unitdefname found for: legmlv
+[t=00:00:04.150959][f=-000001] gridmenu config: no unitdefname found for: legck
+[t=00:00:04.151026][f=-000001] gridmenu config: no unitdefname found for: legcomlvl4
+[t=00:00:04.151122][f=-000001] gridmenu config: no unitdefname found for: legaceb
+[t=00:00:04.151324][f=-000001] gridmenu config: no unitdefname found for: legcomlvl2
+[t=00:00:04.151337][f=-000001] gridmenu config: no unitdefname found for: legcomlvl6
+[t=00:00:04.151340][f=-000001] gridmenu config: no unitdefname found for: legch
+[t=00:00:04.151468][f=-000001] gridmenu config: no unitdefname found for: leghacv
+[t=00:00:04.151509][f=-000001] gridmenu config: no unitdefname found for: legspcon
+[t=00:00:04.151572][f=-000001] gridmenu config: no unitdefname found for: legaca
+[t=00:00:04.151619][f=-000001] gridmenu config: no unitdefname found for: leganavyengineer
+[t=00:00:04.151679][f=-000001] gridmenu config: no unitdefname found for: leghack
+[t=00:00:04.151684][f=-000001] gridmenu config: no unitdefname found for: legcomlvl10
+[t=00:00:04.151687][f=-000001] gridmenu config: no unitdefname found for: legcomlvl9
+[t=00:00:04.151690][f=-000001] gridmenu config: no unitdefname found for: legcomlvl3
+[t=00:00:04.152082][f=-000001] gridmenu config: no unitdefname found for: legnavyconship
+[t=00:00:04.152149][f=-000001] gridmenu config: no unitdefname found for: legotter
+[t=00:00:04.152320][f=-000001] gridmenu config: no unitdefname found for: legack
+[t=00:00:04.152390][f=-000001] gridmenu config: no unitdefname found for: legcomlvl8
+[t=00:00:04.152396][f=-000001] gridmenu config: no unitdefname found for: legca
+[t=00:00:04.152398][f=-000001] gridmenu config: no unitdefname found for: legcv
+[t=00:00:04.152401][f=-000001] gridmenu config: no unitdefname found for: leganavyconsub
+[t=00:00:04.152456][f=-000001] gridmenu config: no unitdefname found for: legcomlvl5
+[t=00:00:04.152461][f=-000001] gridmenu config: no unitdefname found for: legcom
+[t=00:00:04.152539][f=-000001] gridmenu config: no unitdefname found for: legvp
+[t=00:00:04.152566][f=-000001] gridmenu config: no unitdefname found for: leglab
+[t=00:00:04.152615][f=-000001] gridmenu config: no unitdefname found for: leghavp
+[t=00:00:04.152619][f=-000001] gridmenu config: no unitdefname found for: legap
+[t=00:00:04.152632][f=-000001] gridmenu config: no unitdefname found for: legavp
+[t=00:00:04.152635][f=-000001] gridmenu config: no unitdefname found for: legsplab
+[t=00:00:04.152648][f=-000001] gridmenu config: no unitdefname found for: leghp
+[t=00:00:04.152672][f=-000001] gridmenu config: no unitdefname found for: legsy
+[t=00:00:04.152683][f=-000001] gridmenu config: no unitdefname found for: leghalab
+[t=00:00:04.152694][f=-000001] gridmenu config: no unitdefname found for: leggant
+[t=00:00:04.152728][f=-000001] gridmenu config: no unitdefname found for: legadvshipyard
+[t=00:00:04.152732][f=-000001] gridmenu config: no unitdefname found for: legfhp
+[t=00:00:04.152747][f=-000001] gridmenu config: no unitdefname found for: legalab
+[t=00:00:04.152751][f=-000001] gridmenu config: no unitdefname found for: legamphlab
+[t=00:00:04.152753][f=-000001] gridmenu config: no unitdefname found for: legaap
+[t=00:00:04.182073][f=-000001] [Font] [LoadCustomFonts] loaded large font "fonts/FreeSansBold.otf"
+[t=00:00:04.182710][f=-000001] [Font] [LoadCustomFonts] loaded small font "Exo2-SemiBold.otf"
+[t=00:00:04.228520][f=-000001] Failed to load: gui_scavenger_info.lua  (no GetInfo() call)
+[t=00:00:04.248067][f=-000001] Map is, Altair_Crossing_V4
+[t=00:00:04.248087][f=-000001] Overriding map grass
+[t=00:00:04.321005][f=-000001] Loading widget from mod:   Shared State API    <api_shared_state.lua> ...
+[t=00:00:04.321136][f=-000001] Loading widget from mod:   Headless environment overrides  <dbg_test_headless_overrides.lua> ...
+[t=00:00:04.321200][f=-000001] Loading widget from mod:   Ignore Self         <cmd_no_self_selection.lua> ...
+[t=00:00:04.321275][f=-000001] Loading widget from mod:   Distortion GL4      <gfx_distortion_gl4.lua> ...
+[t=00:00:04.321288][f=-000001] Missing capabilities:  Distortion GL4. Disabling.
+[t=00:00:04.321292][f=-000001] Loading widget from mod:   Deferred rendering GL4  <gfx_deferred_rendering_gl4.lua> ...
+[t=00:00:04.321296][f=-000001] Missing capabilities:  Deferred rendering GL4. Disabling.
+[t=00:00:04.321299][f=-000001] Loading widget from mod:   Cache Icons         <gui_cache_icons.lua> ...
+[t=00:00:04.321365][f=-000001] Loading widget from mod:   Overview Camera TAB hold & release  <gui_overview_cam_tab_hold.lua> ...
+[t=00:00:04.321440][f=-000001] Loading widget from mod:   Playernames API     <api_playernames.lua> ...
+[t=00:00:04.321503][f=-000001] Loading widget from mod:   Font handler        <gui_fonthandler.lua> ...
+[t=00:00:04.330983][f=-000001] Loading widget from mod:   Tooltip             <gui_tooltip.lua> ...
+[t=00:00:04.332141][f=-000001] Loading widget from mod:   Map Lighting Adjuster  <map_lighting_adjuster.lua> ...
+[t=00:00:04.332225][f=-000001] Loading widget from mod:   Rml context manager  <rml_context_manager.lua> ...
+[t=00:00:04.332309][f=-000001] Loading widget from mod:   Tweakdefs Custom Unit Names  <tweakdefs_unit_translations.lua> ...
+[t=00:00:04.333228][f=-000001] Loading widget from mod:   API Resource Spot Finder (mex/geo)  <api_resource_spot_finder.lua> ...
+[t=00:00:04.336586][f=-000001] Loading widget from mod:   Game Speed          <cmd_gamespeed.lua> ...
+[t=00:00:04.336658][f=-000001] Loading widget from mod:   Language            <gui_language.lua> ...
+[t=00:00:04.345018][f=-000001] Loading widget from mod:   Limit idle FPS      <gfx_limit_idle_fps.lua> ...
+[t=00:00:04.345106][f=-000001] Loading widget from mod:   SmartSelect         <unit_smart_select.lua> ...
+[t=00:00:04.345212][f=-000001] Loading widget from mod:   HighlightUnit API GL4  <gfx_highlightunit_gl4.lua> ...
+[t=00:00:04.345291][f=-000001] Loading widget from mod:   Map Grass GL4       <map_grass_gl4.lua> ...
+[t=00:00:04.374250][f=-000001] Loading widget from mod:   Pregame UI - Draft Spawn Order  <gui_pregameui_draft.lua> ...
+[t=00:00:04.374360][f=-000001] Loading widget from mod:   Unit Stats          <gui_unit_stats.lua> ...
+[t=00:00:04.374453][f=-000001] Loading widget from mod:   GUI Shader          <gfx_guishader.lua> ...
+[t=00:00:04.380566][f=-000001] Loading widget from mod:   Vote interface      <gui_vote_interface.lua> ...
+[t=00:00:04.381213][f=-000001] Loading widget from mod:   API Screencopy Manager  <api_screencopy_manager.lua> ...
+[t=00:00:04.381335][f=-000001] Loading widget from mod:   API Unit Tracker DEVMODE GL4  <api_unit_tracker_gl4.lua> ...
+[t=00:00:04.381351][f=-000001] Missing capabilities:  API Unit Tracker DEVMODE GL4. Disabling.
+[t=00:00:04.381358][f=-000001] Loading widget from mod:   Auto Cloak Units    <unit_auto_cloak.lua> ...
+[t=00:00:04.381431][f=-000001] Loading widget from mod:   BAR Hotkeys         <cmd_bar_hotkeys.lua> ...
+[t=00:00:04.382961][f=-000001] BAR Hotkeys: Loaded hotkeys from luaui/configs/hotkeys/grid_keys.txt
+[t=00:00:04.382971][f=-000001] Loading widget from mod:   Changelog Info      <gui_changelog_info.lua> ...
+[t=00:00:04.390703][f=-000001] Loading widget from mod:   Keybind/Mouse Info  <gui_keybind_info.lua> ...
+[t=00:00:04.398628][f=-000001] Loading widget from mod:   Options             <gui_options.lua> ...
+[t=00:00:04.398770][f=-000001] Input grabbing is enabled!
+[t=00:00:04.411865][f=-000001] Set "shadows" config-parameter to 1
+[t=00:00:04.411994][f=-000001] Draw unit icons as UI:  is enabled!
+[t=00:00:04.412125][f=-000001] Loading widget from mod:   TeamStats           <gui_teamstats.lua> ...
+[t=00:00:04.414618][f=-000001] Loading widget from mod:   Picture-in-Picture Minimap  <gui_pip_minimap.lua> ...
+[t=00:00:04.431127][f=-000001] [PIP] GL4 instanced decal rendering enabled
+[t=00:00:04.468089][f=-000001] Loading widget from mod:   Chat                <gui_chat.lua> ...
+[t=00:00:04.470486][f=-000001] Loading widget from mod:   Top Bar             <gui_top_bar.lua> ...
+[t=00:00:04.473135][f=-000001] Loading widget from mod:   Infolos API         <gui_infolos.lua> ...
+[t=00:00:04.487632][f=-000001] InfoLOS GL4,  recompiled in , 14, ms at, 0, success, true
+[t=00:00:04.500701][f=-000001] Loading widget from mod:   Save Game Menu      <gui_savegame.lua> ...
+[t=00:00:04.500859][f=-000001] Loading widget from mod:   DrawUnitShape GL4   <gfx_drawunitshape_gl4.lua> ...
+[t=00:00:04.500876][f=-000001] Missing capabilities:  DrawUnitShape GL4. Disabling.
+[t=00:00:04.500883][f=-000001] Loading widget from mod:   Defense Range GL4   <gui_defenserange_gl4.lua> ...
+[t=00:00:04.500896][f=-000001] Missing capabilities:  Defense Range GL4. Disabling.
+[t=00:00:04.500901][f=-000001] Loading widget from mod:   Attack Range GL4    <gui_attackrange_gl4.lua> ...
+[t=00:00:04.500906][f=-000001] Missing capabilities:  Attack Range GL4. Disabling.
+[t=00:00:04.500910][f=-000001] Loading widget from mod:   Given Units         <gui_given_units.lua> ...
+[t=00:00:04.501003][f=-000001] Loading widget from mod:   Self-Destruct Icons  <gui_selfd_icons.lua> ...
+[t=00:00:04.501813][f=-000001] Loading widget from mod:   Resurrection Halos GL4  <gui_resurrection_halos_gl4.lua> ...
+[t=00:00:04.560024][f=-000001] LuaShader: [ResurrectionHalosShader GL4] shader error(s):
+
+[t=00:00:04.561108][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.561126][f=-000001] ResurrectionHalosShader GL4,  recompiled in , 59, ms at, 0, success, false
+[t=00:00:04.561141][f=-000001] Failed to compile shader for , ResurrectionHalos
+[t=00:00:04.561151][f=-000001] Loading widget from mod:   Selected Units GL4  <gui_selectedunits_gl4.lua> ...
+[t=00:00:04.614829][f=-000001] LuaShader: [selectedUnitsGroundShader GL4] shader error(s):
+
+[t=00:00:04.615624][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.615645][f=-000001] selectedUnitsGroundShader GL4,  recompiled in , 54, ms at, 0, success, false
+[t=00:00:04.615651][f=-000001] Failed to compile shader for , selectedUnitsGround
+[t=00:00:04.615661][f=-000001] Loading widget from mod:   Unit Energy Icons   <gui_unit_energy_icons.lua> ...
+[t=00:00:04.651511][f=-000001] LuaShader: [energy iconsShader GL4] shader error(s):
+
+[t=00:00:04.652358][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.652385][f=-000001] energy iconsShader GL4,  recompiled in , 36, ms at, 0, success, false
+[t=00:00:04.652391][f=-000001] Failed to compile shader for , energy icons
+[t=00:00:04.652401][f=-000001] Loading widget from mod:   Unit Idle Builder Icons  <gui_unit_idlebuilder_icons.lua> ...
+[t=00:00:04.688576][f=-000001] LuaShader: [energy iconsShader GL4] shader error(s):
+
+[t=00:00:04.689371][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.689388][f=-000001] energy iconsShader GL4,  recompiled in , 36, ms at, 0, success, false
+[t=00:00:04.689393][f=-000001] Failed to compile shader for , energy icons
+[t=00:00:04.689402][f=-000001] Loading widget from mod:   Unit Wait Icons     <gui_unit_wait_icons.lua> ...
+[t=00:00:04.726166][f=-000001] LuaShader: [energy iconsShader GL4] shader error(s):
+
+[t=00:00:04.726951][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.726969][f=-000001] energy iconsShader GL4,  recompiled in , 37, ms at, 0, success, false
+[t=00:00:04.726974][f=-000001] Failed to compile shader for , energy icons
+[t=00:00:04.726983][f=-000001] Loading widget from mod:   Snow                <gfx_snow.lua> ...
+[t=00:00:04.727106][f=-000001] Loading widget from mod:   Lockcamera          <camera_lockcamera.lua> ...
+[t=00:00:04.727202][f=-000001] Loading widget from mod:   Map Info            <gui_mapinfo.lua> ...
+[t=00:00:04.727313][f=-000001] Loading widget from mod:   Health Bars GL4     <gui_healthbars_gl4.lua> ...
+[t=00:00:04.839509][f=-000001] LuaShader: [Health Bars Shader GL4] shader error(s):
+
+[t=00:00:04.843928][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.843959][f=-000001] Health Bars Shader GL4,  recompiled in , 116, ms at, 0, success, false
+[t=00:00:04.843964][f=-000001] Healthbars GL4 widget exiting with reason: Failed to compile health bars GL4 
+[t=00:00:04.845969][f=-000001] Loading widget from mod:   BuildETA            <gui_build_eta.lua> ...
+[t=00:00:04.846821][f=-000001] Loading widget from mod:   Clearmapmarks button  <gui_clearmapmarks.lua> ...
+[t=00:00:04.846911][f=-000001] Loading widget from mod:   AdvPlayersList      <gui_advplayerslist.lua> ...
+[t=00:00:04.848559][f=-000001] Loading widget from mod:   AdvPlayersList Game Info  <gui_advplayerslist_gameinfo.lua> ...
+[t=00:00:04.848706][f=-000001] frames-per-second indicator is disabled!
+[t=00:00:04.848772][f=-000001] small digital clock is disabled!
+[t=00:00:04.848787][f=-000001] simulation speed indicator is disabled!
+[t=00:00:04.848794][f=-000001] Loading widget from mod:   AdvPlayersList Music Player New  <gui_advplayerslist_music_new.lua> ...
+[t=00:00:04.849792][f=-000001] Loading widget from mod:   Awards              <gui_awards.lua> ...
+[t=00:00:04.849880][f=-000001] EndGame Graph enabled, causes reload
+[t=00:00:04.850941][f=-000001] Loading widget from mod:   Pregame UI          <gui_pregameui.lua> ...
+[t=00:00:04.851326][f=-000001] Loading widget from mod:   Commander Name Tags  <gui_com_nametags.lua> ...
+[t=00:00:04.852206][f=-000001] Loading widget from mod:   Player-TV           <camera_player_tv.lua> ...
+[t=00:00:04.867684][f=-000001] Loading widget from mod:   API Resource Spot Builder (mex/geo)  <api_resource_spot_builder.lua> ...
+[t=00:00:04.867829][f=-000001] Loading widget from mod:   Analytics API       <api_analytics.lua> ...
+[t=00:00:04.867908][f=-000001] Loading widget from mod:   Area Command Filter  <cmd_area_commands_filter.lua> ...
+[t=00:00:04.867988][f=-000001] Loading widget from mod:   Blueprint API       <api_blueprint.lua> ...
+[t=00:00:04.875113][f=-000001] Loading widget from mod:   Cloak Fire State    <unit_cloak_firestate.lua> ...
+[t=00:00:04.875202][f=-000001] Loading widget from mod:   Factionpicker       <gui_factionpicker.lua> ...
+[t=00:00:04.875309][f=-000001] Loading widget from mod:   Norush Timer GL4    <gfx_norush_timer_gl4.lua> ...
+[t=00:00:04.875383][f=-000001] Loading widget from mod:   Set unit type target  <unit_alt_set_target_type.lua> ...
+[t=00:00:04.875462][f=-000001] Loading widget from mod:   Airjets GL4         <gfx_airjets_gl4.lua> ...
+[t=00:00:04.907427][f=-000001] LuaShader: [JetShader GL4] shader error(s):
+
+[t=00:00:04.908188][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.908205][f=-000001] JetShader GL4,  recompiled in , 33, ms at, 0, success, false
+[t=00:00:04.908211][f=-000001] Airjet GL4 widget exiting with reason: Failed to compile jetShader GL4 
+[t=00:00:04.908352][f=-000001] Loading widget from mod:   Ground AO Plates Features GL4  <gui_ground_ao_plates_features_gl4.lua> ...
+[t=00:00:04.947818][f=-000001] LuaShader: [Ground AO Plates FeaturesShader GL4] shader error(s):
+
+[t=00:00:04.948662][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:04.948680][f=-000001] Ground AO Plates FeaturesShader GL4,  recompiled in , 37, ms at, 0, success, false
+[t=00:00:04.948685][f=-000001] Failed to compile shader for , Ground AO Plates Features
+[t=00:00:04.948696][f=-000001] Loading widget from mod:   Ground AO Plates GL4  <gui_ground_ao_plates_gl4.lua> ...
+[t=00:00:04.948703][f=-000001] Missing capabilities:  Ground AO Plates GL4. Disabling.
+[t=00:00:04.948708][f=-000001] Loading widget from mod:   Orb Effects GL4     <gfx_orb_effects_gl4.lua> ...
+[t=00:00:05.015326][f=-000001] LuaShader: [orbShader GL4] shader error(s):
+
+[t=00:00:05.016095][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.016110][f=-000001] Orb GL4 widget exiting with reason: Failed to compile orbShader GL4 
+[t=00:00:05.016473][f=-000001] Unit Tracker API unavailable, exiting Orb GL4
+[t=00:00:05.016482][f=-000001] Loading widget from mod:   API Builder Queue   <api_builder_queue.lua> ...
+[t=00:00:05.016624][f=-000001] Loading widget from mod:   Ally Request Listener  <snd_notifications_addon_ally_alerts.lua> ...
+[t=00:00:05.016710][f=-000001] Loading widget from mod:   Analytics - Widgets  <ana_report_widgets.lua> ...
+[t=00:00:05.016795][f=-000001] Loading widget from mod:   Area Reclaim Enemy  <unit_area_reclaim_enemy.lua> ...
+[t=00:00:05.016878][f=-000001] Loading widget from mod:   Area unload         <cmd_area_unload.lua> ...
+[t=00:00:05.016958][f=-000001] Loading widget from mod:   Attack and Move Notification  <unit_attackmovenotification.lua> ...
+[t=00:00:05.018801][f=-000001] Loading widget from mod:   Attack no Ally      <cmd_attack_no_ally.lua> ...
+[t=00:00:05.018888][f=-000001] Loading widget from mod:   Auto First Build Facing  <unit_autofirstbuildfacing.lua> ...
+[t=00:00:05.018968][f=-000001] Loading widget from mod:   Auto Group          <unit_auto_group.lua> ...
+[t=00:00:05.019066][f=-000001] Loading widget from mod:   Auto mapmark eraser  <map_auto_mapmark_eraser.lua> ...
+[t=00:00:05.019146][f=-000001] Loading widget from mod:   Autoquit            <cmd_autoquit.lua> ...
+[t=00:00:05.019227][f=-000001] Loading widget from mod:   Blast Radius        <gui_blast_radius.lua> ...
+[t=00:00:05.020001][f=-000001] Loading widget from mod:   Bomber Attack Building Ground  <cmd_bomber_attack_building_ground.lua> ...
+[t=00:00:05.020090][f=-000001] Loading widget from mod:   Build Split         <cmd_buildsplit.lua> ...
+[t=00:00:05.020179][f=-000001] Loading widget from mod:   Builder Priority    <unit_builder_priority.lua> ...
+[t=00:00:05.020271][f=-000001] Loading widget from mod:   Camera Anchors      <gui_camera_anchors.lua> ...
+[t=00:00:05.020354][f=-000001] Loading widget from mod:   Camera Goto         <camera_goto.lua> ...
+[t=00:00:05.020436][f=-000001] Loading widget from mod:   Camera Remember     <camera_remember_mode.lua> ...
+[t=00:00:05.020524][f=-000001] Loading widget from mod:   CameraFlip          <camera_flip.lua> ...
+[t=00:00:05.020607][f=-000001] Loading widget from mod:   CameraShake         <camera_shake.lua> ...
+[t=00:00:05.020693][f=-000001] Loading widget from mod:   Chain Actions       <cmd_chainactions.lua> ...
+[t=00:00:05.020774][f=-000001] Loading widget from mod:   Clean Builder Queue  <unit_clean_builder_queue.lua> ...
+[t=00:00:05.021069][f=-000001] Loading widget from mod:   Cloaked Buildpower Default Move  <unit_default_spy_move_cloaked.lua> ...
+[t=00:00:05.021162][f=-000001] Loading widget from mod:   Command Dance       <cmd_dance.lua> ...
+[t=00:00:05.021788][f=-000001] Loading widget from mod:   Commander Selector  <cmd_comselect.lua> ...
+[t=00:00:05.021880][f=-000001] Loading widget from mod:   Converter Usage     <gui_converter_usage.lua> ...
+[t=00:00:05.021972][f=-000001] Loading widget from mod:   DGun Stall Assist   <unit_dgun_stall_assist.lua> ...
+[t=00:00:05.022140][f=-000001] Loading widget from mod:   DGun no ally        <cmd_dgun_no_ally.lua> ...
+[t=00:00:05.022225][f=-000001] Loading widget from mod:   Death Messages      <death_messages.lua> ...
+[t=00:00:05.022310][f=-000001] Loading widget from mod:   EMP + decloak range  <gui_emp_decloak_range.lua> ...
+[t=00:00:05.022417][f=-000001] Loading widget from mod:   Easy Facing         <gui_easyfacing.lua> ...
+[t=00:00:05.022505][f=-000001] Loading widget from mod:   Engine Shader Auto Reloader  <dbg_engine_shader_reload.lua> ...
+[t=00:00:05.023492][f=-000001] Loading widget from mod:   Factory Assist Fix  <unit_factory_assist_fix.lua> ...
+[t=00:00:05.023587][f=-000001] Loading widget from mod:   Factory Quotas      <unit_factory_quota.lua> ...
+[t=00:00:05.023682][f=-000001] Loading widget from mod:   Factory hold position  <cmd_fac_holdposition.lua> ...
+[t=00:00:05.023770][f=-000001] Loading widget from mod:   GameTypeInfo        <gui_game_type_info.lua> ...
+[t=00:00:05.023876][f=-000001] Loading widget from mod:   Grid menu           <gui_gridmenu.lua> ...
+[t=00:00:05.026829][f=-000001] Loading widget from mod:   Guard Remove        <cmd_guard_remove.lua> ...
+[t=00:00:05.026928][f=-000001] Loading widget from mod:   Guard damaged constructors  <cmd_guard_damaged_constructors.lua> ...
+[t=00:00:05.027018][f=-000001] Loading widget from mod:   Holdfire Fix        <cmd_holdfire_fix.lua> ...
+[t=00:00:05.027111][f=-000001] Loading widget from mod:   Idle Constructor Guard After Build  <unit_idle_guard.lua> ...
+[t=00:00:05.027194][f=-000001] Loading widget from mod:   Ignore List API     <api_ignore.lua> ...
+[t=00:00:05.027284][f=-000001] Loading widget from mod:   ImmobileBuilder     <unit_immobile_builder.lua> ...
+[t=00:00:05.027380][f=-000001] Loading widget from mod:   LOS View            <gfx_los_view.lua> ...
+[t=00:00:05.027469][f=-000001] Loading widget from mod:   LOS colors          <gfx_los_colors.lua> ...
+[t=00:00:05.027578][f=-000001] Loading widget from mod:   Limit Build Spacing  <cmd_limit_build_spacing.lua> ...
+[t=00:00:05.027649][f=-000001] Loading widget from mod:   Line-Build Hotkey Ignore  <cmd_line-build_hotkey_ignore.lua> ...
+[t=00:00:05.027735][f=-000001] Loading widget from mod:   Load Own Moving     <unit_load_own_moving.lua> ...
+[t=00:00:05.027823][f=-000001] Loading widget from mod:   Log UnitDefIDs      <log_unitdefids.lua> ...
+[t=00:00:05.028377][f=-000001] Loading widget from mod:   Logo adjuster       <logo_adjuster.lua> ...
+[t=00:00:05.028467][f=-000001] Loading widget from mod:   Mapmark Ping        <snd_mapmark_ping.lua> ...
+[t=00:00:05.028550][f=-000001] Loading widget from mod:   Minimap             <gui_minimap.lua> ...
+[t=00:00:05.028672][f=-000001] Loading widget from mod:   Minimap Rotation Manager  <minimap_rotation_manager.lua> ...
+[t=00:00:05.028775][f=-000001] Loading widget from mod:   Nano range on transport  <gui_turret_trans_range.lua> ...
+[t=00:00:05.028862][f=-000001] Loading widget from mod:   NoDuplicateOrders   <cmd_no_duplicate_orders.lua> ...
+[t=00:00:05.028949][f=-000001] Loading widget from mod:   Onoff for Hound and trajectory  <cmd_onoff.lua> ...
+[t=00:00:05.029033][f=-000001] Loading widget from mod:   Persistent Build Spacing  <cmd_persistent_build_spacing.lua> ...
+[t=00:00:05.029115][f=-000001] Loading widget from mod:   Preserve Commands   <cmd_transport_preserve_commands.lua> ...
+[t=00:00:05.029228][f=-000001] Loading widget from mod:   Priority Construction Turrets  <cmd_nanoturrets_assist_priority.lua> ...
+[t=00:00:05.029312][f=-000001] Loading widget from mod:   Projectile Target AoE  <gui_projectile_target_aoe.lua> ...
+[t=00:00:05.029648][f=-000001] Loading widget from mod:   ReclaimInfo         <gui_reclaiminfo.lua> ...
+[t=00:00:05.029749][f=-000001] Loading widget from mod:   RelativeMinimap     <minimap_relative.lua> ...
+[t=00:00:05.029845][f=-000001] Loading widget from mod:   Ruins Blueprint Generator  <ai_ruins_blueprint_generator.lua> ...
+[t=00:00:05.029980][f=-000001] Loading widget from mod:   Screen Mode Info    <gui_screen_mode_info.lua> ...
+[t=00:00:05.030068][f=-000001] Loading widget from mod:   Screen Mode/Resolution Switcher  <cmd_resolution_switcher.lua> ...
+[t=00:00:05.030249][f=-000001] Loading widget from mod:   Share Tracker       <unit_share_tracker.lua> ...
+[t=00:00:05.030345][f=-000001] Loading widget from mod:   Share Unit Command  <cmd_share_unit.lua> ...
+[t=00:00:05.030450][f=-000001] Loading widget from mod:   Show Orders         <gui_show_orders.lua> ...
+[t=00:00:05.030635][f=-000001] Loading widget from mod:   Smart Area Reclaim  <unit_smart_area_reclaim.lua> ...
+[t=00:00:05.030730][f=-000001] Loading widget from mod:   Spectate Next Alive Player  <gui_spec_next_alive_player.lua> ...
+[t=00:00:05.030814][f=-000001] Loading widget from mod:   Spectate Selected   <gui_spectate_selected.lua> ...
+[t=00:00:05.030907][f=-000001] Loading widget from mod:   State Reverse Toggle  <cmd_state_reverse_toggle.lua> ...
+[t=00:00:05.030989][f=-000001] Loading widget from mod:   Statistics Collection  <stats_damage.lua> ...
+[t=00:00:05.031080][f=-000001] Loading widget from mod:   Stop means Stop     <cmd_stop_selfd.lua> ...
+[t=00:00:05.031166][f=-000001] Loading widget from mod:   Take Proxy          <cmd_take_proxy.lua> ...
+[t=00:00:05.031259][f=-000001] Loading widget from mod:   Test Runner         <dbg_test_runner.lua> ...
+[t=00:00:05.031358][f=-000001] Loading widget from mod:   Toggle Key          <cmd_toggle_key.lua> ...
+[t=00:00:05.031439][f=-000001] Loading widget from mod:   Transport Factory Guard  <cmd_guard_transport_factory.lua> ...
+[t=00:00:05.031525][f=-000001] Loading widget from mod:   Transport Load Indicators  <gui_transport_weight_limit.lua> ...
+[t=00:00:05.031637][f=-000001] Loading widget from mod:   Unit Finished Sounds  <snd_unit_finished.lua> ...
+[t=00:00:05.032255][f=-000001] Loading widget from mod:   Unit Groups - Clear selection on empty  <cmd_unitgroup_clear_selection_on_empty.lua> ...
+[t=00:00:05.032356][f=-000001] Loading widget from mod:   Volume OSD          <snd_volume_osd.lua> ...
+[t=00:00:05.032442][f=-000001] Loading widget from mod:   Widget Auto Reloader  <dbg_widget_auto_reloader.lua> ...
+[t=00:00:05.042676][f=-000001] Loading widget from mod:   Ally Selected Units  <gui_allyselectedunits.lua> ...
+[t=00:00:05.096787][f=-000001] LuaShader: [allySelectedUnitsShader GL4] shader error(s):
+
+[t=00:00:05.097680][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.097699][f=-000001] allySelectedUnitsShader GL4,  recompiled in , 54, ms at, 0, success, false
+[t=00:00:05.097705][f=-000001] Failed to compile shader for , allySelectedUnits
+[t=00:00:05.097716][f=-000001] Loading widget from mod:   Ghost Radar GL4     <unit_ghostradar_gl4.lua> ...
+[t=00:00:05.097906][f=-000001] Loading widget from mod:   Ghost Site GL4      <unit_ghostsite_gl4.lua> ...
+[t=00:00:05.098000][f=-000001] Loading widget from mod:   Highlight Commander Wrecks  <gfx_highlight_commander_wrecks.lua> ...
+[t=00:00:05.105829][f=-000001] Loading widget from mod:   Map Edge Extension  <map_edge_extension2.lua> ...
+[t=00:00:05.305596][f=-000001] Loading widget from mod:   Object Spotlight API  <api_object_spotlight.lua> ...
+[t=00:00:05.305618][f=-000001] Missing capabilities:  Object Spotlight API. Disabling.
+[t=00:00:05.305624][f=-000001] Loading widget from mod:   Paralyze Effect     <gfx_paralyze_effect.lua> ...
+[t=00:00:05.376953][f=-000001] LuaShader: [paralyzedUnitShader] shader error(s):
+
+[t=00:00:05.377736][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.377762][f=-000001] paralyzedUnitShader,  recompiled in , 72, ms at, 0, success, false
+[t=00:00:05.377767][f=-000001] paralyzedUnitShaderCompiled shader compilation failed, nil
+[t=00:00:05.377787][f=-000001] Loading widget from mod:   Sensor Ranges Radar Preview  <gui_sensor_ranges_radar_preview.lua> ...
+[t=00:00:05.395395][f=-000001] radarTruthShader GL4,  recompiled in , 16, ms at, 0, success, true
+[t=00:00:05.421288][f=-000001] Loading widget from mod:   Unit Group Number   <gui_unit_group_number.lua> ...
+[t=00:00:05.458033][f=-000001] LuaShader: [unitGroupsShader GL4] shader error(s):
+
+[t=00:00:05.458926][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.458944][f=-000001] unitGroupsShader GL4,  recompiled in , 37, ms at, 0, success, false
+[t=00:00:05.458950][f=-000001] Failed to compile shader for , unitGroups
+[t=00:00:05.458960][f=-000001] Loading widget from mod:   Area Mex            <cmd_area_mex.lua> ...
+[t=00:00:05.459167][f=-000001] Loading widget from mod:   Attack AoE          <gui_attack_aoe.lua> ...
+[t=00:00:05.467978][f=-000001] AoE Napalm Shader,  recompiled in , 8, ms at, 0, success, true
+[t=00:00:05.470390][f=-000001] Loading widget from mod:   Blueprint           <cmd_blueprint.lua> ...
+[t=00:00:05.471849][f=-000001] Failed to read blueprints file: LuaUI/Config/blueprints.json
+[t=00:00:05.471884][f=-000001] Loading widget from mod:   Command Queue Manager  <cmd_commandq_manager.lua> ...
+[t=00:00:05.471971][f=-000001] Loading widget from mod:   Context Build       <cmd_context_build.lua> ...
+[t=00:00:05.472104][f=-000001] Loading widget from mod:   Ecostats            <gui_ecostats.lua> ...
+[t=00:00:05.472255][f=-000001] Loading widget from mod:   Exclude walls from area attacks  <cmd_exclude_walls_area_attacks.lua> ...
+[t=00:00:05.472344][f=-000001] Loading widget from mod:   Factory Guard Default On  <cmd_factory_guard_pref.lua> ...
+[t=00:00:05.472437][f=-000001] Loading widget from mod:   Info                <gui_info.lua> ...
+[t=00:00:05.482940][f=-000001] Loading widget from mod:   Order menu          <gui_ordermenu.lua> ...
+[t=00:00:05.484438][f=-000001] Loading widget from mod:   Overview Camera Keep Position  <gui_overview_keep_camera_position.lua> ...
+[t=00:00:05.484544][f=-000001] Loading widget from mod:   Pregame Queue       <gui_pregame_build.lua> ...
+[t=00:00:05.484664][f=-000001] Loading widget from mod:   Unit Groups         <gui_unitgroups.lua> ...
+[t=00:00:05.484775][f=-000001] Loading widget from mod:   Extractor Snap (mex/geo)  <cmd_extractor_snap.lua> ...
+[t=00:00:05.484883][f=-000001] Loading widget from mod:   Game info           <gui_gameinfo.lua> ...
+[t=00:00:05.489579][f=-000001] Loading widget from mod:   Idle Builders       <gui_idle_builders.lua> ...
+[t=00:00:05.490444][f=-000001] Loading widget from mod:   Mapmarks FX         <gui_mapmarks_fx.lua> ...
+[t=00:00:05.490607][f=-000001] Loading widget from mod:   Mouse FX            <gui_mouse_fx.lua> ...
+[t=00:00:05.490718][f=-000001] Loading widget from mod:   Commands FX         <gui_commands_fx.lua> ...
+[t=00:00:05.495003][f=-000001] Loading widget from mod:   Geothermalspots     <gui_geothermalspots.lua> ...
+[t=00:00:05.507720][f=-000001] Loading widget from mod:   Metalspots          <gui_metalspots.lua> ...
+[t=00:00:05.528872][f=-000001] Metalspots GL4,  recompiled in , 21, ms at, 0, success, true
+[t=00:00:05.529234][f=-000001] Loading widget from mod:   AllyCursors         <gui_ally_cursors.lua> ...
+[t=00:00:05.529377][f=-000001] Loading widget from mod:   CommandInsert       <cmd_commandinsert.lua> ...
+[t=00:00:05.529478][f=-000001] Loading widget from mod:   Notifications       <snd_notifications.lua> ...
+[t=00:00:05.529756][f=-000001] Notification Sound Items Loaded
+[t=00:00:05.529775][f=-000001] Loading widget from mod:   Player Status Notifications  <snd_notifications_addon_playerstatus.lua> ...
+[t=00:00:05.529878][f=-000001] Loading widget from mod:   Select n Center!    <gui_center_n_select.lua> ...
+[t=00:00:05.529972][f=-000001] Loading widget from mod:   Set fighters on Fly mode  <unit_set_fighters_fly.lua> ...
+[t=00:00:05.530064][f=-000001] Loading widget from mod:   Waypoint Dragger    <unit_waypoint_dragger_2.lua> ...
+[t=00:00:05.530158][f=-000001] Loading widget from mod:   Rank Icons GL4      <gui_rank_icons_gl4.lua> ...
+[t=00:00:05.567079][f=-000001] LuaShader: [Rank IconsShader GL4] shader error(s):
+
+[t=00:00:05.567929][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.567947][f=-000001] Rank IconsShader GL4,  recompiled in , 38, ms at, 0, success, false
+[t=00:00:05.567953][f=-000001] Failed to compile shader for , Rank Icons
+[t=00:00:05.567967][f=-000001] Loading widget from mod:   Replay buttons      <gui_replaybuttons.lua> ...
+[t=00:00:05.568172][f=-000001] Loading widget from mod:   Sensor Ranges Jammer  <gui_sensor_ranges_jammer.lua> ...
+[t=00:00:05.582063][f=-000001] LuaShader: [Jammer Ranges Stencil GL4] shader error(s):
+
+[t=00:00:05.582618][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.582635][f=-000001] Sensor Ranges LOS widget exiting with reason: Failed to compile jammerrange stencil shader GL4 
+[t=00:00:05.582647][f=-000001] Loading widget from mod:   Sensor Ranges Sonar  <gui_sensor_ranges_sonar.lua> ...
+[t=00:00:05.582776][f=-000001] Loading widget from mod:   Sensor Ranges Radar  <gui_sensor_ranges_radar.lua> ...
+[t=00:00:05.594585][f=-000001] LuaShader: [Radar Ranges Stencil GL4] shader error(s):
+
+[t=00:00:05.595041][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.595056][f=-000001] Sensor Ranges LOS widget exiting with reason: Failed to compile radarrange stencil shader GL4 
+[t=00:00:05.595078][f=-000001] Loading widget from mod:   Point Tracker       <gui_point_tracker.lua> ...
+[t=00:00:05.613086][f=-000001] Loading widget from mod:   Sensor Ranges LOS   <gui_sensor_ranges_los.lua> ...
+[t=00:00:05.626866][f=-000001] LuaShader: [LOS Ranges Circles GL4] shader error(s):
+
+[t=00:00:05.627335][f=-000001] The shader compilation error code was very short. This likely means a Linker error, check the [in] [out] blocks linking VS/GS/FS shaders to each other to make sure the structs match
+[t=00:00:05.627352][f=-000001] Sensor Ranges LOS widget exiting with reason: Failed to compile losrange stencil shader GL4 
+[t=00:00:05.627364][f=-000001] Loading widget from mod:   Unit Stencil GL4    <gfx_unit_stencil_gl4.lua> ...
+[t=00:00:05.627370][f=-000001] Missing capabilities:  Unit Stencil GL4. Disabling.
+[t=00:00:05.627376][f=-000001] Loading widget from mod:   Show Builder Queue  <gfx_showbuilderqueue.lua> ...
+[t=00:00:05.627533][f=-000001] Loading widget from mod:   Commander Hurt Vignette  <gui_commanderhurt.lua> ...
+[t=00:00:05.627657][f=-000001] Loading widget from mod:   Mouse Buildspacing  <gui_buildspacing.lua> ...
+[t=00:00:05.627750][f=-000001] Loading widget from mod:   Decals GL4          <gfx_decals_gl4.lua> ...
+[t=00:00:05.627763][f=-000001] Missing capabilities:  Decals GL4. Disabling.
+[t=00:00:05.627771][f=-000001] Loading widget from mod:   Reclaim Field Highlight  <gui_reclaim_field_highlight.lua> ...
+[t=00:00:05.628026][f=-000001] Loading widget from mod:   State Prefs V2      <unit_stateprefs.lua> ...
+[t=00:00:05.628138][f=-000001] Loading widget from mod:   Quick Build (mex/geo)  <cmd_quick_build_extractor.lua> ...
+[t=00:00:05.628247][f=-000001] Loading widget from mod:   Prospector          <gui_prospector.lua> ...
+[t=00:00:05.628456][f=-000001] Loading widget from mod:   Stained Glass       <gfx_glass.lua> ...
+[t=00:00:05.628542][f=-000001] Loading widget from mod:   Contrast Adaptive Sharpen  <gfx_cas.lua> ...
+[t=00:00:05.632972][f=-000001] Loading widget from mod:   Rejoin progress     <gui_rejoinprogress.lua> ...
+[t=00:00:05.633123][f=-000001] Loading widget from mod:   CustomFormations2   <cmd_customformations2.lua> ...
+[t=00:00:05.633244][f=-000001] Loading widget from mod:   Darken map          <gfx_darken_map.lua> ...
+[t=00:00:05.633348][f=-000001] Loading widget from mod:   Start Position Suggestions  <map_start_position_suggestions.lua> ...
+[t=00:00:05.635191][f=-000001] [Start Position Suggestions] Warning: No modoption start position data found
+[t=00:00:05.635217][f=-000001] Loading widget from mod:   Cursor              <gui_cursor.lua> ...
+[t=00:00:05.729903][f=-000001] Loading widget from mod:   Messages            <gui_messages.lua> ...
+[t=00:00:05.730245][f=-000001] Loading widget from mod:   Bloom Shader Deferred  <gfx_bloom_shader_deferred.lua> ...
+[t=00:00:05.730360][f=-000001] [BloomShader::Initialize] removing widget, AllowDeferredModelRendering is required
+[t=00:00:05.730384][f=-000001] [BloomShader::Initialize] removing widget, AllowDeferredMapRendering is required
+[t=00:00:05.740788][f=-000001] Loading widget from mod:   Pause Screen        <gui_pausescreen.lua> ...
+[t=00:00:05.744928][f=-000001] Loading widget from mod:   Selectionbox        <gui_selectionbox.lua> ...
+[t=00:00:05.745110][f=-000001] Loading widget from mod:   Widget Selector     <widget_selector.lua> ...
+[t=00:00:05.747293][f=-000001] Loading widget from mod:   SSAO                <gfx_ssao.lua> ...
+[t=00:00:05.747312][f=-000001] Missing capabilities:  SSAO. Disabling.
+[t=00:00:05.747317][f=-000001] Loading widget from mod:   FlowUI              <gui_flowui.lua> ...
+[t=00:00:05.748339][f=-000001] Healthbars GL4 unloaded hooks
+[t=00:00:05.842835][f=-000001] [Game::Load][7] globalQuit=0 forcedQuit=0
+[t=00:00:05.890438][f=-000001] [Game::Load][8] globalQuit=0 forcedQuit=0
+[t=00:00:06.621909][f=-000001] Removed:  LuaUI/Widgets/gui_minimap.lua
+[t=00:00:08.818064][f=-000001] Set "shadows" config-parameter to 1
+[t=00:00:09.475981][f=-000001] potato Graphics Card detected
+[t=00:00:09.479937][f=-000001] [Font] Error: [CFontTexture] fonts//yeojun/RecoilEngine/builddir/install/fonts/FreeSansBold.otf (s=12): Couldn't find font 'fonts//yeojun/RecoilEngine/builddir/install/fonts/FreeSansBold.otf'.
+[t=00:00:09.479977][f=-000001] [Font] Error: Failed creating font: Couldn't find font 'fonts//yeojun/RecoilEngine/builddir/install/fonts/FreeSansBold.otf'.
+[t=00:00:09.875195][f=-000001] [SpringApp::MainEventHandler][SDL_WINDOWEVENT_MOVED][1] di=0, ssx=1512, ssy=982, wsx=1048, wsy=720, wpx=464, wpy=100
+[t=00:00:09.875537][f=-000001] [SpringApp::MainEventHandler][SDL_WINDOWEVENT_MOVED][2] di=0, ssx=1512, ssy=982, wsx=1048, wsy=720, wpx=355, wpy=97
+[t=00:00:09.953038][f=-000001] GameID: 1d4cc769a6763c6314a43a1366e3b3b1
+[t=00:00:09.955384][f=-000001] Connection attempt from UnnamedPlayer
+[t=00:00:09.955400][f=-000001]  -> Version: 2026.06.06-6-gce685e9 master [MacOS 64-bit (native)]
+[t=00:00:10.135668][f=-000001]  -> Connection established (given id 0)
+[t=00:00:10.135688][f=-000001] [Game::ClientReadNet][LOGMSG] sender="UnnamedPlayer" string="[PreGame::GameDataReceived][map-checksums]
+	server=cb66943c7c980f2f9bcd2f8fd7d0ceeec88ce89018f0292c685cfd34812ae4373f5852c5b64bc809ff0c43636e5af218d1498c4dfafebb4d31e8e38d0983326e
+	client=cb66943c7c980f2f9bcd2f8fd7d0ceeec88ce89018f0292c685cfd34812ae4373f5852c5b64bc809ff0c43636e5af218d1498c4dfafebb4d31e8e38d0983326e"
+[t=00:00:10.135692][f=-000001] [Game::ClientReadNet][LOGMSG] sender="UnnamedPlayer" string="[PreGame::GameDataReceived][mod-checksums]
+	server=912a8d9091f9b390410ead41254a0dc83bfcea48b16f6e8699ca3624b752acbfa55f7fd5d28837b3f7e0853e162281d0393c9670465331d2b0c169aebdb8ff9b
+	client=912a8d9091f9b390410ead41254a0dc83bfcea48b16f6e8699ca3624b752acbfa55f7fd5d28837b3f7e0853e162281d0393c9670465331d2b0c169aebdb8ff9b"
+[t=00:00:10.135757][f=-000001] [Game::ClientReadNet][LOGMSG] sender="UnnamedPlayer" string="[Game::Load][lua{Rules,Gaia}={0x10a45af80,0x10a45bd80}][locale="C"]"
+[t=00:00:10.135762][f=-000001] Player UnnamedPlayer finished loading and is now ingame
+[t=00:00:10.135836][f=-000001] [Initial Spawn] automatic spawning using default map start positions, in fixed order
+[t=00:00:10.858399][f=0000005] [CrashHandler] Error: Abort trap: 6 in Spring 2026.06.06-6-gce685e9 master
+[t=00:00:10.858418][f=0000005] [CrashHandler] Error: Halted Stacktrace for Spring 2026.06.06-6-gce685e9 master (SIGABRT) using libunwind:
+[t=00:00:11.812844][f=0000005] [CrashHandler] Error: [02]   2   libsystem_platform.dylib            0x00000001895c97a4 _sigtramp + 56
+[t=00:00:11.812876][f=0000005] [CrashHandler] Error: [03]   3   libsystem_pthread.dylib             0x00000001895bf8d8 pthread_kill + 296
+[t=00:00:11.812882][f=0000005] [CrashHandler] Error: [04]   4   libsystem_c.dylib                   0x00000001894c6790 abort + 148
+[t=00:00:11.812887][f=0000005] [CrashHandler] Error: [05]   5   libsystem_c.dylib                   0x00000001894c59ec err + 0
+[t=00:00:11.812904][f=0000005] [WatchDog::DeregisterThread] deregistering controls for thread [main]
+[t=00:00:11.812908][f=0000005] Fatal: [ExitSpringProcess] errorMsg="/Users/yeojun/RecoilEngine/builddir/install/infolog.txt.
+
+" msgCaption="Spring crashed" mainThread=1
+[t=00:00:11.812931][f=0000005] Error: [Watchdog::ClearTimer(id)] Invalid thread 4 (_threadId=0x0)
+[t=00:00:11.812937][f=0000005] [SpringApp::Kill][1] fromRun=0
+[t=00:00:11.812939][f=0000005] [ThreadPool::SetThreadCount][1] wanted=0 current=14 maximum=14 (init=0)
+[t=00:00:11.845418][f=0000005] 	[async=0] threads=14 tasks=1001 {sum,avg}{exec,wait}time={{1249.118, 1.248}, {1696.786, 1.695}}ms
+[t=00:00:11.845438][f=0000005] 		thread=1 tasks=77 {sum,min,max,avg}{exec,wait}time={{82.747, 0.000, 34.826, 1.075}, {100.553, 0.000, 14.992, 1.306}}ms
+[t=00:00:11.845441][f=0000005] 		thread=2 tasks=77 {sum,min,max,avg}{exec,wait}time={{85.432, 0.000, 38.957, 1.110}, {173.421, 0.000, 14.956, 2.252}}ms
+[t=00:00:11.845443][f=0000005] 		thread=3 tasks=77 {sum,min,max,avg}{exec,wait}time={{98.165, 0.000, 36.759, 1.275}, {94.806, 0.000, 19.850, 1.231}}ms
+[t=00:00:11.845446][f=0000005] 		thread=4 tasks=77 {sum,min,max,avg}{exec,wait}time={{107.981, 0.000, 49.248, 1.402}, {141.031, 0.000, 14.339, 1.832}}ms
+[t=00:00:11.845449][f=0000005] 		thread=5 tasks=77 {sum,min,max,avg}{exec,wait}time={{100.067, 0.000, 45.536, 1.300}, {118.262, 0.000, 13.518, 1.536}}ms
+[t=00:00:11.845460][f=0000005] 		thread=6 tasks=77 {sum,min,max,avg}{exec,wait}time={{98.435, 0.000, 39.491, 1.278}, {127.764, 0.000, 14.935, 1.659}}ms
+[t=00:00:11.845462][f=0000005] 		thread=7 tasks=77 {sum,min,max,avg}{exec,wait}time={{85.383, 0.000, 38.082, 1.109}, {214.660, 0.000, 14.974, 2.788}}ms
+[t=00:00:11.845465][f=0000005] 		thread=8 tasks=77 {sum,min,max,avg}{exec,wait}time={{92.404, 0.000, 37.778, 1.200}, {106.923, 0.000, 13.986, 1.389}}ms
+[t=00:00:11.845468][f=0000005] 		thread=9 tasks=77 {sum,min,max,avg}{exec,wait}time={{100.592, 0.000, 42.085, 1.306}, {111.156, 0.000, 13.389, 1.444}}ms
+[t=00:00:11.845470][f=0000005] 		thread=10 tasks=77 {sum,min,max,avg}{exec,wait}time={{94.398, 0.000, 38.905, 1.226}, {120.488, 0.000, 13.379, 1.565}}ms
+[t=00:00:11.845472][f=0000005] 		thread=11 tasks=77 {sum,min,max,avg}{exec,wait}time={{103.652, 0.000, 43.582, 1.346}, {110.870, 0.001, 13.983, 1.440}}ms
+[t=00:00:11.845474][f=0000005] 		thread=12 tasks=77 {sum,min,max,avg}{exec,wait}time={{111.775, 0.000, 54.521, 1.452}, {115.496, 0.001, 13.412, 1.500}}ms
+[t=00:00:11.845484][f=0000005] 		thread=13 tasks=77 {sum,min,max,avg}{exec,wait}time={{88.088, 0.000, 37.917, 1.144}, {161.355, 0.001, 13.384, 2.096}}ms
+[t=00:00:11.845486][f=0000005] 	[async=1] threads=14 tasks=1786 {sum,avg}{exec,wait}time={{4547.176, 2.546}, {371581.156, 208.052}}ms
+[t=00:00:11.845492][f=0000005] 		thread=1 tasks=137 {sum,min,max,avg}{exec,wait}time={{340.873, 0.000, 49.641, 2.488}, {27780.344, 23.719, 364.401, 202.776}}ms
+[t=00:00:11.845495][f=0000005] 		thread=2 tasks=137 {sum,min,max,avg}{exec,wait}time={{354.965, 0.000, 49.392, 2.591}, {28369.396, 11.336, 366.125, 207.076}}ms
+[t=00:00:11.845497][f=0000005] 		thread=3 tasks=137 {sum,min,max,avg}{exec,wait}time={{341.037, 0.000, 49.119, 2.489}, {28069.367, 23.690, 364.536, 204.886}}ms
+[t=00:00:11.845499][f=0000005] 		thread=4 tasks=137 {sum,min,max,avg}{exec,wait}time={{356.395, 0.000, 49.079, 2.601}, {30267.766, 11.338, 367.319, 220.933}}ms
+[t=00:00:11.845501][f=0000005] 		thread=5 tasks=138 {sum,min,max,avg}{exec,wait}time={{347.835, 0.000, 26.077, 2.521}, {27994.721, 17.871, 364.352, 202.860}}ms
+[t=00:00:11.845507][f=0000005] 		thread=6 tasks=138 {sum,min,max,avg}{exec,wait}time={{346.135, 0.000, 49.826, 2.508}, {31287.672, 23.696, 369.648, 226.722}}ms
+[t=00:00:11.845509][f=0000005] 		thread=7 tasks=138 {sum,min,max,avg}{exec,wait}time={{343.743, 0.000, 50.094, 2.491}, {28701.186, 23.691, 366.824, 207.980}}ms
+[t=00:00:11.845511][f=0000005] 		thread=8 tasks=138 {sum,min,max,avg}{exec,wait}time={{355.405, 0.000, 49.383, 2.575}, {28874.850, 11.351, 366.566, 209.238}}ms
+[t=00:00:11.845514][f=0000005] 		thread=9 tasks=138 {sum,min,max,avg}{exec,wait}time={{342.066, 0.000, 49.368, 2.479}, {27667.182, 23.696, 364.430, 200.487}}ms
+[t=00:00:11.845516][f=0000005] 		thread=10 tasks=137 {sum,min,max,avg}{exec,wait}time={{343.373, 0.000, 49.142, 2.506}, {28191.971, 23.698, 366.884, 205.781}}ms
+[t=00:00:11.845518][f=0000005] 		thread=11 tasks=137 {sum,min,max,avg}{exec,wait}time={{365.255, 0.000, 49.074, 2.666}, {28185.658, 1.237, 366.301, 205.735}}ms
+[t=00:00:11.845524][f=0000005] 		thread=12 tasks=137 {sum,min,max,avg}{exec,wait}time={{354.512, 0.000, 51.096, 2.588}, {26272.562, 11.351, 364.543, 191.771}}ms
+[t=00:00:11.845527][f=0000005] 		thread=13 tasks=137 {sum,min,max,avg}{exec,wait}time={{355.582, 0.000, 49.384, 2.595}, {29918.475, 11.345, 366.747, 218.383}}ms
+[t=00:00:11.845529][f=0000005] [ThreadPool::SetThreadCount][2] workers=0
+[t=00:00:11.845531][f=0000005] [SpringApp::Kill][2]
+[t=00:00:11.845591][f=0000005] [Game::KillLua][0] dtor=0 loadscreen=0x0
+[t=00:00:11.845594][f=0000005] [Game::KillLua][1] dtor=0 luaUI=0x10a3ec800
+[t=00:00:11.851488][f=0000005] Rml Context Manager shutdown, dynamic context dp ratio updates to contexts disabled.
+[t=00:00:11.853536][f=0000005] frames-per-second indicator is enabled!
+[t=00:00:11.853655][f=0000005] small digital clock is enabled!
+[t=00:00:11.853737][f=0000005] simulation speed indicator is enabled!
+[t=00:00:11.853826][f=0000005] EndGame Graph enabled, causes reload
+[t=00:00:11.867919][f=0000005] [LuaMemPool::LogStats][handle=LuaUI (unsynced)] index=18446744073709551615 numAllocs{int+, int-, ext, int_p}={2063514, 271892, 234662, 80.3} allocedSize{int+, int-, ext}={176192080, 24738541, 349155706}, avgAllocTime{int+, int-, ext}={0.0000, 0.0000, 0.0000}, cumAllocTime={int+, int-, ext}={0, 0, 0}
+[t=00:00:11.868340][f=0000005] [Game::KillLua][2] dtor=0 luaGaia=0x10a45bd80
+[t=00:00:11.869446][f=0000005] [LuaMemPool::LogStats][handle=LuaGaia (unsynced)] index=18446744073709551615 numAllocs{int+, int-, ext, int_p}={0, 0, 0, 0.0} allocedSize{int+, int-, ext}={0, 0, 0}, avgAllocTime{int+, int-, ext}={0.0000, 0.0000, 0.0000}, cumAllocTime={int+, int-, ext}={0, 0, 0}
+[t=00:00:11.869468][f=0000005] [LuaMemPool::LogStats][handle=LuaGaia (synced)] index=18446744073709551615 numAllocs{int+, int-, ext, int_p}={0, 0, 0, 0.0} allocedSize{int+, int-, ext}={0, 0, 0}, avgAllocTime{int+, int-, ext}={0.0000, 0.0000, 0.0000}, cumAllocTime={int+, int-, ext}={0, 0, 0}
+[t=00:00:11.869499][f=0000005] [Game::KillLua][3] dtor=0 luaRules=0x10a45af80
+[t=00:00:11.869529][f=0000005] AA Targeting Priority Stats: total = 0, unitDefs = 1, average = 0.00; Above average:
+[t=00:00:11.872472][f=0000005] [LuaMemPool::LogStats][handle=LuaRules (unsynced)] index=18446744073709551615 numAllocs{int+, int-, ext, int_p}={15, 0, 0, 100.0} allocedSize{int+, int-, ext}={741, 0, 0}, avgAllocTime{int+, int-, ext}={0.0000, 0.0000, 0.0000}, cumAllocTime={int+, int-, ext}={0, 0, 0}
+[t=00:00:11.872552][f=0000005] [LuaMemPool::LogStats][handle=LuaRules (synced)] index=18446744073709551615 numAllocs{int+, int-, ext, int_p}={0, 0, 0, 0.0} allocedSize{int+, int-, ext}={0, 0, 0}, avgAllocTime{int+, int-, ext}={0.0000, 0.0000, 0.0000}, cumAllocTime={int+, int-, ext}={0, 0, 0}
+[t=00:00:11.872571][f=0000005] [Game::KillLua][4] dtor=0
+[t=00:00:11.872576][f=0000005] [Game::KillLua][5] dtor=0
+[t=00:00:11.873366][f=0000005] [DemoRecorder::WriteDemoFile] writing client-demo "/Users/yeojun/RecoilEngine/builddir/install/demos/2026-03-28_03-33-49-351_Altair_Crossing_V4_2026.06.06-6-gce685e9 master.sdfz" (5036 bytes)
+[t=00:00:11.873404][f=0000005] [Game::~CGame][1]
+[t=00:00:11.873565][f=0000005] [Game::KillLua][0] dtor=1 loadscreen=0x0
+[t=00:00:11.873570][f=0000005] [Game::KillLua][1] dtor=1 luaUI=0x0
+[t=00:00:11.873572][f=0000005] [Game::KillLua][2] dtor=1 luaGaia=0x0
+[t=00:00:11.873573][f=0000005] [Game::KillLua][3] dtor=1 luaRules=0x0
+[t=00:00:11.873575][f=0000005] [Game::KillLua][4] dtor=1
+[t=00:00:11.873577][f=0000005] [Game::KillLua][5] dtor=1
+[t=00:00:11.873656][f=0000005] [Game::KillMisc][1]
+[t=00:00:11.873661][f=0000005] [Game::KillMisc][2]
+[t=00:00:11.873669][f=0000005] [Game::KillMisc][3]
+[t=00:00:11.873699][f=0000005] [Game::KillRendering][1]
+[t=00:00:11.875996][f=0000005] [3DOParser::Kill] allocated 1 pieces
+[t=00:00:11.876010][f=0000005] [S3OParser::Kill] allocated 6335 pieces
+[t=00:00:11.876097][f=0000005] [AssParser::Kill] allocated 0 pieces
+[t=00:00:11.876742][f=0000005] [Game::KillInterface][1]
+[t=00:00:11.876777][f=0000005] [Game::KillInterface][2]
+[t=00:00:11.876828][f=0000005] [Game::KillSimulation][1]
+[t=00:00:11.876844][f=0000005] [Game::KillSimulation][2]
+[t=00:00:11.877452][f=0000005] [CCollisionHandler] dis-/continuous tests: 0/64
+[t=00:00:11.877458][f=0000005] [Game::KillSimulation][3]
+[t=00:00:11.879042][f=0000005] ~PathManager: 0 entities still active!
+[t=00:00:11.883543][f=0000005] [~CRectangleOverlapHandler] 0% overlap reduction
+[t=00:00:11.883652][f=0000005] [LosHandler::Kill] raycast instance cache-{hits,misses}={1,2}; shared=0%; cached=33%
+[t=00:00:11.885870][f=0000005] [Game::KillSimulation][4]
+[t=00:00:11.885896][f=0000005] [CommonDefHandler::KillStatic] 2766 sound-set data items added
+[t=00:00:11.885903][f=0000005] [Game::~CGame][2]
+[t=00:00:11.885905][f=0000005] [Game::~CGame][3]
+[t=00:00:11.885920][f=0000005] [SpringApp::Kill][3]
+[t=00:00:11.885926][f=0000005] [NetProto::~CNetProtocol] [LocalConnection::Statistics]
+	3617 bytes sent  
+	4119 bytes recv'd
+
+[t=00:00:11.887575][f=0000005] Kill: client disconnecting...
+[t=00:00:11.887641][f=0000005] [GameServer] UpdateLoop: thread affinity 0
+[t=00:00:13.890738][f=0000005] CloseConnection: client connection closed
+[t=00:00:13.890840][f=0000005] [SpringApp::Kill][4] font=0x15067d040
+[t=00:00:13.891369][f=0000005] [SpringApp::Kill][5]
+[t=00:00:13.897473][f=0000005] [SpringApp::Kill][6]
+[t=00:00:13.897505] [SpringApp::Kill][7]
+[t=00:00:13.897535] [RenderBuffer::KillStatic] Type = VA_TYPE_0 max size/init. capacity/curr. capacity: VBO = {0, 65536, 65536}, EBO = {0, 131072, 131072}
+[t=00:00:13.897539] [RenderBuffer::KillStatic] Type = VA_TYPE_C max size/init. capacity/curr. capacity: VBO = {0, 1048576, 1048576}, EBO = {0, 2097152, 2097152}
+[t=00:00:13.897541] [RenderBuffer::KillStatic] Type = VA_TYPE_N max size/init. capacity/curr. capacity: VBO = {0, 1024, 1024}, EBO = {0, 2048, 2048}
+[t=00:00:13.897544] [RenderBuffer::KillStatic] Type = VA_TYPE_T max size/init. capacity/curr. capacity: VBO = {0, 1048576, 1048576}, EBO = {0, 2097152, 2097152}
+[t=00:00:13.897546] [RenderBuffer::KillStatic] Type = VA_TYPE_T4 max size/init. capacity/curr. capacity: VBO = {0, 65536, 65536}, EBO = {0, 262144, 262144}
+[t=00:00:13.897566] [RenderBuffer::KillStatic] Type = VA_TYPE_TN max size/init. capacity/curr. capacity: VBO = {0, 65536, 65536}, EBO = {0, 131072, 131072}
+[t=00:00:13.897568] [RenderBuffer::KillStatic] Type = VA_TYPE_TC max size/init. capacity/curr. capacity: VBO = {4, 1048576, 1048576}, EBO = {6, 2097152, 2097152}
+[t=00:00:13.897570] [RenderBuffer::KillStatic] Type = VA_TYPE_TC3 max size/init. capacity/curr. capacity: VBO = {0, 1024, 1024}, EBO = {0, 2048, 2048}
+[t=00:00:13.897572] [RenderBuffer::KillStatic] Type = VA_TYPE_PROJ max size/init. capacity/curr. capacity: VBO = {0, 1048576, 1048576}, EBO = {0, 2097152, 2097152}
+[t=00:00:13.897574] [RenderBuffer::KillStatic] Type = VA_TYPE_TNT max size/init. capacity/curr. capacity: VBO = {0, 0, 0}, EBO = {0, 0, 0}
+[t=00:00:13.897575] [RenderBuffer::KillStatic] Type = VA_TYPE_2D0 max size/init. capacity/curr. capac
