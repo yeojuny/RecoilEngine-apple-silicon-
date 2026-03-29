@@ -24,6 +24,7 @@
 
 #include "Game/UI/MouseHandler.h"
 #include "Rendering/GlobalRendering.h"
+#include "System/Log/ILog.h"
 #include "System/MainDefines.h"
 #include "System/SafeUtil.h"
 
@@ -62,28 +63,96 @@ IMouseInput::~IMouseInput()
 }
 
 
+
+#ifdef __APPLE__
+#include <SDL.h>
+static int2 ScaleMouseCoords(int x, int y) {
+	int sdlW = 1, sdlH = 1;
+	if (globalRendering->sdlWindow != nullptr)
+		SDL_GetWindowSize(globalRendering->sdlWindow, &sdlW, &sdlH);
+	if (sdlW < 1) sdlW = 1;
+	if (sdlH < 1) sdlH = 1;
+	int scaledX = (int)((float)x * (float)globalRendering->viewSizeX / (float)sdlW);
+	int scaledY = (int)((float)y * (float)globalRendering->viewSizeY / (float)sdlH);
+	return int2(scaledX, scaledY);
+}
+static float ScaleMouseDelta(float d, int sdlSize, int viewSize) {
+	if (sdlSize < 1) sdlSize = 1;
+	return d * (float)viewSize / (float)sdlSize;
+}
+#endif
+
 bool IMouseInput::HandleSDLMouseEvent(const SDL_Event& event)
 {
 	switch (event.type) {
 		case SDL_MOUSEMOTION: {
+#ifdef __APPLE__
+			mousepos = ScaleMouseCoords(event.motion.x, event.motion.y);
+#else
 			mousepos = int2(event.motion.x, event.motion.y);
+#endif
+
+			
+			// === macOS mouse coordinate debug ===
+			{
+				static int debugCounter = 0;
+				if (debugCounter++ % 120 == 0) {
+					LOG("[MouseInput] SDL raw: x=%d y=%d scaled: x=%d y=%d | winSize=%dx%d viewSize=%dx%d viewPos=%d,%d viewWinOffY=%d",
+						event.motion.x, event.motion.y,
+						event.motion.x * 2, event.motion.y * 2,
+						globalRendering->winSizeX, globalRendering->winSizeY,
+						globalRendering->viewSizeX, globalRendering->viewSizeY,
+						globalRendering->viewPosX, globalRendering->viewPosY,
+						globalRendering->viewWindowOffsetY);
+				}
+			}
+			// === end debug ===
 
 			if (mouse != nullptr)
-				mouse->MouseMove(mousepos.x, mousepos.y, event.motion.xrel, event.motion.yrel);
+				// === macOS Retina: SDL reports logical coords, viewport uses physical pixels ===
+#ifdef __APPLE__
+			{
+				int sdlW = 1, sdlH = 1;
+				if (globalRendering->sdlWindow) SDL_GetWindowSize(globalRendering->sdlWindow, &sdlW, &sdlH);
+				mouse->MouseMove(mousepos.x, mousepos.y,
+					ScaleMouseDelta(event.motion.xrel, sdlW, globalRendering->viewSizeX),
+					ScaleMouseDelta(event.motion.yrel, sdlH, globalRendering->viewSizeY));
+			}
+#else
+			mouse->MouseMove(mousepos.x, mousepos.y, event.motion.xrel, event.motion.yrel);
+#endif
 
 		} break;
 		case SDL_MOUSEBUTTONDOWN: {
+#ifdef __APPLE__
+			mousepos = ScaleMouseCoords(event.button.x, event.button.y);
+#else
 			mousepos = int2(event.button.x, event.button.y);
+#endif
 
 			if (mouse != nullptr)
-				mouse->MousePress(mousepos.x, mousepos.y, event.button.button);
+				// === macOS Retina scaling ===
+#ifdef __APPLE__
+			mouse->MousePress(mousepos.x, mousepos.y, event.button.button);
+#else
+			mouse->MousePress(mousepos.x, mousepos.y, event.button.button);
+#endif
 
 		} break;
 		case SDL_MOUSEBUTTONUP: {
+#ifdef __APPLE__
+			mousepos = ScaleMouseCoords(event.button.x, event.button.y);
+#else
 			mousepos = int2(event.button.x, event.button.y);
+#endif
 
 			if (mouse != nullptr)
-				mouse->MouseRelease(mousepos.x, mousepos.y, event.button.button);
+				// === macOS Retina scaling ===
+#ifdef __APPLE__
+			mouse->MouseRelease(mousepos.x, mousepos.y, event.button.button);
+#else
+			mouse->MouseRelease(mousepos.x, mousepos.y, event.button.button);
+#endif
 
 		} break;
 		case SDL_MOUSEWHEEL: {

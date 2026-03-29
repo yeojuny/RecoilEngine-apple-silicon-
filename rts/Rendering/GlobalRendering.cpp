@@ -1084,11 +1084,23 @@ void CGlobalRendering::SetGLSupportFlags()
 		globalRenderingInfo.glslVersionNum = glslVerNum.x * 100 + glslVerNum.y;
 	}
 
-	haveGL4 = static_cast<bool>(GLAD_GL_ARB_multi_draw_indirect);
-	haveGL4 &= static_cast<bool>(GLAD_GL_ARB_uniform_buffer_object);
-	haveGL4 &= static_cast<bool>(GLAD_GL_ARB_shader_storage_buffer_object);
-	haveGL4 &= CheckShaderGL4();
-	haveGL4 &= !forceDisableGL4;
+	// === GL4 capability debug ===
+	bool hasMultiDrawIndirect = static_cast<bool>(GLAD_GL_ARB_multi_draw_indirect);
+	bool hasUBO = static_cast<bool>(GLAD_GL_ARB_uniform_buffer_object);
+	bool hasSSBO = static_cast<bool>(GLAD_GL_ARB_shader_storage_buffer_object);
+	bool shaderOK = CheckShaderGL4();
+	bool notForceDisabled = !forceDisableGL4;
+	LOG("[GL4 check] multi_draw_indirect=%d UBO=%d SSBO=%d shaderTest=%d forceDisable=%d",
+		hasMultiDrawIndirect, hasUBO, hasSSBO, shaderOK, forceDisableGL4);
+	haveGL4 = hasMultiDrawIndirect && hasUBO && hasSSBO && shaderOK && notForceDisabled;
+	// === macOS: force GL4 on — vertex SSBO limit is 0 but most widgets use fragment SSBO or UBO ===
+#ifdef __APPLE__
+	if (!haveGL4 && hasMultiDrawIndirect && hasUBO && hasSSBO && !forceDisableGL4) {
+		LOG("[GL4 check] macOS override: shaderTest failed (vertex SSBO limit=0) but forcing GL4=true");
+		haveGL4 = true;
+	}
+#endif
+	// === end GL4 debug ===
 
 	{
 		// use some ATI bugfixes?
@@ -1163,6 +1175,15 @@ void CGlobalRendering::QueryGLMaxVals()
 	if (GLAD_GL_ARB_shader_storage_buffer_object) {
 		glGetIntegerv(GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS, &glslMaxStorageBufferBindings);
 		glGetIntegerv(GL_MAX_SHADER_STORAGE_BLOCK_SIZE,      &glslMaxStorageBufferSize);
+		// === macOS SSBO per-stage debug ===
+		GLint vsSSBO = 0, fsSSBO = 0, gsSSBO = 0, combinedSSBO = 0;
+		glGetIntegerv(GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS, &vsSSBO);
+		glGetIntegerv(GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS, &fsSSBO);
+		glGetIntegerv(GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS, &gsSSBO);
+		glGetIntegerv(GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS, &combinedSSBO);
+		LOG("[SSBO limits] vertex=%d fragment=%d geometry=%d combined=%d bindings=%d",
+			vsSSBO, fsSSBO, gsSSBO, combinedSSBO, glslMaxStorageBufferBindings);
+		// === end debug ===
 	}
 
 	glGetIntegerv(GL_MAX_VARYING_FLOATS,                 &glslMaxVaryings);
@@ -2007,11 +2028,13 @@ void main()
 	testShader.AttachShaderObject(new Shader::GLSLShaderObject(GL_VERTEX_SHADER  , vsSrc));
 	testShader.AttachShaderObject(new Shader::GLSLShaderObject(GL_FRAGMENT_SHADER, fsSrc));
 
-	testShader.SetLogReporting(false); //no need to spam guinea pig shader errors
+	testShader.SetLogReporting(true); // macOS debug: show GL4 test shader errors
 	testShader.Link();
+	LOG("[GL4-TestShader] link status: valid=%d log='%s'", testShader.IsValid(), testShader.GetLog().c_str());
 	testShader.Enable();
 	testShader.Disable();
 	testShader.Validate();
+	LOG("[GL4-TestShader] validate status: valid=%d log='%s'", testShader.IsValid(), testShader.GetLog().c_str());
 
 	return testShader.IsValid();
 #else
