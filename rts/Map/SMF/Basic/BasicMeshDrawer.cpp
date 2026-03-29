@@ -225,16 +225,33 @@ void CBasicMeshDrawer::DrawMesh(const DrawPass::e& drawPass)
 
 	const CCamera* activeCam = CCameraHandler::GetActiveCamera();
 
+	int patchesDrawn = 0;
+	int patchesSkipped = 0;
 	for (uint32_t py = 0; py < numPatchesY; py += 1) {
 		for (uint32_t px = 0; px < numPatchesX; px += 1) {
 			const auto& meshVisPatch = meshVisPatches[py * numPatchesX + px];
 
-			if (meshVisPatch.visUpdateFrames[activeCam->GetCamType()] < globalRendering->drawFrame)
+			if (meshVisPatch.visUpdateFrames[activeCam->GetCamType()] < globalRendering->drawFrame) {
+				patchesSkipped++;
 				continue;
+			}
 
 			smfGroundDrawer->SetupBigSquare(drawPass, px, py);
 
 			DrawSquareMeshPatch();
+			patchesDrawn++;
+		}
+	}
+	{
+		static int meshLogCount = 0;
+		if (meshLogCount < 10) {
+			GLint curProg = 0;
+			glGetIntegerv(GL_CURRENT_PROGRAM, &curProg);
+			GLenum err = glGetError();
+			LOG("[BasicMeshDrawer] drawPass=%d drawn=%d skipped=%d total=%dx%d program=%d glErr=0x%x",
+				(int)drawPass, patchesDrawn, patchesSkipped,
+				numPatchesX, numPatchesY, curProg, err);
+			meshLogCount++;
 		}
 	}
 }

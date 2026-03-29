@@ -65,6 +65,23 @@ static void* GetNSViewFromSDLWindow(SDL_Window* window) {
     return (void*)view;
 }
 
+static void GetMetalDrawableSize(SDL_Window* window, int* w, int* h) {
+    SDL_SysWMinfo wmInfo;
+    SDL_VERSION(&wmInfo.version);
+    *w = 0; *h = 0;
+    if (!SDL_GetWindowWMInfo(window, &wmInfo)) return;
+    
+    id nswindow = (id)wmInfo.info.cocoa.window;
+    id contentView = ((id(*)(id, SEL))objc_msgSend)(nswindow, sel_registerName("contentView"));
+    id layer = ((id(*)(id, SEL))objc_msgSend)(contentView, sel_registerName("layer"));
+    
+    // CAMetalLayer.drawableSize returns CGSize (double, double)
+    typedef struct { double width; double height; } CGSizeD;
+    CGSizeD sz = ((CGSizeD(*)(id, SEL))objc_msgSend)(layer, sel_registerName("drawableSize"));
+    *w = (int)sz.width;
+    *h = (int)sz.height;
+}
+
 static bool InitEGLContext(SDL_Window* window, int major, int minor) {
     g_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     if (g_eglDisplay == EGL_NO_DISPLAY) return false;
@@ -89,11 +106,13 @@ static bool InitEGLContext(SDL_Window* window, int major, int minor) {
     void* nativeView = GetNSViewFromSDLWindow(window);
     if (nativeView) {
         g_eglSurface = eglCreateWindowSurface(g_eglDisplay, eglConfig, (EGLNativeWindowType)nativeView, NULL);
+        printf("[EGL] eglCreateWindowSurface nativeView=%p surface=%p", nativeView, (void*)g_eglSurface);
     }
     if (g_eglSurface == EGL_NO_SURFACE) {
         EGLint pbAttribs[] = { EGL_WIDTH, 1280, EGL_HEIGHT, 720, EGL_NONE };
         g_eglSurface = eglCreatePbufferSurface(g_eglDisplay, eglConfig, pbAttribs);
         if (g_eglSurface == EGL_NO_SURFACE) return false;
+        printf("[EGL] FALLBACK to PbufferSurface! surface=%p", (void*)g_eglSurface);
     }
 
     EGLint contextAttribs[] = {
@@ -849,10 +868,46 @@ void CGlobalRendering::SwapBuffers(bool allowSwapBuffers, bool clearErrors)
 		#endif
 		
 #if defined(__APPLE__) && !defined(HEADLESS)
+		// --- DIAGNOSTIC: 4분면 픽셀 확인 ---
+		{
+			static int diagCount = 0;
+			if (diagCount < 5 && globalRendering->drawFrame > 200) {
+				GLint vp[4] = {0};
+				glGetIntegerv(GL_VIEWPORT, vp);
+				int w = vp[2], h = vp[3];
+				
+				// 4분면 중앙 + 정중앙 = 5개 지점
+				int points[][2] = {
+					{w/4, h/4},         // 왼쪽 아래
+					{3*w/4, h/4},       // 오른쪽 아래
+					{w/4, 3*h/4},       // 왼쪽 위
+					{3*w/4, 3*h/4},     // 오른쪽 위
+					{w/2, h/2}          // 정중앙
+				};
+				const char* names[] = {"BL","BR","TL","TR","CENTER"};
+				
+				for (int p = 0; p < 5; p++) {
+					unsigned char px[4] = {0};
+					glReadPixels(points[p][0], points[p][1], 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, px);
+					LOG("[GR::DIAG] frame=%d %s(%d,%d)=(%d,%d,%d,%d)",
+						globalRendering->drawFrame, names[p],
+						points[p][0], points[p][1],
+						px[0], px[1], px[2], px[3]);
+				}
+				
+				// EGL surface 크기도 확인
+				EGLint eglW=0, eglH=0;
+				eglQuerySurface(g_eglDisplay, g_eglSurface, EGL_WIDTH, &eglW);
+				eglQuerySurface(g_eglDisplay, g_eglSurface, EGL_HEIGHT, &eglH);
+				LOG("[GR::DIAG] frame=%d viewport=%dx%d EGL_surface=%dx%d winSize=%dx%d",
+					globalRendering->drawFrame, w, h, eglW, eglH,
+					globalRendering->winSizeX, globalRendering->winSizeY);
+				diagCount++;
+			}
+		}
 		if (g_eglDisplay != EGL_NO_DISPLAY && g_eglSurface != EGL_NO_SURFACE) {
 			glFlush();
-			// eglSwapBuffers deadlocks on macOS (dispatch_sync to main thread)
-			// Kopper/Zink renders directly to CAMetalLayer, glFlush is sufficient
+			eglSwapBuffers(g_eglDisplay, g_eglSurface);
 		} else
 #endif
 		SDL_GL_SwapWindow(sdlWindow);
@@ -1724,6 +1779,21 @@ void CGlobalRendering::ReadWindowPosAndSize()
 		UpdateWindowBorders(sdlWindow);
 
 	SDL_GetWindowSize(sdlWindow, &winSizeX, &winSizeY);
+#if defined(__APPLE__) && !defined(HEADLESS)
+	{
+		int metalW = 0, metalH = 0;
+		GetMetalDrawableSize(sdlWindow, &metalW, &metalH);
+		if (metalW > winSizeX && metalH > winSizeY) {
+			LOG("[GR::%s] macOS Retina: SDL=%dx%d Metal=%dx%d (using Metal size)",
+			    __func__, winSizeX, winSizeY, metalW, metalH);
+			winSizeX = metalW;
+			winSizeY = metalH;
+		} else {
+			LOG("[GR::%s] macOS: SDL=%dx%d Metal=%dx%d (using SDL size)",
+			    __func__, winSizeX, winSizeY, metalW, metalH);
+		}
+	}
+#endif
 	SDL_GetWindowPosition(sdlWindow, &winPosX, &winPosY);
 
 	//enforce >=0 https://github.com/beyond-all-reason/spring/issues/23

@@ -198,6 +198,20 @@ bool LoadFromLua(Shader::IProgramObject* program, const std::string& filename)
 	ParseShaderTable(&root, "tcs",       tcsSrcs);
 	ParseShaderTable(&root, "tes",       tesSrcs);
 	ParseShaderTable(&root, "geometry", geomSrcs);
+
+	// [macOS Apple Silicon] Strip geometry shader if HW doesn't support it.
+	{
+		GLint maxGeomOutputVerts = 0;
+		glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES, &maxGeomOutputVerts);
+		const GLenum err = glGetError();
+		LOG_L(L_WARNING, "[LuaShaderContainer] GS check: GL_MAX_GEOMETRY_OUTPUT_VERTICES=%d, glErr=0x%x", maxGeomOutputVerts, err);
+		if (true) { // [macOS Apple Silicon] unconditionally strip GS (KosmicKrisp has no GS HW)
+			LOG_L(L_WARNING, "[LuaShaderContainer] geometry shader stripped (no HW support)");
+			geomSrcs.str("");
+			geomSrcs.clear();
+		}
+	}
+
 	ParseShaderTable(&root, "fragment", fragSrcs);
 	ParseShaderTable(&root, "compute",  compSrcs);
 

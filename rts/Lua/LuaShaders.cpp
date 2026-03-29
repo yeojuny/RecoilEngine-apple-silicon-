@@ -657,6 +657,22 @@ int LuaShaders::CreateShader(lua_State* L)
 	if (!ParseShaderTable(L, 1, "fragment", fragSrcs))
 		return 0;
 
+	// [macOS Apple Silicon] Strip geometry shader if HW doesn't support it.
+	// Prevents CSO assert crash in Mesa Zink when geometryShader=false.
+	// The shader program will either link without GS or fail gracefully.
+	if (!geomSrcs.empty()) {
+		GLint maxGeomOutputVerts = 0;
+		glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES, &maxGeomOutputVerts);
+		const GLenum err = glGetError();
+		LOG_L(L_WARNING, "[LuaShaders::%s] GS check: GL_MAX_GEOMETRY_OUTPUT_VERTICES=%d, glErr=0x%x, geomSrcs=%d", __func__, maxGeomOutputVerts, err, (int)geomSrcs.size());
+		// [macOS Apple Silicon] KosmicKrisp/Zink: geometryShader=false in Vulkan caps.
+		// GL_MAX_GEOMETRY_OUTPUT_VERTICES returns non-zero (Mesa lies), so unconditionally strip GS.
+		{
+			LOG_L(L_WARNING, "[LuaShaders::%s] GS unconditionally stripped (Apple Silicon fallback). maxGeomVerts=%d", __func__, maxGeomOutputVerts);
+			geomSrcs.clear();
+		}
+	}
+
 	if (!ParseShaderTable(L, 1, "compute", compSrcs))
 		return 0;
 

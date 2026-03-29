@@ -189,6 +189,7 @@ ISMFRenderState* CSMFGroundDrawer::SelectRenderState(const DrawPass::e& drawPass
 	}
 
 	// fallback
+	LOG("[SMFGroundDrawer] FALLBACK to NOP RenderState for drawPass=%d", (int)drawPass);
 	return (smfRenderStates[RENDER_STATE_SEL] = smfRenderStates[RENDER_STATE_NOP]);
 }
 
@@ -277,6 +278,7 @@ void CSMFGroundDrawer::DrawForwardPass(const DrawPass::e& drawPass, bool alphaTe
 	RECOIL_DETAILED_TRACY_ZONE;
 	if (!SelectRenderState(drawPass)->CanDrawForward(this))
 		return;
+
 
 	smfRenderStates[RENDER_STATE_SEL]->SetCurrentShader(this, drawPass);
 	smfRenderStates[RENDER_STATE_SEL]->Enable(this, drawPass);

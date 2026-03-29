@@ -135,6 +135,17 @@ void SMFRenderStateGLSL::Update(
 			}
 
 			glslShaders[n]->Link();
+			{
+				GLuint progID = glslShaders[n]->GetObjID();
+				GLint linkStatus = 0;
+				glGetProgramiv(progID, GL_LINK_STATUS, &linkStatus);
+				GLint logLen = 0;
+				glGetProgramiv(progID, GL_INFO_LOG_LENGTH, &logLen);
+				char logBuf[1024] = {0};
+				if (logLen > 0) glGetProgramInfoLog(progID, sizeof(logBuf)-1, nullptr, logBuf);
+				LOG("[SMFShader] Shader[%d] progID=%d GL_LINK_STATUS=%d log=%s",
+					n, progID, linkStatus, logBuf);
+			}
 			glslShaders[n]->Enable();
 
 			glslShaders[n]->SetUniform("diffuseTex",             0);
@@ -188,6 +199,7 @@ void SMFRenderStateGLSL::Update(
 
 			glslShaders[n]->Disable();
 			glslShaders[n]->Validate();
+			LOG("[SMFRenderState] Shader[%d] valid=%d log=%s", n, glslShaders[n]->IsValid(), glslShaders[n]->GetLog().c_str());
 		}
 	}
 }
@@ -253,6 +265,8 @@ void SMFRenderStateGLSL::Enable(const CSMFGroundDrawer* smfGroundDrawer, const D
 	}
 
 	glActiveTexture(GL_TEXTURE0);
+
+
 
 	if (isAdv)
 		currShader->SetFlag("HAVE_SHADOWS", shadowHandler.ShadowsLoaded());

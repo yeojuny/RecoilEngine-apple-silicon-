@@ -1153,7 +1153,22 @@ inline void LuaOpenGL::NotImplementedError(lua_State* L, const char* caller)
  */
 int LuaOpenGL::HasExtension(lua_State* L)
 {
-	lua_pushboolean(L, globalRendering->IsExtensionSupported(luaL_checkstring(L, 1)));
+	const char* ext = luaL_checkstring(L, 1);
+
+	/* [macOS Apple Silicon] Block geometry shader extensions on HW that lacks GS.
+	 * This prevents Lua widgets from generating GS code that would hit
+	 * the Mesa CSO assert (cso_set_geometry_shader_handle). */
+	if (strstr(ext, "geometry_shader") != nullptr) {
+		GLint maxGeomVerts = 0;
+		glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES, &maxGeomVerts);
+		GLenum gsErr = glGetError();
+		LOG_L(L_WARNING, "[LuaOpenGL::HasExtension] GS query: ext=%s maxGeomVerts=%d glErr=0x%x -> forcing false", ext, maxGeomVerts, gsErr);
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+
+	lua_pushboolean(L, globalRendering->IsExtensionSupported(ext));
 	return 1;
 }
 
