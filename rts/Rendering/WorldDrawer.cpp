@@ -54,6 +54,54 @@
 
 CONFIG(bool, PreloadModels).defaultValue(true).description("The engine will preload all models");
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool AppleFlagEnabled(const char* name)
+{
+	const char* env = std::getenv(name);
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool DisableAppleSkyDraw()
+{
+	return AppleFlagEnabled("BARONMETAL_DISABLE_SKYDRAW");
+}
+
+static bool AppleTerrainOnlyPass()
+{
+	return AppleFlagEnabled("BARONMETAL_TERRAIN_ONLY");
+}
+
+static bool AppleSkipGroundDecals()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_GROUND_DECALS");
+}
+
+static bool AppleSkipGroundFlashes()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_GROUND_FLASHES");
+}
+
+static bool AppleSkipGrass()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_GRASS");
+}
+
+static bool AppleSkipUnits()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_UNITS");
+}
+
+static bool AppleSkipFeatures()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_FEATURES");
+}
+
+static bool AppleSkipProjectiles()
+{
+	return AppleFlagEnabled("BARONMETAL_SKIP_PROJECTILES");
+}
+#endif
+
 void CWorldDrawer::InitPre() const
 {
 	LuaObjectDrawer::Init();
@@ -338,17 +386,35 @@ void CWorldDrawer::DrawOpaqueObjects() const
 			gd->Draw(DrawPass::Normal);
 			depthBufferCopy->MakeDepthBufferCopy();
 		}
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (AppleTerrainOnlyPass())
+			return;
+		#endif
 		{
 			eventHandler.DrawPreDecals();
 			SCOPED_TIMER("Draw::World::Decals");
 			SCOPED_GL_DEBUGGROUP("Draw::World::Decals");
-			groundDecals->Draw();
-			projectileDrawer->DrawGroundFlashes();
+			#if defined(__APPLE__) && !defined(HEADLESS)
+			if (!AppleSkipGroundDecals()) {
+				groundDecals->Draw();
+			}
+			if (!AppleSkipGroundFlashes()) {
+				projectileDrawer->DrawGroundFlashes();
+			}
+			#else
+			{
+				groundDecals->Draw();
+				projectileDrawer->DrawGroundFlashes();
+			}
+			#endif
 		}
 		{
 			SCOPED_TIMER("Draw::World::Foliage");
 			SCOPED_GL_DEBUGGROUP("Draw::World::Foliage");
-			grassDrawer->Draw();
+			#if defined(__APPLE__) && !defined(HEADLESS)
+			if (!AppleSkipGrass())
+			#endif
+				grassDrawer->Draw();
 		}
 		smoothHeightMeshDrawer->Draw(1.0f);
 	}
@@ -356,6 +422,12 @@ void CWorldDrawer::DrawOpaqueObjects() const
 	// not an opaque rendering, but makes sense to run after the terrain was rendered
 	{
 		const auto& sky = ISky::GetSky();
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (DisableAppleSkyDraw()) {
+			// Apple terrain bring-up diagnostic: if sky depth/composition is incorrect,
+			// it can repaint over terrain after the ground pass.
+		} else
+		#endif
 		sky->Draw();
 	}
 
@@ -365,13 +437,22 @@ void CWorldDrawer::DrawOpaqueObjects() const
 	{
 		SCOPED_TIMER("Draw::World::Models::Opaque");
 		SCOPED_GL_DEBUGGROUP("Draw::World::Models::Opaque");
-		unitDrawer->Draw(false);
-		featureDrawer->Draw(false);
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (!AppleSkipUnits())
+		#endif
+			unitDrawer->Draw(false);
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (!AppleSkipFeatures())
+		#endif
+			featureDrawer->Draw(false);
 	}
 	{
 		SCOPED_TIMER("Draw::World::Models::Projectiles");
 		SCOPED_GL_DEBUGGROUP("Draw::World::Models::Projectiles");
-		projectileDrawer->DrawOpaque(false);
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (!AppleSkipProjectiles())
+		#endif
+			projectileDrawer->DrawOpaque(false);
 	}
 	{
 		SCOPED_TIMER("Draw::OpaqueObjects::Debug");

@@ -5,6 +5,7 @@
 #include "Game/Camera.h"
 #include "Game/GlobalUnsynced.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/ColorMap.h"
@@ -99,6 +100,18 @@ void CSimpleParticleSystem::Serialize(creg::ISerializer* s)
 void CSimpleParticleSystem::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	// Many BAR CEG smoke/exhaust/geovent effects are emitted through simple
+	// particle systems and currently show their source quads as black boxes on
+	// the macOS translated GL stack.
+	if (BaronMetalParticleFlags::SkipSimpleParticles() || !BaronMetalParticleFlags::EnableSimpleParticles())
+		return;
+	if (BaronMetalParticleFlags::SkipBubbles()) {
+		const std::string textureName = projectileDrawer->textureAtlas->GetTextureName(texture);
+		if (BaronMetalParticleFlags::IsBubbleTexture(textureName))
+			return;
+	}
+#endif
 	if (!UpdateAnimParams())
 		return;
 

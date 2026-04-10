@@ -117,6 +117,7 @@ void CFeatureDrawerData::UpdateObjectDrawFlags(CSolidObject* o) const
 
 	CFeature* f = static_cast<CFeature*>(o);
 	f->ResetDrawFlag();
+	const bool isTreeFeature = (f->def->drawType >= DRAWTYPE_TREE);
 
 	for (uint32_t camType = CCamera::CAMTYPE_PLAYER; camType < CCamera::CAMTYPE_ENVMAP; ++camType) {
 		if (camType == CCamera::CAMTYPE_UWREFL && !IWater::GetWater()->CanDrawReflectionPass())
@@ -143,6 +144,24 @@ void CFeatureDrawerData::UpdateObjectDrawFlags(CSolidObject* o) const
 			{
 			case CCamera::CAMTYPE_PLAYER: {
 				const float camDist = (f->drawPos - cam->GetPos()).Length();
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+				// Generated map trees are especially unstable on the Mesa/Zink path when
+				// they enter the alpha-fade tier. Keep them in the opaque path on macOS
+				// so they stop flickering while we sort out the longer-distance terrain path.
+				if (isTreeFeature) {
+					if (camDist > featureDrawDistance) {
+						f->drawAlpha = 0.0f;
+						continue;
+					}
+
+					f->drawAlpha = 1.0f;
+					f->SetDrawFlag(DrawFlags::SO_OPAQUE_FLAG);
+					if (f->IsInWater())
+						f->AddDrawFlag(DrawFlags::SO_REFRAC_FLAG);
+					continue;
+				}
+#endif
 
 				// special case for non-fading features
 				if (!f->alphaFade) {

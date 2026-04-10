@@ -36,6 +36,12 @@ CONFIG(bool, ShadowColorMode).defaultValue(true).description("Whether the colorb
 
 CShadowHandler shadowHandler;
 
+static bool AppleDisableShadows()
+{
+	const char* env = std::getenv("BARONMETAL_DISABLE_SHADOWS");
+	return (env != nullptr && std::string(env) == "1");
+}
+
 void CShadowHandler::Reload(const char* argv)
 {
 	int nextShadowConfig = (shadowConfig + 1) & 0xF;
@@ -77,6 +83,11 @@ void CShadowHandler::Init()
 
 	shadowDepthTexture = 0;
 	shadowColorTexture = 0;
+
+	if (AppleDisableShadows()) {
+		LOG("[BARonMetal] shadow rendering disabled by BARONMETAL_DISABLE_SHADOWS=1");
+		return;
+	}
 
 	if (!tmpFirstInit && !shadowsSupported)
 		return;

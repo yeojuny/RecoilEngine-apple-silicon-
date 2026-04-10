@@ -1,6 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
 #include <array>
+#include <cstdlib>
 #include <tuple>
 
 #include <SDL_keycode.h>
@@ -105,6 +106,14 @@ CMiniMap::CMiniMap()
 	simpleColors = configHandler->GetBool("SimpleMiniMapColors");
 	minimapRefreshRate = configHandler->GetInt("MiniMapRefreshRate");
 	renderToTexture = configHandler->GetBool("MiniMapRenderToTexture") && FBO::IsSupported();
+
+#ifdef __APPLE__
+	// Zink/KosmicKrisp on macOS has been leaving the cached minimap texture black,
+	// while the direct path is more reliable and good enough for now.
+	const char* forceMiniMapRTT = std::getenv("BARONMETAL_ENABLE_MINIMAP_RTT");
+	if (!(forceMiniMapRTT != nullptr && forceMiniMapRTT[0] == '1' && forceMiniMapRTT[1] == '\0'))
+		renderToTexture = false;
+#endif
 
 	ConfigUpdate();
 
@@ -1339,7 +1348,44 @@ void CMiniMap::DrawForReal(bool useNormalizedCoors, bool updateTex, bool luaCall
 	glActiveTexture(GL_TEXTURE0);
 
 	if (!updateTex) {
-		RenderCachedTexture(useNormalizedCoors);
+		if (RenderCachedTexture(useNormalizedCoors))
+			return;
+
+		GLint prevViewport[4] = {0, 0, 0, 0};
+		GLint prevScissor[4] = {0, 0, 0, 0};
+		const GLboolean prevScissorEnabled = glIsEnabled(GL_SCISSOR_TEST);
+
+		glGetIntegerv(GL_VIEWPORT, prevViewport);
+		glGetIntegerv(GL_SCISSOR_BOX, prevScissor);
+
+		glViewport(curPos.x, curPos.y, curDim.x, curDim.y);
+		glEnable(GL_SCISSOR_TEST);
+		glScissor(curPos.x, curPos.y, curDim.x, curDim.y);
+
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0, 1, 0, 1);
+
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		DrawForReal(false, true, luaCall);
+		DrawCameraFrustumAndMouseSelection();
+
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+
+		glViewport(prevViewport[0], prevViewport[1], prevViewport[2], prevViewport[3]);
+		glScissor(prevScissor[0], prevScissor[1], prevScissor[2], prevScissor[3]);
+		if (prevScissorEnabled)
+			glEnable(GL_SCISSOR_TEST);
+		else
+			glDisable(GL_SCISSOR_TEST);
+
 		return;
 	}
 
@@ -2065,4 +2111,3 @@ void CMiniMap::SetClipPlanes(const bool lua) const
 
 
 /******************************************************************************/
-

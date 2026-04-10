@@ -26,6 +26,7 @@
 #include "System/EventHandler.h"
 #include "System/Log/ILog.h"
 #include "System/FileSystem/FileHandler.h"
+#include "System/FileSystem/FileSystem.h"
 #include "System/Threading/ThreadPool.h"
 #ifdef _DEBUG
 	#include "System/Platform/Threading.h"
@@ -388,9 +389,24 @@ static std::shared_ptr<FontFace> LoadFontFace(const std::string& fontfile)
 
 	if (!f.FileExists()) {
 		// check in 'fonts/', too
-		if (fontPath.substr(0, 6) != "fonts/") {
+		if (fontPath.substr(0, 7) == "fonts//") {
+			// Recover from stale "fonts//Users/..." or "fonts//home/..."
+			// paths that can be persisted by Lua option/font reload paths.
+			f.Close();
+			f.Open(fontPath = "fonts/" + FileSystem::GetFilename(fontPath));
+		}
+		else if (!FileSystem::IsAbsolutePath(fontPath) && fontPath.substr(0, 6) != "fonts/") {
 			f.Close();
 			f.Open(fontPath = "fonts/" + fontPath);
+		}
+
+		if (!f.FileExists() && FileSystem::IsAbsolutePath(fontPath)) {
+			// Some BAR option paths can persist an absolute font name. If that
+			// stale path is not readable on the current machine, fall back to
+			// the VFS font with the same basename instead of probing
+			// "fonts//Users/..." and producing noisy, misleading errors.
+			f.Close();
+			f.Open(fontPath = "fonts/" + FileSystem::GetFilename(fontPath));
 		}
 
 		if (!f.FileExists())

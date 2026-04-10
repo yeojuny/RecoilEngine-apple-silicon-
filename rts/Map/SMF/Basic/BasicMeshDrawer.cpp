@@ -1,5 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
+
 #include "BasicMeshDrawer.h"
 #include "Game/Camera.h"
 #include "Game/CameraHandler.h"
@@ -12,6 +14,28 @@
 #include "System/EventHandler.h"
 
 #include "System/Misc/TracyDefs.h"
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool ForceAppleAllTerrainPatches()
+{
+	const char* env = std::getenv("BARONMETAL_DRAW_ALL_TERRAIN_PATCHES");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static int ForceAppleTerrainLOD()
+{
+	const char* env = std::getenv("BARONMETAL_FORCE_TERRAIN_LOD");
+	if (env == nullptr || env[0] == '\0')
+		return -1;
+
+	char* end = nullptr;
+	long parsed = std::strtol(env, &end, 10);
+	if (end == env || *end != '\0')
+		return -1;
+
+	return std::clamp<int>(static_cast<int>(parsed), 0, CBasicMeshDrawer::LOD_LEVELS - 1);
+}
+#endif
 
 
 CBasicMeshDrawer::CBasicMeshDrawer(CSMFGroundDrawer* gd)
@@ -79,6 +103,13 @@ void CBasicMeshDrawer::Update(const DrawPass::e& drawPass)
 {
 	RECOIL_DETAILED_TRACY_ZONE;
 	CCamera* activeCam = CCameraHandler::GetActiveCamera();
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool drawAllTerrainPatches = ForceAppleAllTerrainPatches();
+	const int forcedTerrainLOD = ForceAppleTerrainLOD();
+	#else
+	const bool drawAllTerrainPatches = false;
+	const int forcedTerrainLOD = -1;
+	#endif
 
 	static constexpr float wsEdge = PATCH_SIZE * SQUARE_SIZE;
 
@@ -94,14 +125,14 @@ void CBasicMeshDrawer::Update(const DrawPass::e& drawPass)
 				{ (x + 1) * wsEdge, uhmi.y, (z + 1) * wsEdge }
 			};
 
-			if (!activeCam->InView(aabb))
+			if (!drawAllTerrainPatches && !activeCam->InView(aabb))
 				continue;
 
 			meshVisPatches[z * numPatchesX + x].visUpdateFrames[activeCam->GetCamType()] = globalRendering->drawFrame;
 		}
 	}
 
-	drawPassLOD = CalcDrawPassLOD(activeCam, drawPass);
+	drawPassLOD = (forcedTerrainLOD >= 0) ? forcedTerrainLOD : CalcDrawPassLOD(activeCam, drawPass);
 }
 
 void CBasicMeshDrawer::UploadPatchSquareGeometry(std::unique_ptr<MeshRenderBuffer>& meshRenderBuffer, uint32_t lodStep)
@@ -227,6 +258,7 @@ void CBasicMeshDrawer::DrawMesh(const DrawPass::e& drawPass)
 
 	int patchesDrawn = 0;
 	int patchesSkipped = 0;
+	static int patchErrLogCount = 0;
 	for (uint32_t py = 0; py < numPatchesY; py += 1) {
 		for (uint32_t px = 0; px < numPatchesX; px += 1) {
 			const auto& meshVisPatch = meshVisPatches[py * numPatchesX + px];
@@ -236,9 +268,30 @@ void CBasicMeshDrawer::DrawMesh(const DrawPass::e& drawPass)
 				continue;
 			}
 
+			if (patchErrLogCount < 12) {
+				while (glGetError() != GL_NO_ERROR) {}
+			}
+
 			smfGroundDrawer->SetupBigSquare(drawPass, px, py);
+			GLenum errAfterSetup = GL_NO_ERROR;
+			if (patchErrLogCount < 12) {
+				errAfterSetup = glGetError();
+			}
 
 			DrawSquareMeshPatch();
+			GLenum errAfterDraw = GL_NO_ERROR;
+			if (patchErrLogCount < 12) {
+				errAfterDraw = glGetError();
+				if (errAfterSetup != GL_NO_ERROR || errAfterDraw != GL_NO_ERROR) {
+					GLint curProg = 0;
+					GLint curTex = 0;
+					glGetIntegerv(GL_CURRENT_PROGRAM, &curProg);
+					glGetIntegerv(GL_TEXTURE_BINDING_2D, &curTex);
+					LOG("[BasicMeshDrawer::PatchGL] drawPass=%d patch=(%u,%u) tex=%d prog=%d errSetup=0x%x errDraw=0x%x",
+						(int)drawPass, px, py, curTex, curProg, errAfterSetup, errAfterDraw);
+					patchErrLogCount++;
+				}
+			}
 			patchesDrawn++;
 		}
 	}

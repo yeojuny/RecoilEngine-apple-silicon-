@@ -51,8 +51,18 @@ void main() {
 	#endif
 
 	vec4 color = vec4(mix(c0, c1, vBF));
+
+	#ifdef BARONMETAL_PARTICLE_ALPHA_CLIP
+	if (color.a < 0.055)
+		discard;
+	#endif
+
 	fragColor = color * vCol;
 	fragColor.rgb = mix(fragColor.rgb, fogColor * fragColor.a, (1.0 - fogFactor));
+
+	#ifdef BARONMETAL_PARTICLE_PREMULTIPLY_ALPHA
+	fragColor.rgb *= fragColor.a;
+	#endif
 
 	#ifdef SMOOTH_PARTICLES
 	float depthZO = texture(depthTex, screenUV).x;

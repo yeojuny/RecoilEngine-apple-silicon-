@@ -89,6 +89,12 @@ void CBasicWater::Draw()
 	if (!waterRendering->forceRendering && !readMap->HasVisibleWater())
 		return;
 
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	if (std::getenv("BARONMETAL_DISABLE_BASIC_WATER") != nullptr) {
+		return;
+	}
+	#endif
+
 	glPushAttrib(GL_FOG_BIT | GL_POLYGON_BIT | GL_ENABLE_BIT);
 
 	glDisable(GL_ALPHA_TEST);
@@ -103,7 +109,14 @@ void CBasicWater::Draw()
 
 	auto& sh = rb.GetShader();
 	sh.Enable();
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	// The default basic-water blend is too opaque on the current macOS
+	// Zink/KosmicKrisp path and can read as a solid black curtain over
+	// low-lying terrain. Keep the surface hint, but make it much lighter.
+	sh.SetUniform("ucolor", 0.95f, 0.95f, 0.95f, 0.12f);
+	#else
 	sh.SetUniform("ucolor", 0.7f, 0.7f, 0.7f, 0.5f);
+	#endif
 	rb.DrawElements(GL_TRIANGLES, false);
 	sh.SetUniform("ucolor", 1.0f, 1.0f, 1.0f, 1.0f);
 	sh.Disable();

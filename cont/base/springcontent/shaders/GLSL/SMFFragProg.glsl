@@ -58,6 +58,7 @@ in vec3 halfDir;
 in float fogFactor;
 in vec4 vertexWorldPos;
 in vec2 diffuseTexCoords;
+flat in vec2 texSquareCoords;
 
 uniform sampler2D diffuseTex;
 uniform sampler2D normalsTex;
@@ -295,6 +296,26 @@ void main() {
 #endif
 
 	vec4 diffuseCol = texture(diffuseTex, diffTexCoords);
+	vec4 terrainCol = diffuseCol + detailCol;
+
+	#ifdef SMF_MACOS_SAFE_DETAIL
+		// Apple Silicon under Zink/KosmicKrisp currently shows unstable mid-distance
+		// terrain composition. Prefer a stable diffuse-only fallback over black bands.
+		terrainCol = diffuseCol;
+	#endif
+
+	#ifdef SMF_MACOS_DEBUG_TEXSQUARE
+	{
+		ivec2 texSquareCoordsI = ivec2(round(texSquareCoords));
+		vec3 patchDebug = vec3(
+			float((texSquareCoordsI.x & 1) != 0),
+			float((texSquareCoordsI.y & 1) != 0),
+			float(((texSquareCoordsI.x + texSquareCoordsI.y) & 1) != 0)
+		);
+		terrainCol.rgb = 0.20 + patchDebug * 0.55;
+	}
+	#endif
+
 	vec4 specularCol = vec4(0.0, 0.0, 0.0, 1.0);
 	vec4 emissionCol = vec4(0.0, 0.0, 0.0, 0.0);
 
@@ -309,8 +330,10 @@ void main() {
 
 	#if !defined(DEFERRED_MODE) && defined(HAVE_INFOTEX)
 	{
+		#ifndef SMF_MACOS_SAFE_DETAIL
 		diffuseCol.rgb += (texture(infoTex, infoTexCoords).rgb * infoTexIntensityMul);
 		diffuseCol.rgb -= (vec3(0.5, 0.5, 0.5) * float(infoTexIntensityMul == 1.0));
+		#endif
 	}
 	#endif
 
@@ -329,13 +352,18 @@ void main() {
 		#ifdef SMF_ADV_SHADING
 		{
 			vec4 shadeInt = GetShadeInt(cosAngleDiffuse, shadowCoeff, diffuseCol.a);
-			fragColor.rgb = (diffuseCol.rgb + detailCol.rgb) * shadeInt.rgb;
+			fragColor.rgb = terrainCol.rgb * shadeInt.rgb;
 			fragColor.a = shadeInt.a;
 		}
 		#else
 		{
-			fragColor.rgb = (diffuseCol.rgb + detailCol.rgb) * texture(shadingTex, specTexCoords).rgb;
+			#ifdef SMF_MACOS_SAFE_DETAIL
+			fragColor.rgb = max(terrainCol.rgb, vec3(0.05));
 			fragColor.a = diffuseCol.a;
+			#else
+			fragColor.rgb = terrainCol.rgb * texture(shadingTex, specTexCoords).rgb;
+			fragColor.a = diffuseCol.a;
+			#endif
 		}
 		#endif
 	#endif
@@ -371,12 +399,16 @@ void main() {
 
 #ifdef DEFERRED_MODE
 	fragData[GBUFFER_NORMTEX_IDX] = vec4((normal + vec3(1.0, 1.0, 1.0)) * 0.5, 1.0);
-	fragData[GBUFFER_DIFFTEX_IDX] = diffuseCol + detailCol;
+	fragData[GBUFFER_DIFFTEX_IDX] = terrainCol;
 	fragData[GBUFFER_SPECTEX_IDX] = specularCol;
 	fragData[GBUFFER_EMITTEX_IDX] = emissionCol;
 	fragData[GBUFFER_MISCTEX_IDX] = vec4(0.0, 0.0, 0.0, 0.0);
 #else
+	#ifdef SMF_MACOS_NO_FOG
+	fragColor.a = 1.0;
+	#else
 	fragColor.rgb = mix(fogColor.rgb, fragColor.rgb, fogFactor);
 	fragColor.a = 1.0;  // Force alpha=1 for Metal compositor
+	#endif
 #endif
 }

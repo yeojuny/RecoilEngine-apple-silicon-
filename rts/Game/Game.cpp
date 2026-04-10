@@ -856,12 +856,19 @@ void CGame::LoadLua(bool dryRun, bool onlyUnsynced)
 
 	const std::string prefix = (dryRun ? "Synced " : (onlyUnsynced ? "Unsynced " : ""));
 	const std::string names[] = {"LuaRules", "LuaGaia"};
+	const bool skipLuaRules = (!dryRun && std::getenv("BARONMETAL_DISABLE_LUARULES") != nullptr && std::string(std::getenv("BARONMETAL_DISABLE_LUARULES")) == "1");
+	const bool skipLuaGaia = (!dryRun && std::getenv("BARONMETAL_DISABLE_LUAGAIA") != nullptr && std::string(std::getenv("BARONMETAL_DISABLE_LUAGAIA")) == "1");
 
 	CSplitLuaHandle* handles[] = {luaRules, luaGaia};
 	decltype(&CLuaRules::LoadFreeHandler) loaders[] = {CLuaRules::LoadFreeHandler, CLuaGaia::LoadFreeHandler};
 
 	for (int i = 0; i < 2; i++) {
 		loadscreen->SetLoadMessage("Loading " + prefix + names[i]);
+
+		if ((!onlyUnsynced && ((i == 0 && skipLuaRules) || (i == 1 && skipLuaGaia)))) {
+			LOG("[BARonMetal] skipping %s load because %s=1", names[i].c_str(), (i == 0 ? "BARONMETAL_DISABLE_LUARULES" : "BARONMETAL_DISABLE_LUAGAIA"));
+			continue;
+		}
 
 		if (onlyUnsynced && handles[i] != nullptr) {
 			handles[i]->InitUnsynced();
@@ -874,8 +881,13 @@ void CGame::LoadLua(bool dryRun, bool onlyUnsynced)
 
 	if (!dryRun) {
 		loadscreen->SetLoadMessage("Loading LuaUI");
-		auto lock = CLoadLock::GetUniqueLock();
-		CLuaUI::LoadFreeHandler();
+		const char* disableLuaUI = std::getenv("BARONMETAL_DISABLE_LUAUI");
+		if (disableLuaUI != nullptr && std::string(disableLuaUI) == "1") {
+			LOG("[BARonMetal] skipping LuaUI load because BARONMETAL_DISABLE_LUAUI=1");
+		} else {
+			auto lock = CLoadLock::GetUniqueLock();
+			CLuaUI::LoadFreeHandler();
+		}
 	}
 }
 
@@ -1085,11 +1097,7 @@ void CGame::KillSimulation()
 
 void CGame::ResizeEvent()
 {
-	LOG("[Game::%s][1]", __func__);
-
 	{
-		SCOPED_ONCE_TIMER("Game::ViewResize")
-
 		if (minimap != nullptr)
 			minimap->UpdateGeometry();
 
@@ -1099,11 +1107,7 @@ void CGame::ResizeEvent()
 		IWater::SetWater(wt);
 	}
 
-	LOG("[Game::%s][2]", __func__);
-
 	{
-		SCOPED_ONCE_TIMER("EventHandler::ViewResize");
-
 		gameTextInput.ViewResize();
 		eventHandler.ViewResize();
 	}
@@ -1432,6 +1436,36 @@ bool CGame::Draw() {
 	if (UpdateUnsynced(currentTimePreUpdate))
 		return false;
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+	{
+		static bool forcedPostStartResize = false;
+		if (!forcedPostStartResize && gs->frameNum > 0) {
+			forcedPostStartResize = true;
+
+			if (SDL_Window* window = globalRendering->GetWindow()) {
+				int logicalW = 0, logicalH = 0;
+				SDL_GetWindowSize(window, &logicalW, &logicalH);
+
+				LOG("[BARonMetal] forcing post-start resize refresh at gameFrame=%d logical=%dx%d winSize=%dx%d",
+					gs->frameNum, logicalW, logicalH, globalRendering->winSizeX, globalRendering->winSizeY);
+
+				// On macOS Retina + Zink/KosmicKrisp the first ingame frame can stay
+				// black until a manual window resize happens. Reproduce that resize
+				// path automatically with a one-pixel jiggle, then immediately restore.
+				if (logicalW > 32 && logicalH > 32) {
+					SDL_SetWindowSize(window, logicalW + 1, logicalH);
+					SDL_SetWindowSize(window, logicalW, logicalH);
+				}
+
+				globalRendering->UpdateGLConfigs();
+				globalRendering->UpdateGLGeometry();
+				globalRendering->InitGLState();
+				ResizeEvent();
+			}
+		}
+	}
+#endif
+
 	RmlGui::Update();
 	const spring_time currentTimePreDraw = spring_gettime();
 
@@ -1504,6 +1538,13 @@ bool CGame::Draw() {
 			FBO::Unbind();
 		camera->LoadViewport();
 
+		// macOS Retina + Zink/KosmicKrisp can leak a stale scissor/viewport
+		// from UI or offscreen passes into the world draw, which leaves the
+		// left side of the frame black even though camera->viewport is correct.
+		glDisable(GL_SCISSOR_TEST);
+		glViewport(0, 0, globalRendering->viewSizeX, globalRendering->viewSizeY);
+		glScissor(0, 0, globalRendering->viewSizeX, globalRendering->viewSizeY);
+
 		worldDrawer.Draw();
 		worldDrawer.ResetMVPMatrices();
 	}
@@ -1511,6 +1552,11 @@ bool CGame::Draw() {
 	{
 		SCOPED_TIMER("Draw::Screen");
 		SCOPED_GL_DEBUGGROUP("Draw::Screen");
+
+		glDisable(GL_SCISSOR_TEST);
+		glViewport(0, 0, globalRendering->viewSizeX, globalRendering->viewSizeY);
+		glScissor(0, 0, globalRendering->viewSizeX, globalRendering->viewSizeY);
+
 		if (CUnitDrawer::UseScreenIcons())
 			unitDrawer->DrawUnitIconsScreen();
 
@@ -2204,4 +2250,3 @@ const ActionList& CGame::GetLastActionList()
 {
 	return gameInputReceiver.lastActionList;
 }
-

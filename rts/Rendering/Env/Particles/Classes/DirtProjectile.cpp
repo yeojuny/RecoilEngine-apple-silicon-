@@ -7,6 +7,7 @@
 #include "Game/GlobalUnsynced.h"
 #include "Map/Ground.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -93,6 +94,10 @@ void CDirtProjectile::Update()
 void CDirtProjectile::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	if (BaronMetalParticleFlags::SkipDirtParticles() || !BaronMetalParticleFlags::EnableDirtParticles())
+		return;
+#endif
 	if (!IsValidTexture(texture))
 		return;
 

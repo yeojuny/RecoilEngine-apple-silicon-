@@ -7,6 +7,7 @@
 #include "Game/GlobalUnsynced.h"
 #include "Map/Ground.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -109,6 +110,10 @@ void CSmokeProjectile2::Update()
 void CSmokeProjectile2::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	if (BaronMetalParticleFlags::SkipSmokeBillboards() || !BaronMetalParticleFlags::EnableSmokeBillboards())
+		return;
+#endif
 	const float interAge = std::min(1.0f, age + ageSpeed * globalRendering->timeOffset);
 	unsigned char col[4];
 	unsigned char alpha;

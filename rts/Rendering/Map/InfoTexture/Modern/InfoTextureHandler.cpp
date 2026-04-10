@@ -10,6 +10,7 @@
 #include "Path.h"
 #include "Radar.h"
 
+#include "System/Log/ILog.h"
 #include "System/Misc/TracyDefs.h"
 
 
@@ -161,4 +162,3 @@ void CInfoTextureHandler::Update()
 
 	firstUpdate = false;
 }
-

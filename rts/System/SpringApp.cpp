@@ -1066,16 +1066,6 @@ bool SpringApp::MainEventHandler(const SDL_Event& event)
 		case SDL_WINDOWEVENT: {
 			switch (event.window.event) {
 				case SDL_WINDOWEVENT_MOVED: {
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_MOVED][1] di=%d, ssx=%d, ssy=%d, wsx=%d, wsy=%d, wpx=%d, wpy=%d"
-						, __func__
-						, globalRendering->GetCurrentDisplayIndex()
-						, globalRendering->screenSizeX
-						, globalRendering->screenSizeY
-						, globalRendering->winSizeX
-						, globalRendering->winSizeY
-						, globalRendering->winPosX
-						, globalRendering->winPosY);
-
 					SaveWindowPosAndSize();
 
 					if (globalRendering->numDisplays > 1 && globalRendering->dualScreenMode) {
@@ -1088,21 +1078,9 @@ bool SpringApp::MainEventHandler(const SDL_Event& event)
 							UpdateInterfaceGeometry();
 						}
 					}
-
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_MOVED][2] di=%d, ssx=%d, ssy=%d, wsx=%d, wsy=%d, wpx=%d, wpy=%d"
-						, __func__
-						, globalRendering->GetCurrentDisplayIndex()
-						, globalRendering->screenSizeX
-						, globalRendering->screenSizeY
-						, globalRendering->winSizeX
-						, globalRendering->winSizeY
-						, globalRendering->winPosX
-						, globalRendering->winPosY);
 				} break;
 				// case SDL_WINDOWEVENT_RESIZED: // always preceded by CHANGED
 				case SDL_WINDOWEVENT_SIZE_CHANGED: {
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_SIZE_CHANGED][1] fullScreen=%d", __func__, globalRendering->fullScreen);
-
 					Watchdog::ClearTimer(WDT_MAIN, true);
 
 					{
@@ -1114,21 +1092,12 @@ bool SpringApp::MainEventHandler(const SDL_Event& event)
 						globalRendering->InitGLState();
 						UpdateInterfaceGeometry();
 					}
-					{
-						SCOPED_ONCE_TIMER("ActiveController::ResizeEvent");
-
-						activeController->ResizeEvent();
-						mouseInput->InstallWndCallback();
-					}
-
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_SIZE_CHANGED][2]\n", __func__);
+					activeController->ResizeEvent();
+					mouseInput->InstallWndCallback();
 				} break;
 				case SDL_WINDOWEVENT_MAXIMIZED:
 				case SDL_WINDOWEVENT_RESTORED:
 				case SDL_WINDOWEVENT_SHOWN: {
-					LOG("%s", "");
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_SHOWN][1] fullScreen=%d", __func__, globalRendering->fullScreen);
-
 					// reactivate sounds and other
 					globalRendering->active = true;
 
@@ -1141,8 +1110,6 @@ bool SpringApp::MainEventHandler(const SDL_Event& event)
 						SCOPED_ONCE_TIMER("FBO::GLContextReinit");
 						FBO::GLContextReinit();
 					}
-
-					LOG("[SpringApp::%s][SDL_WINDOWEVENT_SHOWN][2]\n", __func__);
 				} break;
 				case SDL_WINDOWEVENT_MINIMIZED:
 				case SDL_WINDOWEVENT_HIDDEN: {

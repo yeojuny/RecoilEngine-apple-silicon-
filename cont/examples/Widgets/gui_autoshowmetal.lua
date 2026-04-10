@@ -4,7 +4,7 @@ function widget:GetInfo()
     desc      = "Toggles metal view for extractor building commands",
     license   = "GNU GPL, v2 or later",
     layer     = -50,
-    enabled   = true
+    enabled   = false
   }
 end
 
@@ -24,7 +24,7 @@ function widget:Initialize()
     widgetHandler:RemoveWidget()
     return
   end
-  if Spring.SetAutoShowMetal then
+  if Spring.SetAutoShowMetal and Engine.FeatureSupport.noAutoShowMetal == false then
     -- disable automatic showmetal control, check existance so this will
     -- keep working when AutoShowMetal gets removed from future engine version.
     Spring.SetAutoShowMetal(false)

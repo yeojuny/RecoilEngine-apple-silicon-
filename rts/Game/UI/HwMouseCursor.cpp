@@ -4,8 +4,9 @@
 #include "System/TypeToStr.h"
 #include "Rendering/GlobalRendering.h"
 
-#if defined(__APPLE__) || defined(HEADLESS)
-	// FIXME: no hardware cursor support for macs
+#if defined(__APPLE__) && !defined(HEADLESS)
+	#include <SDL_mouse.h>
+#elif defined(HEADLESS)
 #elif defined(_WIN32)
 	#include <windows.h>
 	#include "System/Input/MouseInput.h"
@@ -17,19 +18,22 @@
 
 #include "HwMouseCursor.h"
 
-#if !defined(__APPLE__) && !defined(HEADLESS)
+#if !defined(HEADLESS)
 
 #include "System/Log/ILog.h"
 #include "System/SpringMath.h"
 
 #include <SDL_config.h>
-#include <SDL_syswm.h>
 #include <SDL_mouse.h>
 #include <SDL_events.h>
+	#if !defined(__APPLE__)
+		#include <SDL_syswm.h>
+	#endif
 #endif
 
 #include <bit>
 #include <cstring> // memset
+#include <unordered_set>
 
 #include "System/Misc/TracyDefs.h"
 
@@ -40,22 +44,50 @@
 // Platform dependent classes
 //////////////////////////////////////////////////////////////////////
 
-#if defined(__APPLE__) || defined(HEADLESS)
-class HardwareCursorApple: public IHardwareCursor {
-public:
-	void PushImage(int xsize, int ysize, const void* mem) override {}
-	void PushFrame(int index, float delay) override {}
-	void SetDelay(float delay) override {}
-	void SetHotSpot(CMouseCursor::HotSpot hs) override {}
-	void Finish() override {}
+#if defined(__APPLE__) && !defined(HEADLESS)
+	class HardwareCursorApple: public IHardwareCursor {
+		struct CursorFrameSDL {
+			SDL_Cursor* cursor = nullptr;
+			SDL_Surface* surface = nullptr;
+			float delay = 0.0f;
+		};
 
-	bool NeedsYFlip() const override { return false; }
-	bool IsValid() const override { return false; }
+	public:
+		void PushImage(int xsize, int ysize, const void* mem) override;
+		void PushFrame(int index, float delay) override;
+		void SetDelay(float delay) override;
+		void SetHotSpot(CMouseCursor::HotSpot hs) override;
+		void Finish() override;
+		void Update(float animTime) override;
 
-	void Init(CMouseCursor::HotSpot hs) override {}
-	void Kill() override {}
-	void Bind() override {}
-};
+		bool NeedsYFlip() const override { return false; }
+		bool IsValid() const override { return !frames.empty() && frames[0].cursor != nullptr; }
+
+		void Init(CMouseCursor::HotSpot hs) override;
+		void Kill() override;
+		void Bind() override;
+
+	private:
+		std::vector<CursorFrameSDL> frames;
+		CMouseCursor::HotSpot hotSpot = CMouseCursor::Center;
+	};
+
+#elif defined(HEADLESS)
+	class HardwareCursorHeadless: public IHardwareCursor {
+	public:
+		void PushImage(int xsize, int ysize, const void* mem) override {}
+		void PushFrame(int index, float delay) override {}
+		void SetDelay(float delay) override {}
+		void SetHotSpot(CMouseCursor::HotSpot hs) override {}
+		void Finish() override {}
+
+		bool NeedsYFlip() const override { return false; }
+		bool IsValid() const override { return false; }
+
+		void Init(CMouseCursor::HotSpot hs) override {}
+		void Kill() override {}
+		void Bind() override {}
+	};
 
 
 #elif defined(_WIN32)
@@ -205,10 +237,13 @@ private:
 #endif
 
 IHardwareCursor* IHardwareCursor::Alloc(void* mem) {
-#if defined(__APPLE__) || defined(HEADLESS)
+	#if defined(__APPLE__) && !defined(HEADLESS)
 	static_assert(sizeof(HardwareCursorApple  ) <= CMouseCursor::HWC_MEM_SIZE, "");
 	return (new (mem) HardwareCursorApple());
-#elif defined (_WIN32)
+	#elif defined(HEADLESS)
+	static_assert(sizeof(HardwareCursorHeadless) <= CMouseCursor::HWC_MEM_SIZE, "");
+	return (new (mem) HardwareCursorHeadless());
+	#elif defined (_WIN32)
 	static_assert(sizeof(HardwareCursorWindows) <= CMouseCursor::HWC_MEM_SIZE, "");
 	return (new (mem) HardwareCursorWindows());
 #else //LINUX
@@ -247,7 +282,110 @@ void IHardwareCursor::Free(IHardwareCursor* hwc) {
 //////////////////////////////////////////////////////////////////////
 
 
-#if defined(__APPLE__) || defined(HEADLESS)
+#if defined(__APPLE__) && !defined(HEADLESS)
+
+void HardwareCursorApple::PushImage(int xsize, int ysize, const void* mem)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	SDL_Surface* surface = SDL_CreateRGBSurface(0, xsize, ysize, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000);
+	if (surface == nullptr) {
+		LOG_L(L_ERROR, "SDL_CreateRGBSurface failed: %s", SDL_GetError());
+		return;
+	}
+
+	SDL_memcpy(surface->pixels, mem, xsize * ysize * 4);
+	frames.push_back({nullptr, surface, CMouseCursor::DEF_FRAME_LENGTH});
+}
+
+void HardwareCursorApple::PushFrame(int index, float delay)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	if (index < 0 || index >= int(frames.size()))
+		return;
+
+	CursorFrameSDL& frame = frames[index];
+	if (frame.delay != delay) {
+		PushImage(frame.surface->w, frame.surface->h, frame.surface->pixels);
+		SetDelay(delay);
+		return;
+	}
+
+	frames.push_back({nullptr, frame.surface, delay});
+}
+
+void HardwareCursorApple::SetDelay(float delay)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	if (!frames.empty())
+		frames.back().delay = delay;
+}
+
+void HardwareCursorApple::SetHotSpot(CMouseCursor::HotSpot hs)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	hotSpot = hs;
+}
+
+void HardwareCursorApple::Finish()
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	for (CursorFrameSDL& frame: frames) {
+		if (frame.cursor != nullptr)
+			continue;
+
+		const int hotx = (hotSpot == CMouseCursor::TopLeft) ? 0 : frame.surface->w / 2;
+		const int hoty = (hotSpot == CMouseCursor::TopLeft) ? 0 : frame.surface->h / 2;
+		frame.cursor = SDL_CreateColorCursor(frame.surface, hotx, hoty);
+		if (frame.cursor == nullptr) {
+			LOG_L(L_ERROR, "SDL_CreateColorCursor failed: %s", SDL_GetError());
+			Kill();
+			return;
+		}
+	}
+}
+
+void HardwareCursorApple::Update(float animTime)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	float accumulatedTime = 0.0f;
+	for (const CursorFrameSDL& frame: frames) {
+		accumulatedTime += frame.delay;
+		if (accumulatedTime >= animTime) {
+			SDL_SetCursor(frame.cursor);
+			return;
+		}
+	}
+}
+
+void HardwareCursorApple::Init(CMouseCursor::HotSpot hs)
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	hotSpot = hs;
+}
+
+void HardwareCursorApple::Kill()
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	spring::unordered_set<SDL_Surface*> freedSurfaces;
+	for (CursorFrameSDL& frame: frames) {
+		if (frame.cursor != nullptr)
+			SDL_FreeCursor(frame.cursor);
+
+		if (frame.surface != nullptr && freedSurfaces.insert(frame.surface).second)
+			SDL_FreeSurface(frame.surface);
+	}
+	frames.clear();
+}
+
+void HardwareCursorApple::Bind()
+{
+	RECOIL_DETAILED_TRACY_ZONE;
+	SDL_ShowCursor(SDL_ENABLE);
+	if (!frames.empty())
+		SDL_SetCursor(frames[0].cursor);
+}
+
+#elif defined(HEADLESS)
 
 
 #elif defined(_WIN32)
@@ -830,4 +968,3 @@ void HardwareCursorSDL::Bind()
 
 
 #endif
-

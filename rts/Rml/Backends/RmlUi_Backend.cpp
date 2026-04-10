@@ -393,6 +393,16 @@ void RmlGui::RenderFrame()
 	if (state->contexts.empty())
 		return;
 
+	bool hasDocuments = false;
+	for (const auto& context : state->contexts) {
+		if (context->GetNumDocuments() > 0) {
+			hasDocuments = true;
+			break;
+		}
+	}
+	if (!hasDocuments)
+		return;
+
 	RmlGui::BeginFrame();
 	// render back-to-front so that index 0 is atop index 1 and so on
 	for (auto& context: std::ranges::reverse_view(state->contexts)) {

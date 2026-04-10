@@ -1,5 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
+
 #include "Feature.h"
 #include "FeatureDef.h"
 #include "FeatureDefHandler.h"
@@ -687,6 +689,16 @@ void CFeature::StartFire()
 void CFeature::EmitGeoSmoke()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__) && !defined(HEADLESS)
+	if (const char* env = std::getenv("BARONMETAL_SKIP_GEOVENT_SMOKE"); env != nullptr && env[0] == '1' && env[1] == '\0') {
+		static bool loggedSkip = false;
+		if (!loggedSkip) {
+			LOG_L(L_INFO, "[BARonMetal] skipping geothermal vent smoke particles");
+			loggedSkip = true;
+		}
+		return;
+	}
+#endif
 	if ((gs->frameNum + id % 5) % 5 == 0) {
 		// Find the unit closest to the geothermal
 		QuadFieldQuery qfQuery;
@@ -737,4 +749,3 @@ int CFeature::ChunkNumber(float f) { return int(math::ceil(f * modInfo.reclaimMe
 // to distinguish unit and feature ID's (values >= MaxUnits() correspond to
 // features in object commands)
 int CFeature::GetBlockingMapID() const { return (id + unitHandler.MaxUnits()); }
-

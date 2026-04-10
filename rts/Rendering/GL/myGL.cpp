@@ -552,6 +552,13 @@ bool glSpringBlitImages(
 void ClearScreen()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+
+	// macOS Retina + Zink/KosmicKrisp can leave a stale viewport or scissor
+	// active during pregame/loading draws, which clips the clear and text output
+	// into a left-side strip. Force a full-window clear path here.
+	glDisable(GL_SCISSOR_TEST);
+	glViewport(0, 0, globalRendering->winSizeX, globalRendering->winSizeY);
+
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

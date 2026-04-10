@@ -1,5 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
+
 #include "SMFRenderState.h"
 #include "SMFGroundDrawer.h"
 #include "SMFReadMap.h"
@@ -24,6 +26,38 @@
 #include "System/Misc/TracyDefs.h"
 
 static constexpr float SMF_TEXSQUARE_SIZE = 1024.0f;
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool ForceAppleAdvTerrain()
+{
+	const char* env = std::getenv("BARONMETAL_FORCE_ADV_TERRAIN");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool EnableAppleTerrainShadows()
+{
+	const char* env = std::getenv("BARONMETAL_ENABLE_TERRAIN_SHADOWS");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool EnableAppleDebugTexSquares()
+{
+	const char* env = std::getenv("BARONMETAL_DEBUG_TEXSQUARE");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool EnableAppleFlatTerrainGeom()
+{
+	const char* env = std::getenv("BARONMETAL_FLAT_TERRAIN_GEOM");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool DisableAppleTerrainFog()
+{
+	const char* env = std::getenv("BARONMETAL_DISABLE_TERRAIN_FOG");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+#endif
 
 
 ISMFRenderState* ISMFRenderState::GetInstance(bool luaShaders, bool noop) {
@@ -104,20 +138,36 @@ void SMFRenderStateGLSL::Update(
 
 		for (uint32_t n = GLSL_SHADER_FWD_STD; n <= GLSL_SHADER_DFR_ADV; n++) {
 			const bool isAdv = (n != GLSL_SHADER_FWD_STD);
+			#if defined(__APPLE__) && !defined(HEADLESS)
+			const bool macosSafeTerrain = !ForceAppleAdvTerrain();
+			const bool macosDebugTexSquares = EnableAppleDebugTexSquares();
+			const bool macosFlatTerrainGeom = EnableAppleFlatTerrainGeom();
+			const bool macosDisableTerrainFog = DisableAppleTerrainFog();
+			#else
+			const bool macosSafeTerrain = false;
+			const bool macosDebugTexSquares = false;
+			const bool macosFlatTerrainGeom = false;
+			const bool macosDisableTerrainFog = false;
+			#endif
+
+			glslShaders[n]->SetFlag("SMF_MACOS_SAFE_DETAIL", macosSafeTerrain);
+			glslShaders[n]->SetFlag("SMF_MACOS_DEBUG_TEXSQUARE", macosDebugTexSquares);
+			glslShaders[n]->SetFlag("SMF_MACOS_FLAT_GEOM", macosFlatTerrainGeom);
+			glslShaders[n]->SetFlag("SMF_MACOS_NO_FOG", macosDisableTerrainFog);
 
 			if (isAdv) {
 				glslShaders[n]->SetFlag("SMF_ADV_SHADING",                      true);
 				glslShaders[n]->SetFlag("SMF_VOID_WATER",                       mapRendering->voidWater);
 				glslShaders[n]->SetFlag("SMF_VOID_GROUND",                      mapRendering->voidGround);
 				glslShaders[n]->SetFlag("SMF_SPECULAR_LIGHTING",                smfMap->GetSpecularTexture() != 0);
-				glslShaders[n]->SetFlag("SMF_DETAIL_TEXTURE_SPLATTING",        (smfMap->GetSplatDistrTexture() != 0 && smfMap->GetSplatDetailTexture() != 0));
-				glslShaders[n]->SetFlag("SMF_DETAIL_NORMAL_TEXTURE_SPLATTING", (smfMap->GetSplatDistrTexture() != 0 && smfMap->HaveSplatNormalTexture()));
+				glslShaders[n]->SetFlag("SMF_DETAIL_TEXTURE_SPLATTING",        (!macosSafeTerrain && smfMap->GetSplatDistrTexture() != 0 && smfMap->GetSplatDetailTexture() != 0));
+				glslShaders[n]->SetFlag("SMF_DETAIL_NORMAL_TEXTURE_SPLATTING", (!macosSafeTerrain && smfMap->GetSplatDistrTexture() != 0 && smfMap->HaveSplatNormalTexture()));
 				glslShaders[n]->SetFlag("SMF_DETAIL_NORMAL_DIFFUSE_ALPHA",      mapRendering->splatDetailNormalDiffuseAlpha);
 				glslShaders[n]->SetFlag("SMF_WATER_ABSORPTION",                 smfMap->HasVisibleWater());
 				glslShaders[n]->SetFlag("SMF_SKY_REFLECTIONS",                  smfMap->GetSkyReflectModTexture() != 0);
-				glslShaders[n]->SetFlag("SMF_BLEND_NORMALS",                    smfMap->GetBlendNormalsTexture() != 0);
+				glslShaders[n]->SetFlag("SMF_BLEND_NORMALS",                    (!macosSafeTerrain && smfMap->GetBlendNormalsTexture() != 0));
 				glslShaders[n]->SetFlag("SMF_LIGHT_EMISSION",                   smfMap->GetLightEmissionTexture() != 0);
-				glslShaders[n]->SetFlag("SMF_PARALLAX_MAPPING",                 smfMap->GetParallaxHeightTexture() != 0);
+				glslShaders[n]->SetFlag("SMF_PARALLAX_MAPPING",                 (!macosSafeTerrain && smfMap->GetParallaxHeightTexture() != 0));
 			}
 
 			// both are runtime set in ::Enable, but AMD drivers need values from the beginning
@@ -228,6 +278,11 @@ void SMFRenderStateGLSL::Enable(const CSMFGroundDrawer* smfGroundDrawer, const D
 
 	const auto shaderStage = (drawPass == DrawPass::TerrainDeferred) ? GLSL_SHADER_DFR_ADV : GLSL_SHADER_FWD_ADV;
 	const bool isAdv = CanUseAdvShading(smfGroundDrawer, shaderStage);
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool terrainShadowsEnabled = EnableAppleTerrainShadows() && shadowHandler.ShadowsLoaded();
+	#else
+	const bool terrainShadowsEnabled = shadowHandler.ShadowsLoaded();
+	#endif
 
 	const CSMFReadMap* smfMap = smfGroundDrawer->GetReadMap();
 
@@ -235,7 +290,7 @@ void SMFRenderStateGLSL::Enable(const CSMFGroundDrawer* smfGroundDrawer, const D
 	glLoadIdentity();
 	glMultMatrixf(camera->GetViewMatrix());
 
-	if (isAdv && shadowHandler.ShadowsLoaded()) {
+	if (isAdv && terrainShadowsEnabled) {
 		shadowHandler.SetupShadowTexSampler(GL_TEXTURE4, true);
 		glActiveTexture(GL_TEXTURE19); glBindTexture(GL_TEXTURE_2D, shadowHandler.GetColorTextureID());
 	}
@@ -269,7 +324,7 @@ void SMFRenderStateGLSL::Enable(const CSMFGroundDrawer* smfGroundDrawer, const D
 
 
 	if (isAdv)
-		currShader->SetFlag("HAVE_SHADOWS", shadowHandler.ShadowsLoaded());
+		currShader->SetFlag("HAVE_SHADOWS", terrainShadowsEnabled);
 
 	currShader->SetFlag("HAVE_INFOTEX", infoTextureHandler->IsEnabled());
 
@@ -279,7 +334,7 @@ void SMFRenderStateGLSL::Enable(const CSMFGroundDrawer* smfGroundDrawer, const D
 
 	if (isAdv) {
 		currShader->SetUniform3v("cameraPos", &camera->GetPos()[0]);
-		if (shadowHandler.ShadowsLoaded())
+		if (terrainShadowsEnabled)
 			currShader->SetUniformMatrix4x4("shadowMat", false, shadowHandler.GetShadowMatrixRaw());
 	}
 }
@@ -296,10 +351,15 @@ void SMFRenderStateGLSL::Disable(const CSMFGroundDrawer* smfGroundDrawer, const 
 
 	const auto shaderStage = (drawPass == DrawPass::TerrainDeferred) ? GLSL_SHADER_DFR_ADV : GLSL_SHADER_FWD_ADV;
 	const bool isAdv = CanUseAdvShading(smfGroundDrawer, shaderStage);
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool terrainShadowsEnabled = EnableAppleTerrainShadows() && shadowHandler.ShadowsLoaded();
+	#else
+	const bool terrainShadowsEnabled = shadowHandler.ShadowsLoaded();
+	#endif
 
 	const CSMFReadMap* smfMap = smfGroundDrawer->GetReadMap();
 
-	if (isAdv && shadowHandler.ShadowsLoaded()) {
+	if (isAdv && terrainShadowsEnabled) {
 		shadowHandler.ResetShadowTexSampler(GL_TEXTURE4, true);
 		glActiveTexture(GL_TEXTURE19); glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -336,7 +396,14 @@ void SMFRenderStateGLSL::SetSquareTexGen(const int sqx, const int sqy) const {
 	RECOIL_DETAILED_TRACY_ZONE;
 	// needs to be set even for Lua shaders, is unknowable otherwise
 	// (works because SMFGroundDrawer::SetupBigSquare always calls us)
-	currShader->SetUniform("texSquare", sqx, sqy);
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const GLint texSquareLoc = glGetUniformLocation(currShader->GetObjID(), "texSquare");
+	if (texSquareLoc >= 0) {
+		glUniform2f(texSquareLoc, float(sqx), float(sqy));
+		return;
+	}
+	#endif
+	currShader->SetUniform("texSquare", float(sqx), float(sqy));
 }
 
 void SMFRenderStateGLSL::SetCurrentShader(const CSMFGroundDrawer* smfGroundDrawer, const DrawPass::e& drawPass) {
@@ -371,5 +438,13 @@ void SMFRenderStateGLSL::UpdateShaderSkyUniforms()
 bool SMFRenderStateGLSL::CanUseAdvShading(const CSMFGroundDrawer* smfGroundDrawer, ShaderStage shStage) const
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool forceAdvTerrain = ForceAppleAdvTerrain();
+	// Terrain shadows live in the advanced forward SMF shader. Let the shadow
+	// receiver path run without also enabling deferred terrain or risky detail
+	// features, which stay guarded by BARONMETAL_FORCE_ADV_TERRAIN.
+	const bool safeShadowTerrain = EnableAppleTerrainShadows() && (shStage == GLSL_SHADER_FWD_ADV);
+	return (forceAdvTerrain || safeShadowTerrain) && smfGroundDrawer->UseAdvShading() && glslShaders[shStage]->IsValid();
+	#endif
 	return smfGroundDrawer->UseAdvShading() && glslShaders[shStage]->IsValid();
 }

@@ -6,6 +6,7 @@
 #include "Game/Camera.h"
 #include "Map/Ground.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -111,6 +112,10 @@ void CSmokeTrailProjectile::UpdateEndPos(const float3 pos, const float3 dir)
 void CSmokeTrailProjectile::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	if (BaronMetalParticleFlags::SkipSmokeBillboards() || !BaronMetalParticleFlags::EnableSmokeBillboards())
+		return;
+#endif
 	const float age = gs->frameNum + globalRendering->timeOffset - creationTime;
 	const float invLifeTime = (1.0f / lifeTime);
 

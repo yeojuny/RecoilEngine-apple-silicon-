@@ -7,6 +7,7 @@
 #include "Game/GlobalUnsynced.h"
 #include "Map/Ground.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -100,6 +101,13 @@ void CSmokeProjectile::Update()
 void CSmokeProjectile::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	// Apple Silicon fallback: alpha-billboard smoke quads currently show as
+	// black translucent boxes through the Zink/KosmicKrisp path, so skip them
+	// until the particle blending path is made correct.
+	if (BaronMetalParticleFlags::SkipSmokeBillboards() || !BaronMetalParticleFlags::EnableSmokeBillboards())
+		return;
+#endif
 	unsigned char col[4];
 	unsigned char alpha = (unsigned char) ((1 - age) * 255);
 	col[0] = (unsigned char) (color * alpha);

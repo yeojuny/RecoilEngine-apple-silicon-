@@ -92,22 +92,6 @@ bool IMouseInput::HandleSDLMouseEvent(const SDL_Event& event)
 			mousepos = int2(event.motion.x, event.motion.y);
 #endif
 
-			
-			// === macOS mouse coordinate debug ===
-			{
-				static int debugCounter = 0;
-				if (debugCounter++ % 120 == 0) {
-					LOG("[MouseInput] SDL raw: x=%d y=%d scaled: x=%d y=%d | winSize=%dx%d viewSize=%dx%d viewPos=%d,%d viewWinOffY=%d",
-						event.motion.x, event.motion.y,
-						event.motion.x * 2, event.motion.y * 2,
-						globalRendering->winSizeX, globalRendering->winSizeY,
-						globalRendering->viewSizeX, globalRendering->viewSizeY,
-						globalRendering->viewPosX, globalRendering->viewPosY,
-						globalRendering->viewWindowOffsetY);
-				}
-			}
-			// === end debug ===
-
 			if (mouse != nullptr)
 				// === macOS Retina: SDL reports logical coords, viewport uses physical pixels ===
 #ifdef __APPLE__
@@ -330,4 +314,3 @@ void IMouseInput::FreeInstance(IMouseInput* mouseInp) {
 	memset(mouseInputMem, 0, sizeof(mouseInputMem));
 	mouseInput = nullptr;
 }
-

@@ -1,5 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
+
 #include "SMFReadMap.h"
 #include "SMFGroundDrawer.h"
 #include "SMFGroundTextures.h"
@@ -25,6 +27,20 @@
 #include "System/SpringMath.h"
 
 #include "System/Misc/TracyDefs.h"
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool ForceAppleTerrainDepthAlways()
+{
+	const char* env = std::getenv("BARONMETAL_TERRAIN_DEPTH_ALWAYS");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+
+static bool DisableAppleTerrainAlphaTest()
+{
+	const char* env = std::getenv("BARONMETAL_DISABLE_TERRAIN_ALPHA_TEST");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+#endif
 
 //Basic, ROAM
 static constexpr int MIN_GROUND_DETAIL[] = {                               0,   4};
@@ -288,7 +304,13 @@ void CSMFGroundDrawer::DrawForwardPass(const DrawPass::e& drawPass, bool alphaTe
 	if (wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	if (alphaTest) {
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool disableTerrainAlphaTest = DisableAppleTerrainAlphaTest();
+	#else
+	const bool disableTerrainAlphaTest = false;
+	#endif
+
+	if (alphaTest && !disableTerrainAlphaTest) {
 		glEnable(GL_ALPHA_TEST);
 		glAlphaFunc(GL_GREATER, mapInfo->map.voidAlphaMin);
 	}
@@ -296,7 +318,18 @@ void CSMFGroundDrawer::DrawForwardPass(const DrawPass::e& drawPass, bool alphaTe
 	if (alwaysDispatchEvents || HaveLuaRenderState())
 		eventHandler.DrawGroundPreForward();
 
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	const bool forceTerrainDepthAlways = ForceAppleTerrainDepthAlways();
+	if (forceTerrainDepthAlways)
+		glDepthFunc(GL_ALWAYS);
+	#endif
+
 	meshDrawer->DrawMesh(drawPass);
+
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	if (forceTerrainDepthAlways)
+		glDepthFunc(GL_LEQUAL);
+	#endif
 
 	glPopAttrib();
 
@@ -320,6 +353,14 @@ void CSMFGroundDrawer::Draw(const DrawPass::e& drawPass)
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+	glDisable(GL_CLIP_DISTANCE0);
+	glDisable(GL_CLIP_DISTANCE1);
+	glDisable(GL_CLIP_DISTANCE2);
+	glDisable(GL_CLIP_DISTANCE3);
+	glDisable(GL_CLIP_DISTANCE4);
+	glDisable(GL_CLIP_DISTANCE5);
+	glDisable(GL_CLIP_DISTANCE6);
+	glDisable(GL_CLIP_DISTANCE7);
 
 	if (drawDeferred) {
 		// do the deferred pass first, will allow us to re-use

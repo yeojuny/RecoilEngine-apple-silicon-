@@ -3,10 +3,12 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <cstdlib>
 
 #include <SDL.h>
 
 #include "GlobalRendering.h"
+#include "Menu/LuaMenuController.h"
 
 #if defined(__APPLE__) && !defined(HEADLESS)
 #include <EGL/egl.h>
@@ -80,6 +82,21 @@ static void GetMetalDrawableSize(SDL_Window* window, int* w, int* h) {
     CGSizeD sz = ((CGSizeD(*)(id, SEL))objc_msgSend)(layer, sel_registerName("drawableSize"));
     *w = (int)sz.width;
     *h = (int)sz.height;
+}
+
+static double GetBackingScaleFactor(SDL_Window* window) {
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (!SDL_GetWindowWMInfo(window, &wmInfo))
+		return 1.0;
+
+	id nswindow = (id)wmInfo.info.cocoa.window;
+	if (!nswindow)
+		return 1.0;
+
+	double (*getScale)(id, SEL) = (double(*)(id, SEL))objc_msgSend;
+	double scale = getScale(nswindow, sel_registerName("backingScaleFactor"));
+	return (scale > 0.0)? scale: 1.0;
 }
 
 static bool InitEGLContext(SDL_Window* window, int major, int minor) {
@@ -178,6 +195,14 @@ static void DestroyEGLContext() {
 #include <SDL_rect.h>
 
 #include "System/Misc/TracyDefs.h"
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool DisableAppleClipControl()
+{
+	const char* env = std::getenv("BARONMETAL_DISABLE_CLIPCTRL");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+#endif
 
 CONFIG(bool, DebugGL).defaultValue(false).description("Enables GL debug-context and output. (see GL_ARB_debug_output)");
 CONFIG(bool, DebugGLStacktraces).defaultValue(false).description("Create a stacktrace when an OpenGL error occurs");
@@ -784,6 +809,15 @@ void CGlobalRendering::DestroyWindowAndContext() {
 	WindowManagerHelper::SetIconSurface(sdlWindow, nullptr);
 	SetWindowInputGrabbing(false);
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+	// BARonMetal: the macOS path creates an EGL context directly, then stores
+	// it in glContext only so the rest of the engine can treat GL as available.
+	// Passing that EGLContext to SDL_GL_DeleteContext crashes inside SDL/Cocoa
+	// teardown because SDL does not own it. Destroy the EGL objects explicitly
+	// before releasing the SDL window and skip SDL's GL-context deleter.
+	DestroyEGLContext();
+	SDL_DestroyWindow(sdlWindow);
+#else
 	SDL_GL_MakeCurrent(sdlWindow, nullptr);
 	SDL_DestroyWindow(sdlWindow);
 
@@ -791,6 +825,7 @@ void CGlobalRendering::DestroyWindowAndContext() {
 	if (glContext)
 		SDL_GL_DeleteContext(glContext);
 	#endif
+#endif
 
 	sdlWindow = nullptr;
 	glContext = nullptr;
@@ -870,40 +905,6 @@ void CGlobalRendering::SwapBuffers(bool allowSwapBuffers, bool clearErrors)
 #if defined(__APPLE__) && !defined(HEADLESS)
 		// --- DIAGNOSTIC: 4분면 픽셀 확인 ---
 		{
-			static int diagCount = 0;
-			if (diagCount < 5 && globalRendering->drawFrame > 200) {
-				GLint vp[4] = {0};
-				glGetIntegerv(GL_VIEWPORT, vp);
-				int w = vp[2], h = vp[3];
-				
-				// 4분면 중앙 + 정중앙 = 5개 지점
-				int points[][2] = {
-					{w/4, h/4},         // 왼쪽 아래
-					{3*w/4, h/4},       // 오른쪽 아래
-					{w/4, 3*h/4},       // 왼쪽 위
-					{3*w/4, 3*h/4},     // 오른쪽 위
-					{w/2, h/2}          // 정중앙
-				};
-				const char* names[] = {"BL","BR","TL","TR","CENTER"};
-				
-				for (int p = 0; p < 5; p++) {
-					unsigned char px[4] = {0};
-					glReadPixels(points[p][0], points[p][1], 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, px);
-					LOG("[GR::DIAG] frame=%d %s(%d,%d)=(%d,%d,%d,%d)",
-						globalRendering->drawFrame, names[p],
-						points[p][0], points[p][1],
-						px[0], px[1], px[2], px[3]);
-				}
-				
-				// EGL surface 크기도 확인
-				EGLint eglW=0, eglH=0;
-				eglQuerySurface(g_eglDisplay, g_eglSurface, EGL_WIDTH, &eglW);
-				eglQuerySurface(g_eglDisplay, g_eglSurface, EGL_HEIGHT, &eglH);
-				LOG("[GR::DIAG] frame=%d viewport=%dx%d EGL_surface=%dx%d winSize=%dx%d",
-					globalRendering->drawFrame, w, h, eglW, eglH,
-					globalRendering->winSizeX, globalRendering->winSizeY);
-				diagCount++;
-			}
 		}
 		if (g_eglDisplay != EGL_NO_DISPLAY && g_eglSurface != EGL_NO_SURFACE) {
 			glFlush();
@@ -1126,6 +1127,9 @@ void CGlobalRendering::SetGLSupportFlags()
 	//stick to the theory that reported = exist
 	//supportClipSpaceControl &= ((globalRenderingInfo.glContextVersion.x * 10 + globalRenderingInfo.glContextVersion.y) >= 45);
 	supportClipSpaceControl &= (configHandler->GetInt("ForceDisableClipCtrl") == 0);
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	supportClipSpaceControl &= !DisableAppleClipControl();
+	#endif
 
 	//supportFragDepthLayout = ((globalRenderingInfo.glContextVersion.x * 10 + globalRenderingInfo.glContextVersion.y) >= 42);
 	supportFragDepthLayout = GLAD_GL_ARB_conservative_depth; //stick to the theory that reported = exist
@@ -1454,6 +1458,20 @@ void CGlobalRendering::SetWindowAttributes(SDL_Window* window)
 	winPosX = configHandler->GetInt("WindowPosX");
 	winPosY = configHandler->GetInt("WindowPosY");
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+	// BARonMetal: Chobby strongly prefers borderless lobby windows, which on macOS
+	// tends to hide the menu bar and makes the window feel fullscreen-ish.
+	// Keep LuaMenu in a regular window while no game is running.
+	LOG("[GR::%s][menu-check] luaMenuController=%p game=%p borderless=%d fullScreen=%d", __func__, luaMenuController, game, borderless, fullScreen);
+	if (luaMenuController != nullptr && game == nullptr) {
+		LOG("[GR::%s][menu-check] forcing regular windowed mode for LuaMenu on macOS", __func__);
+		borderless = false;
+		fullScreen = false;
+		if (winPosY < 32)
+			winPosY = 32;
+	}
+#endif
+
 	// update display count
 	numDisplays = SDL_GetNumVideoDisplays();
 
@@ -1760,9 +1778,6 @@ void CGlobalRendering::UpdateViewPortGeometry()
 	viewPosY = winSizeY - (viewSizeY + viewWindowOffsetY);
 	dualViewPosY = winSizeY - (dualViewSizeY + dualWindowOffsetY);
 
-	LOG("[GR::%s] Wind: pos %dx%d | size %dx%d", __func__, winPosX, winPosY, winSizeX, winSizeY);
-	LOG("[GR::%s] View: pos %dx%d | size %dx%d | yoff %d", __func__,  viewPosX, viewPosY, viewSizeX, viewSizeY, viewWindowOffsetY);
-	LOG("[GR::%s] Dual: pos %dx%d | size %dx%d | yoff %d", __func__,  dualViewPosX, dualViewPosY, dualViewSizeX, dualViewSizeY, dualWindowOffsetY);
 }
 
 void CGlobalRendering::UpdatePixelGeometry()
@@ -1803,27 +1818,46 @@ void CGlobalRendering::ReadWindowPosAndSize()
 #if defined(__APPLE__) && !defined(HEADLESS)
 	{
 		int metalW = 0, metalH = 0;
+		int sdlW_saved = winSizeX, sdlH_saved = winSizeY;
 		GetMetalDrawableSize(sdlWindow, &metalW, &metalH);
-		if (metalW > winSizeX && metalH > winSizeY) {
-			LOG("[GR::%s] macOS Retina: SDL=%dx%d Metal=%dx%d (using Metal size)",
-			    __func__, winSizeX, winSizeY, metalW, metalH);
+		if (metalW > 1 && metalH > 1) {
+			// Metal drawable is valid — use it directly
+			// Note: in fullscreen, Metal size may equal SDL size (both physical pixels)
+			// In windowed mode, Metal size is 2x SDL size (Retina scaling)
 			winSizeX = metalW;
 			winSizeY = metalH;
+			// Do NOT scale screenSize/winPos — keep them in logical pixels
+			// UpdateScreenMatrices will use winSize (physical) for projection
+			SDL_GetWindowPosition(sdlWindow, &winPosX, &winPosY);
 		} else {
-			LOG("[GR::%s] macOS: SDL=%dx%d Metal=%dx%d (using SDL size)",
-			    __func__, winSizeX, winSizeY, metalW, metalH);
+			// Metal drawable not ready yet (often 1x1 during early startup).
+			// Fall back to SDL logical size scaled by Cocoa backingScaleFactor
+			// so pregame/loading UI already uses physical pixels on Retina.
+			const double scale = GetBackingScaleFactor(sdlWindow);
+			const int scaledW = std::max(1, int(std::lround(double(sdlW_saved) * scale)));
+			const int scaledH = std::max(1, int(std::lround(double(sdlH_saved) * scale)));
+			winSizeX = scaledW;
+			winSizeY = scaledH;
+			SDL_GetWindowPosition(sdlWindow, &winPosX, &winPosY);
 		}
 	}
 #endif
-	SDL_GetWindowPosition(sdlWindow, &winPosX, &winPosY);
 
 	//enforce >=0 https://github.com/beyond-all-reason/spring/issues/23
 	//winPosX = std::max(winPosX, 0);
 	//winPosY = std::max(winPosY, 0);
 #endif
 
-	// should be done by caller
-	// UpdateViewPortGeometry();
+	// Sync viewSize with winSize when not in dual-screen mode
+	// This ensures viewSize stays correct even when ReadWindowPosAndSize
+	// is called outside of UpdateGLGeometry (e.g., when Metal drawable
+	// becomes available after initial SDL window creation on macOS Retina)
+	if (!dualScreenMode) {
+		viewPosX = 0;
+		viewPosY = 0;
+		viewSizeX = winSizeX;
+		viewSizeY = winSizeY;
+	}
 }
 
 void CGlobalRendering::SaveWindowPosAndSize()
@@ -1852,44 +1886,22 @@ void CGlobalRendering::SaveWindowPosAndSize()
 
 void CGlobalRendering::UpdateGLConfigs()
 {
-	LOG("[GR::%s]", __func__);
-
 	// re-read configuration value
 	verticalSync->SetInterval();
 }
 
 void CGlobalRendering::UpdateScreenMatrices()
 {
-	// .x := screen width (meters), .y := eye-to-screen (meters)
-	static float2 screenParameters = { 0.36f, 0.60f };
+	// Simple orthographic projection: (0,0) = bottom-left, (viewSizeX, viewSizeY) = top-right
+	// This avoids all Retina scaling issues with screenSize vs winSize mismatch
+	const float vsx = (float)viewSizeX;
+	const float vsy = (float)viewSizeY;
 
-	const int remScreenSize = screenSizeY - winSizeY; // remaining desktop size (ssy >= wsy)
-	const int bottomWinCoor = remScreenSize - winPosY; // *bottom*-left origin
+	// Identity view matrix (no translation needed for 2D ortho)
+	screenViewMatrix = CMatrix44f::Identity();
 
-	const float vpx = viewPosX + winPosX;
-	const float vpy = viewPosY + bottomWinCoor;
-	const float vsx = viewSizeX; // same as winSizeX except in dual-screen mode
-	const float vsy = viewSizeY; // same as winSizeY
-	const float ssx = screenSizeX;
-	const float ssy = screenSizeY;
-	const float hssx = 0.5f * ssx;
-	const float hssy = 0.5f * ssy;
-
-	const float zplane = screenParameters.y * (ssx / screenParameters.x);
-	const float znear = zplane * 0.5f;
-	const float zfar = zplane * 2.0f;
-	constexpr float zfact = 0.5f;
-
-	const float left = (vpx - hssx) * zfact;
-	const float bottom = (vpy - hssy) * zfact;
-	const float right = ((vpx + vsx) - hssx) * zfact;
-	const float top = ((vpy + vsy) - hssy) * zfact;
-
-	LOG("[GR::%s] vpx=%f, vpy=%f, vsx=%f, vsy=%f, ssx=%f, ssy=%f, screenPosX=%d, screenPosY=%d", __func__, vpx, vpy, vsx, vsy, ssx, ssy, screenPosX, screenPosY);
-
-	// translate s.t. (0,0,0) is on the zplane, on the window's bottom-left corner
-	screenViewMatrix = CMatrix44f{ float3{left / zfact, bottom / zfact, -zplane} };
-	screenProjMatrix = CMatrix44f::ClipPerspProj(left, right, bottom, top, znear, zfar, supportClipSpaceControl * 1.0f);
+	// Orthographic projection: left=0, right=vsx, bottom=0, top=vsy, near=-1, far=1
+	screenProjMatrix = CMatrix44f::ClipOrthoProj(0.0f, vsx, 0.0f, vsy, -1.0f, 1.0f, supportClipSpaceControl * 1.0f);
 }
 
 void CGlobalRendering::UpdateWindowBorders(SDL_Window* window) const
@@ -1934,20 +1946,14 @@ void CGlobalRendering::UpdateWindowBorders(SDL_Window* window) const
 
 void CGlobalRendering::UpdateGLGeometry()
 {
-	LOG("[GR::%s][1] winSize=<%d,%d>", __func__, winSizeX, winSizeY);
-
 	ReadWindowPosAndSize();
 	UpdateViewPortGeometry();
 	UpdatePixelGeometry();
 	UpdateScreenMatrices();
-
-	LOG("[GR::%s][2] winSize=<%d,%d>", __func__, winSizeX, winSizeY);
 }
 
 void CGlobalRendering::InitGLState()
 {
-	LOG("[GR::%s]", __func__);
-
 	glShadeModel(GL_SMOOTH);
 
 	glClearDepth(1.0f);

@@ -228,8 +228,17 @@ void CubeMapHandler::CreateReflectionFace(unsigned int glFace, bool skyOnly)
 
 		if (!globalRendering->drawDebugCubeMap) {
 			sky->Draw();
+			#if defined(__APPLE__) && !defined(HEADLESS)
+			if (!skyOnly) {
+				// TerrainReflection currently trips GL errors on the macOS
+				// Zink/KosmicKrisp path and poisons reflection-dependent water
+				// rendering. Keep sky reflections, but skip terrain in the
+				// cubemap until the reflection pass is corrected.
+			}
+			#else
 			if (!skyOnly)
 				readMap->GetGroundDrawer()->Draw(DrawPass::TerrainReflection);
+			#endif
 		}
 		else {
 			debugCubeMapTexture.Draw(glFace);
@@ -327,4 +336,3 @@ void CubeMapHandler::UpdateSpecularFace(
 
 	glTexSubImage2D(texType, 0, 0, y, size, 1, GL_RGBA, GL_UNSIGNED_BYTE, buf);
 }
-

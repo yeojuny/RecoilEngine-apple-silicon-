@@ -16,6 +16,7 @@
 #include "Rendering/ShadowHandler.h"
 #include "Rendering/Units/UnitDrawer.h"
 #include "Rendering/Env/ISky.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/GL/FBO.h"
 #include "Rendering/GL/SubState.h"
 #include "Rendering/GL/RenderBuffers.h"
@@ -116,6 +117,13 @@ void CProjectileDrawer::Init() {
 
 	textureAtlas->SetMaxTexLevel(4);
 	groundFXAtlas->SetMaxTexLevel(4);
+#if defined(__APPLE__)
+	// Transparent particle textures can pick up black RGB from their source
+	// quads when mipmaps are generated through the translated macOS GL stack.
+	// Keep this behind a flag so we can A/B smoke quality without touching BAR data.
+	if (BaronMetalParticleFlags::ParticleNoMipmaps())
+		textureAtlas->SetMaxTexLevel(1);
+#endif
 
 	int smokeTexCount = -1;
 
@@ -313,6 +321,10 @@ void CProjectileDrawer::Init() {
 	fxShader->SetFlag("SMOOTH_PARTICLES", CheckSoftenExt());
 	fxShader->SetFlag("DEPTH_CLIP01", globalRendering->supportClipSpaceControl);
 	fxShader->SetFlag("USE_TEXTURE_ARRAY", false);
+#if defined(__APPLE__)
+	fxShader->SetFlag("BARONMETAL_PARTICLE_PREMULTIPLY_ALPHA", BaronMetalParticleFlags::ParticlePremultiplyAlpha());
+	fxShader->SetFlag("BARONMETAL_PARTICLE_ALPHA_CLIP", BaronMetalParticleFlags::ParticleAlphaClip());
+#endif
 
 	using VAT = std::decay_t<decltype(CProjectile::GetPrimaryRenderBuffer())>::VertType;
 	fxShader->BindAttribLocations<VAT>();
@@ -799,9 +811,14 @@ void CProjectileDrawer::DrawAlpha(bool drawAboveWater, bool drawBelowWater, bool
 		ZoneScopedN("ProjectileDrawer::DrawAlpha(RR)");
 
 		using namespace GL::State;
+#if defined(__APPLE__)
+		const GLenum particleBlendSrc = BaronMetalParticleFlags::ParticleSrcAlphaBlend() ? GL_SRC_ALPHA : GL_ONE;
+#else
+		static constexpr GLenum particleBlendSrc = GL_ONE;
+#endif
 		auto state = GL::SubState(
 			Blending(GL_TRUE),
-			BlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA),
+			BlendFunc(particleBlendSrc, GL_ONE_MINUS_SRC_ALPHA),
 			DepthTest(GL_TRUE),
 			DepthMask(GL_FALSE),
 			ClipDistance<0>(GL_TRUE)
@@ -1252,4 +1269,3 @@ void CProjectileDrawer::RenderProjectileDestroyed(const CProjectile* p)
 	if (p->model != nullptr)
 		modelRenderers[MDL_TYPE(p)].DelObject(p);
 }
-

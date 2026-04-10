@@ -44,4 +44,3 @@ CBaseGroundDrawer::CBaseGroundDrawer()
 	
 	groundTextures = nullptr;
 }
-

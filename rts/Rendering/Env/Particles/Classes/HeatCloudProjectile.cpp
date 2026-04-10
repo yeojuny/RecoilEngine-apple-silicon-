@@ -5,6 +5,7 @@
 
 #include "Game/Camera.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -102,6 +103,10 @@ void CHeatCloudProjectile::Init(const CUnit* owner, const float3& offset)
 void CHeatCloudProjectile::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	if (BaronMetalParticleFlags::SkipHeatClouds() || !BaronMetalParticleFlags::EnableHeatClouds())
+		return;
+#endif
 	UpdateRotation();
 
 	unsigned char col[4];

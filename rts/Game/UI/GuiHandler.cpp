@@ -1,5 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
+
 #include "GuiHandler.h"
 
 #include <Rml/Backends/RmlUi_Backend.h>
@@ -83,6 +85,13 @@ CGuiHandler::CGuiHandler()
 
 
 	autoShowMetal = mapInfo->gui.autoShowMetal;
+#ifdef __APPLE__
+	// The legacy auto metal-view switch obscures terrain validation on the
+	// macOS port and conflicts with BAR's own Lua-side spot helpers.
+	const char* forceEngineAutoMetal = std::getenv("BARONMETAL_ENABLE_ENGINE_AUTOMETAL");
+	if (!(forceEngineAutoMetal != nullptr && forceEngineAutoMetal[0] == '1' && forceEngineAutoMetal[1] == '\0'))
+		autoShowMetal = false;
+#endif
 	useStencil = false;
 
 	if (GLAD_GL_ARB_depth_clamp) {
@@ -2631,6 +2640,14 @@ void CGuiHandler::ProcessFrontPositions(float3& pos0, const float3& pos1)
 
 void CGuiHandler::Draw()
 {
+#if defined(__APPLE__) && !defined(HEADLESS)
+	// BAR's Lua UI replaces the legacy engine control panel on macOS.
+	// Skipping the old panel also avoids a persistent black lower-left block
+	// that can remain after the panel reserves/draws its screen region.
+	const char* forceEngineGui = std::getenv("BARONMETAL_ENABLE_ENGINE_GUI");
+	if (!(forceEngineGui != nullptr && forceEngineGui[0] == '1' && forceEngineGui[1] == '\0'))
+		return;
+#endif
 	if ((iconsCount <= 0) && (luaUI == nullptr))
 		return;
 
@@ -4432,4 +4449,3 @@ void CGuiHandler::DrawSelectCircle(const float3& pos, float radius,
 
 	glEnable(GL_FOG);
 }
-

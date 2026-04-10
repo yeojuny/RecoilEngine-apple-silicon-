@@ -6,6 +6,7 @@
 #include "Game/GlobalUnsynced.h"
 #include "Game/Camera.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/ColorMap.h"
@@ -81,6 +82,18 @@ void CBitmapMuzzleFlame::Serialize(creg::ISerializer* s)
 void CBitmapMuzzleFlame::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	// BAR footstep and dust shockwaves use this legacy billboard path. On the
+	// translated macOS GL stack its transparent source quad can leak as a dark box.
+	if (BaronMetalParticleFlags::SkipBitmapMuzzleFlames())
+		return;
+	if (BaronMetalParticleFlags::SkipBubbles()) {
+		const std::string sideName = projectileDrawer->textureAtlas->GetTextureName(sideTexture);
+		const std::string frontName = projectileDrawer->textureAtlas->GetTextureName(frontTexture);
+		if (BaronMetalParticleFlags::IsBubbleTexture(sideName) || BaronMetalParticleFlags::IsBubbleTexture(frontName))
+			return;
+	}
+#endif
 	if (!UpdateAnimParams())
 		return;
 

@@ -1,5 +1,6 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
+#include <cstdlib>
 #include <cstring>
 
 #include "Camera.h"
@@ -16,6 +17,13 @@
 
 #include "System/Misc/TracyDefs.h"
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool ForceAppleTinyZNear()
+{
+	const char* env = std::getenv("BARONMETAL_FORCE_TINY_ZNEAR");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+#endif
 
 CONFIG(float, EdgeMoveWidth)
 	.defaultValue(0.02f)
@@ -351,6 +359,12 @@ void CCamera::UpdateViewRange()
 
 	frustum.scales.z = std::max(wantedViewRange * ZFAR_ZNEAR_FACTOR, globalRendering->minViewRange);
 	frustum.scales.w = std::min(wantedViewRange                    , globalRendering->maxViewRange);
+
+	#if defined(__APPLE__) && !defined(HEADLESS)
+	if (ForceAppleTinyZNear()) {
+		frustum.scales.z = std::min(frustum.scales.z, 0.05f);
+	}
+	#endif
 }
 
 bool CCamera::InView(const float3& point, float radius) const

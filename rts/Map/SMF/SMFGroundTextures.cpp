@@ -55,6 +55,39 @@ std::vector<float> CSMFGroundTextures::heightMaxima;
 std::vector<float> CSMFGroundTextures::heightMinima;
 std::vector<float> CSMFGroundTextures::stretchFactors;
 
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool UseAppleUncompressedGroundSquares(GLenum tileTexFormat)
+{
+	return (tileTexFormat == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT);
+}
+
+static void DecompressDxt1SquareToRgba(const GLint* compressedData, int mipSqSize, std::vector<squish::u8>& rgbaBuffer)
+{
+	const int blocksX = mipSqSize / 4;
+	const int blocksY = mipSqSize / 4;
+	const auto* srcBytes = reinterpret_cast<const squish::u8*>(compressedData);
+
+	rgbaBuffer.resize(mipSqSize * mipSqSize * 4);
+
+	for (int by = 0; by < blocksY; ++by) {
+		for (int bx = 0; bx < blocksX; ++bx) {
+			squish::u8 blockRGBA[4 * 4 * 4];
+			const size_t blockOffset = (by * blocksX + bx) * 8;
+
+			squish::Decompress(blockRGBA, srcBytes + blockOffset, squish::kDxt1);
+
+			for (int py = 0; py < 4; ++py) {
+				const int dstY = by * 4 + py;
+				const int dstX = bx * 4;
+				auto* dst = &rgbaBuffer[(dstY * mipSqSize + dstX) * 4];
+				const auto* src = &blockRGBA[py * 4 * 4];
+				memcpy(dst, src, 4 * 4);
+			}
+		}
+	}
+}
+#endif
+
 
 
 CSMFGroundTextures::GroundSquare::~GroundSquare()
@@ -618,11 +651,23 @@ void CSMFGroundTextures::LoadSquareTexturePersistent(int x, int y)
 		glTexParameterf(ttarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, smfMap->GetTexAnisotropyLevel(false));
 
 	std::vector<GLint> tilesBuffer(smfMap->bigTexSize * smfMap->bigTexSize / 2 / sizeof(GLint));
+#if defined(__APPLE__) && !defined(HEADLESS)
+	std::vector<squish::u8> rgbaBuffer;
+	const bool useUncompressedGroundSquares = UseAppleUncompressedGroundSquares(tileTexFormat);
+#endif
 	for (int level = 0; level <= 3; ++level) {
 		const int mipSqSize = smfMap->bigTexSize >> level;
 		const int numSqBytes = (mipSqSize * mipSqSize) / 2;
 		ExtractSquareTiles(x, y, level, tilesBuffer.data());
-		glCompressedTexImage2D(ttarget, level, tileTexFormat, mipSqSize, mipSqSize, 0, numSqBytes, tilesBuffer.data());
+		#if defined(__APPLE__) && !defined(HEADLESS)
+		if (useUncompressedGroundSquares) {
+			DecompressDxt1SquareToRgba(tilesBuffer.data(), mipSqSize, rgbaBuffer);
+			glTexImage2D(ttarget, level, GL_RGBA8, mipSqSize, mipSqSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, rgbaBuffer.data());
+		} else
+		#endif
+		{
+			glCompressedTexImage2D(ttarget, level, tileTexFormat, mipSqSize, mipSqSize, 0, numSqBytes, tilesBuffer.data());
+		}
 	}
 
 	glBindTexture(ttarget, 0);

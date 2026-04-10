@@ -1,6 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
 #include <cmath>
+#include <cstdlib>
 
 #include "GrassDrawer.h"
 #include "Game/Camera.h"
@@ -35,6 +36,14 @@
 #include "System/Misc/TracyDefs.h"
 
 CONFIG(int, GrassDetail).defaultValue(7).headlessValue(0).minimumValue(0).description("Sets how detailed the engine rendered grass will be on any given map.");
+
+#if defined(__APPLE__) && !defined(HEADLESS)
+static bool AppleEnableGrassBillboards()
+{
+	const char* env = std::getenv("BARONMETAL_ENABLE_GRASS_BILLBOARDS");
+	return (env != nullptr && env[0] == '1' && env[1] == '\0');
+}
+#endif
 
 // uses a 'synced' RNG s.t. grass turfs generated from the same
 // seed also share identical sequences, otherwise an unpleasant
@@ -306,6 +315,8 @@ void CGrassDrawer::LoadGrassShaders() {
 	RECOIL_DETAILED_TRACY_ZONE;
 	#define sh shaderHandler
 	grassShaders.resize(GRASS_PROGRAM_LAST, nullptr);
+	const bool haveInfoTex = infoTextureHandler->IsEnabled();
+	const bool haveShadows = shadowHandler.ShadowsLoaded();
 
 	static const std::string shaderNames[GRASS_PROGRAM_LAST] = {
 		"grassNearAdvShader",
@@ -322,6 +333,10 @@ void CGrassDrawer::LoadGrassShaders() {
 		grassShaders[i] = sh->CreateProgramObject("[GrassDrawer]", shaderNames[i] + "GLSL");
 		grassShaders[i]->AttachShaderObject(sh->CreateShaderObject("GLSL/GrassVertProg.glsl", shaderDefines[i], GL_VERTEX_SHADER));
 		grassShaders[i]->AttachShaderObject(sh->CreateShaderObject("GLSL/GrassFragProg.glsl", shaderDefines[i], GL_FRAGMENT_SHADER));
+		// Compile the runtime variant up front so zink does not have to re-link the
+		// program later with newly-activated sampler uniforms still at their defaults.
+		grassShaders[i]->SetFlag("HAVE_INFOTEX", haveInfoTex);
+		grassShaders[i]->SetFlag("HAVE_SHADOWS", haveShadows);
 		grassShaders[i]->Link();
 
 		grassShaders[i]->Enable();
@@ -576,7 +591,16 @@ void CGrassDrawer::Draw()
 	// ATI crashes w/o an error when shadows are enabled!?
     const bool shadows = (shadowHandler.ShadowsLoaded() && globalRendering->amdHacks);
 
-	if (!shadows && (!blockDrawer.inviewFarGrass.empty() || !blockDrawer.inviewNearGrass.empty())) {
+	bool allowBillboards = true;
+#if defined(__APPLE__) && !defined(HEADLESS)
+	// On the Mesa/Zink/KosmicKrisp path, the mid-distance grass billboard pass
+	// can darken large terrain regions even though near mesh grass renders fine.
+	// Default to the stable near-grass-only path on macOS, but keep an override
+	// so we can re-test billboard behavior later.
+	allowBillboards = AppleEnableGrassBillboards();
+#endif
+
+	if (!shadows && allowBillboards && (!blockDrawer.inviewFarGrass.empty() || !blockDrawer.inviewNearGrass.empty())) {
 		SetupGlStateFar();
 			DrawFarBillboards(blockDrawer.inviewFarGrass);
 			DrawNearBillboards(blockDrawer.inviewNearGrass);
@@ -1062,5 +1086,3 @@ void CGrassDrawer::UnsyncedHeightMapUpdate(const SRectangle& rect)
 		}
 	}
 }
-
-

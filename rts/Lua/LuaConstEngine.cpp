@@ -77,7 +77,13 @@ bool LuaConstEngine::PushEntries(lua_State* L)
 		LuaPushNamedBool(L, "NegativeGetUnitCurrentCommand", true);
 		LuaPushNamedBool(L, "hasExitOnlyYardmaps", true);
 		LuaPushNamedNumber(L, "rmlUiApiVersion", 1);
-		LuaPushNamedBool(L, "noAutoShowMetal", false);
+		LuaPushNamedBool(L, "noAutoShowMetal",
+#ifdef __APPLE__
+			true
+#else
+			false
+#endif
+		);
 		LuaPushNamedNumber(L, "maxPiecesPerModel", MAX_PIECES_PER_MODEL);
 		LuaPushNamedBool(L, "transformsInGL4", true);
 		LuaPushNamedNumber(L, "gunshipCruiseAltitudeMultiplier", 1.5f); // see https://github.com/beyond-all-reason/spring/issues/1028

@@ -5,6 +5,7 @@
 
 #include "Game/Camera.h"
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Env/Particles/MacParticleFlags.h"
 #include "Rendering/Env/Particles/ProjectileDrawer.h"
 #include "Rendering/GL/RenderBuffers.h"
 #include "Rendering/Textures/TextureAtlas.h"
@@ -81,6 +82,10 @@ void CBubbleProjectile::Update()
 void CBubbleProjectile::Draw()
 {
 	RECOIL_DETAILED_TRACY_ZONE;
+#if defined(__APPLE__)
+	if (BaronMetalParticleFlags::SkipBubbles())
+		return;
+#endif
 	unsigned char col[4];
 	col[0] = (unsigned char)(255 * alpha);
 	col[1] = (unsigned char)(255 * alpha);

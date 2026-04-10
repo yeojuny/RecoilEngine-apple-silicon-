@@ -249,7 +249,9 @@ else
 				gadgetHandler:AddSyncAction(funcName, func, "")
 			end
 
-			Spring.SendCommands({"showhealthbars 0", "showrezbars 0"})
+			-- BAR on macOS currently loses the GL4 healthbar widget because its
+			-- GS-based shader pipeline is stripped. Keep the engine fallback bars
+			-- available instead of force-disabling them at startup.
 		end
 
 		function gadget:Shutdown()
